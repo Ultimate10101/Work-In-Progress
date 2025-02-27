@@ -27,19 +27,11 @@ public class P_ProjectileScript : MonoBehaviour
     void ProjectileRangeCap()
     {
 
-        if (CalculateDistance() >= maxDistanceFromPlayer)
+        if (Vector3.Distance(gameObject.transform.position, P_PlayerController.playerControllerRef.transform.position) >= maxDistanceFromPlayer)
         {
             Destroy(gameObject);
         }
     }
-
-    float CalculateDistance()
-    {
-        return Mathf.Sqrt(Mathf.Pow(transform.position.z - P_PlayerController.playerControllerRef.transform.position.z, 2) +
-                    Mathf.Pow(transform.position.x - P_PlayerController.playerControllerRef.transform.position.x, 2) +
-                    Mathf.Pow(transform.position.y - P_PlayerController.playerControllerRef.transform.position.y, 2));
-
-    } 
 
     private void OnCollisionEnter(Collision collision)
     {

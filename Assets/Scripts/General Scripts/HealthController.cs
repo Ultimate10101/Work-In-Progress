@@ -14,6 +14,7 @@ public class HealthController : MonoBehaviour
     [SerializeField] private Image healthBar;
     [SerializeField] private TextMeshProUGUI healthText;
 
+
     void Start()
     {
         healthText.text = health+"/"+maxHealth;
@@ -43,5 +44,13 @@ public class HealthController : MonoBehaviour
     public void HealHealth(float health)
     {
         this.health += health;
+    }
+
+    public void Death()
+    {
+        if (health<=0.0f)
+        {
+            Debug.Log("Dead");
+        }
     }
 }
