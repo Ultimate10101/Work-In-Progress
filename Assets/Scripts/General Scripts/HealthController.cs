@@ -14,11 +14,15 @@ public class HealthController : MonoBehaviour
     [SerializeField] private Image healthBar;
     [SerializeField] private TextMeshProUGUI healthText;
 
+    protected LivingStatus creatureLivingStatus;
+
 
     void Start()
     {
         healthText.text = health+"/"+maxHealth;
         maxHealth = health;
+
+        creatureLivingStatus = LivingStatus.ALIVE;
     }
 
     protected virtual void Update()
@@ -27,6 +31,8 @@ public class HealthController : MonoBehaviour
         {
             UpdateHealthUI_Info();
         }
+
+        Death();
     }
 
     void UpdateHealthUI_Info()
@@ -50,7 +56,7 @@ public class HealthController : MonoBehaviour
     {
         if (health<=0.0f)
         {
-            Debug.Log("Dead");
+            creatureLivingStatus = LivingStatus.DEAD;
         }
     }
 }

@@ -3,12 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public enum EnemyState
-{
-    Patrolling,
-    Chasing,
-    Attacking
-}
 
 public class E_AIMovementTest : MonoBehaviour
 {
@@ -25,12 +19,14 @@ public class E_AIMovementTest : MonoBehaviour
     private Vector3 startPos;
     int index;
 
+    public bool wasHit;
+
     // Start is called before the first frame update
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
 
-        currentState = EnemyState.Patrolling;
+        currentState = EnemyState.PATROLLING;
 
         startPos = transform.position;
     }
@@ -40,35 +36,39 @@ public class E_AIMovementTest : MonoBehaviour
     {
         switch (currentState)
         {
-            case EnemyState.Patrolling:
+            case EnemyState.PATROLLING:
                 PatrollignLogic();
 
-                if (PlayerInAgrroRange()) 
+                if (PlayerInAgrroRange() || wasHit) 
                 {
-                    currentState = EnemyState.Chasing;
+                    currentState = EnemyState.CHASING;
+
+                    wasHit = false;
                 }
                 break;
 
-            case EnemyState.Chasing:
+            case EnemyState.CHASING:
                 ChasingLogic();
 
-                if (!PlayerInAgrroRange() || (Vector3.Distance(gameObject.transform.position, startPos) > 30.0f))
+                if ((Vector3.Distance(gameObject.transform.position, startPos) > 35.0f))
                 {
-                    currentState = EnemyState.Patrolling;
+                    currentState = EnemyState.PATROLLING;
                     Debug.Log("Back to Patrolling");
                 }
                 else if (PlayerInAttackRange())
                 {
-                    currentState = EnemyState.Attacking;
+                    navMeshAgent.speed = 0f;
+                    currentState = EnemyState.ATTACKING;
                 }
                 break;
 
-            case EnemyState.Attacking:
+            case EnemyState.ATTACKING:
                 AttackLogic();
 
                 if (!PlayerInAttackRange())
                 {
-                    currentState = EnemyState.Chasing;
+                    navMeshAgent.speed = 8f;
+                    currentState = EnemyState.PATROLLING;
                 }
                 break;
         }      
