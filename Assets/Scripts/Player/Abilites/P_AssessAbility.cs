@@ -93,7 +93,7 @@ public class P_AssessAbility : Def_Ability
     
     void DurationHanlder()
     {
-        StartCoroutine(enemyCanvas.ActiveFor(duration));
+        enemyCanvas.ActiveFor(duration);
     }
 
     // Return true if Player is looking at Target the Spell is usuable on 

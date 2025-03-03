@@ -16,7 +16,7 @@ public class P_HealthController : HealthController
 
         // Test For Now
 
-       if (collision.gameObject.CompareTag("Enemy"))
+       if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Projectile"))
         {
             if (gameObject.GetComponent<P_ThickSkinnedAbility>().isActive)
             {

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class E_CanvasController : MonoBehaviour
@@ -9,10 +10,16 @@ public class E_CanvasController : MonoBehaviour
     [SerializeField] private Camera gameCam;
 
     public bool isActive;
+    private bool timerActive;
+
+    private float timer;
+
 
     private void Start()
     {
         isActive = false;
+
+        timerActive = false;
     }
 
     void Update()
@@ -20,6 +27,13 @@ public class E_CanvasController : MonoBehaviour
         if (enemyCanvas.activeSelf)
         {
             HealthFacePlayer();
+        }
+
+        if(timerActive)
+        {
+            TimeUntilDeactivation();
+
+            Debug.Log(timer);
         }
     }
 
@@ -31,12 +45,21 @@ public class E_CanvasController : MonoBehaviour
 
     }
 
-    public IEnumerator ActiveFor(int seconds)
+    public void ActiveFor(int seconds)
     {
-        yield return new WaitForSeconds(seconds);
+        timer = seconds;
+        timerActive = true;
+    }
 
-        CanvasActive(false);
+    public void TimeUntilDeactivation()
+    {
+        timer = Mathf.MoveTowards(timer, 0.0f, 1.0f * Time.deltaTime);
 
+        if(timer <= 0.0f)
+        {
+            CanvasActive(false);
+            timerActive = false;
+        }
     }
 
     void HealthFacePlayer()

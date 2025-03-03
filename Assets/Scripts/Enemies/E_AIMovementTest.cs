@@ -12,6 +12,9 @@ public class E_AIMovementTest : MonoBehaviour
     private float agrroRange = 15.0f;
     private float attackRange = 6.5f;
 
+    private float patrollStoppingDistance = 0.0f;
+    private float attackStoppingDistance = 6.0f;
+
 
     [SerializeField] Transform[] wayPoints;
 
@@ -27,8 +30,13 @@ public class E_AIMovementTest : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
 
         currentState = EnemyState.PATROLLING;
+        navMeshAgent.stoppingDistance = 0;
+
+        navMeshAgent.speed = 8f;
 
         startPos = transform.position;
+
+        wasHit = false;
     }
 
     // Update is called once per frame
@@ -39,9 +47,12 @@ public class E_AIMovementTest : MonoBehaviour
             case EnemyState.PATROLLING:
                 PatrollignLogic();
 
+                // GO TO CHASE STATE
                 if (PlayerInAgrroRange() || wasHit) 
                 {
                     currentState = EnemyState.CHASING;
+
+                    navMeshAgent.stoppingDistance = attackStoppingDistance;
 
                     wasHit = false;
                 }
@@ -50,11 +61,17 @@ public class E_AIMovementTest : MonoBehaviour
             case EnemyState.CHASING:
                 ChasingLogic();
 
+                // GO TO PATROLLING STATE
                 if ((Vector3.Distance(gameObject.transform.position, startPos) > 35.0f))
                 {
                     currentState = EnemyState.PATROLLING;
+
+                    navMeshAgent.stoppingDistance = patrollStoppingDistance;
+
+                    transform.position = startPos;
                     Debug.Log("Back to Patrolling");
                 }
+                // GO TO ATTACK STATE
                 else if (PlayerInAttackRange())
                 {
                     navMeshAgent.speed = 0f;
@@ -65,10 +82,13 @@ public class E_AIMovementTest : MonoBehaviour
             case EnemyState.ATTACKING:
                 AttackLogic();
 
+                // GO TO PATROLLING STATE
                 if (!PlayerInAttackRange())
                 {
                     navMeshAgent.speed = 8f;
                     currentState = EnemyState.PATROLLING;
+
+                    navMeshAgent.stoppingDistance = patrollStoppingDistance;
                 }
                 break;
         }      
@@ -92,12 +112,12 @@ public class E_AIMovementTest : MonoBehaviour
 
     void ChasingLogic()
     {
+
         navMeshAgent.destination = P_PlayerController.playerControllerRef.gameObject.transform.position;
     }
 
     void AttackLogic()
     {
-        navMeshAgent.stoppingDistance = 6.5f;
         LookAtPlayer();
     }
 
@@ -113,7 +133,6 @@ public class E_AIMovementTest : MonoBehaviour
 
     void GoToPoint()
     {
-        navMeshAgent.stoppingDistance = 0;
         target = wayPoints[index].position;
         navMeshAgent.SetDestination(target);
     }
