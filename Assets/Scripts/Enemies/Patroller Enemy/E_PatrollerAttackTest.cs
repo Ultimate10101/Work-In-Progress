@@ -9,9 +9,12 @@ public class E_PatrollerAttackTest : MonoBehaviour
     [SerializeField] private Transform attackPoint1;
     [SerializeField] private Transform attackPoint2;
 
+    [SerializeField] private GameObject specialAttack;
+
     private E_AIMovementTest enemyMoveState;
 
     private bool canFire;
+    private bool specialReady;
 
     [SerializeField] private float timeBetweenShots;
 
@@ -20,23 +23,35 @@ public class E_PatrollerAttackTest : MonoBehaviour
     {
         canFire = true;
 
-        enemyMoveState = GetComponent<E_AIMovementTest>();
+        specialReady = true;
+
+        enemyMoveState = gameObject.GetComponent<E_AIMovementTest>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (enemyMoveState.currentState == EnemyState.ATTACKING & canFire)
+        if (enemyMoveState.currentState == EnemyState.ATTACKING && (gameObject.GetComponent<E_HealthController>().Health <= 40.0f) && specialReady)
+        {
+            canFire = false;
+            specialReady = false;
+
+            SpecialAttack();
+
+            Invoke("ShotCounter", 2.0f);
+
+        } 
+        else if (enemyMoveState.currentState == EnemyState.ATTACKING & canFire)
         {
             Debug.Log("fire");
 
-            Attack();
+            BaseAttack();
 
             Invoke("ShotCounter", timeBetweenShots);
         }
     }
 
-    void Attack()
+    void BaseAttack()
     {
         canFire = false;
 
@@ -46,6 +61,11 @@ public class E_PatrollerAttackTest : MonoBehaviour
         projectile_.GetComponent<Rigidbody>().AddForce(transform.forward * 20f, ForceMode.Impulse);
         projectile_1.GetComponent<Rigidbody>().AddForce(transform.forward * 20f, ForceMode.Impulse);
 
+    }
+
+    void SpecialAttack()
+    {
+       Instantiate(specialAttack, transform.position + new Vector3(0.0f, 1f), specialAttack.transform.rotation);
     }
 
     void ShotCounter()

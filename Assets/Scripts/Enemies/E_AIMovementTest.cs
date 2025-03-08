@@ -9,14 +9,19 @@ public class E_AIMovementTest : MonoBehaviour
     public EnemyState currentState;
 
     private NavMeshAgent navMeshAgent;
-    private float agrroRange = 15.0f;
-    private float attackRange = 6.5f;
+    [SerializeField] private float agrroRange;
+    [SerializeField] private float attackRange;
 
-    private float patrollStoppingDistance = 0.0f;
-    private float attackStoppingDistance = 6.0f;
+    [SerializeField] private float patrollStoppingDistance;
+    [SerializeField] private float attackStoppingDistance;
+
+    [SerializeField] private float moveSpeed;
+
+    [SerializeField] private bool willPatrolDelay;
+    private float delayTime;
 
 
-    [SerializeField] Transform[] wayPoints;
+    [SerializeField] private Transform[] wayPoints;
 
     private Vector3 target;
     private Vector3 startPos;
@@ -30,22 +35,24 @@ public class E_AIMovementTest : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
 
         currentState = EnemyState.PATROLLING;
-        navMeshAgent.stoppingDistance = 0;
+        navMeshAgent.stoppingDistance = patrollStoppingDistance;
 
-        navMeshAgent.speed = 8f;
+        navMeshAgent.speed = moveSpeed;
 
         startPos = transform.position;
 
         wasHit = false;
+
+        delayTime = 4.0f;
     }
 
-    // Update is called once per frame
+    // Update is called once per framez
     void Update()
     {
         switch (currentState)
         {
             case EnemyState.PATROLLING:
-                PatrollignLogic();
+                PatrollingLogic();
 
                 // GO TO CHASE STATE
                 if (PlayerInAgrroRange() || wasHit) 
@@ -85,7 +92,7 @@ public class E_AIMovementTest : MonoBehaviour
                 // GO TO PATROLLING STATE
                 if (!PlayerInAttackRange())
                 {
-                    navMeshAgent.speed = 8f;
+                    navMeshAgent.speed = moveSpeed;
                     currentState = EnemyState.PATROLLING;
 
                     navMeshAgent.stoppingDistance = patrollStoppingDistance;
@@ -100,14 +107,25 @@ public class E_AIMovementTest : MonoBehaviour
         transform.LookAt(lookAt);
     }
 
-    void PatrollignLogic()
+    int PatrollingLogic()
     {
+        if (willPatrolDelay && (delayTime > 0.0f))
+        {
+             delayTime -= Time.deltaTime;
+
+            return 0;
+        }
+
         GoToPoint();
 
-        if (Vector3.Distance(gameObject.transform.position, target) <= 0.3)
+        if (Vector3.Distance(gameObject.transform.position, target) <= 0.5f)
         {
             UpdateDestination();
+
+            delayTime = 4.0f;
         }
+
+        return 1;
     }
 
     void ChasingLogic()
@@ -124,6 +142,7 @@ public class E_AIMovementTest : MonoBehaviour
     void UpdateDestination()
     {
         index++;
+
 
         if (index == wayPoints.Length)
         {

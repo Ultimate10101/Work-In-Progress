@@ -6,7 +6,7 @@ public class P_FireboltLogic : MonoBehaviour
 {
     private float maxDistanceFromPlayer = 20.0f;
 
-    private int DAMAGE = 50; 
+    private int DAMAGE = 20; 
 
 
     // Start is called before the first frame update

@@ -9,7 +9,7 @@ public class P_ManaController : MonoBehaviour
     [SerializeField] private Image manaGuage;
     [SerializeField] private TextMeshProUGUI manaText;
 
-    private float maxMana = 50;
+    private float maxMana = 50.0f;
     [SerializeField] private float mana;
     [SerializeField] private float manaIncVal;
 

@@ -64,6 +64,7 @@ public class E_CanvasController : MonoBehaviour
 
     void HealthFacePlayer()
     {
-        enemyCanvas.transform.LookAt(gameCam.transform.position, Vector3.down);
+        Vector3 lookAt = new Vector3(gameCam.transform.position.x, enemyCanvas.transform.position.y, gameCam.transform.position.z);
+        enemyCanvas.transform.LookAt(lookAt, Vector3.down);
     }
 }
