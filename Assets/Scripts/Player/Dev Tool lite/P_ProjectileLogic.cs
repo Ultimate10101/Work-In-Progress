@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class P_ProjectileScript : MonoBehaviour
+public class P_ProjectileLogic : MonoBehaviour
 {
 
-    private float maxDistanceFromPlayer = 75.0f;
+    private float maxDistanceFromPlayer = 30.0f;
 
     public static bool enemyHit;
 
@@ -43,7 +43,11 @@ public class P_ProjectileScript : MonoBehaviour
         {
             enemyHit = true;
             collision.gameObject.GetComponent<E_HealthController>().TakeDamage(DAMAGE);
-            collision.gameObject.GetComponent<E_AIMovementTest>().wasHit = true;
+
+            if(collision.gameObject.GetComponent<E_AIMovement>().currentState == EnemyState.PATROLLING)
+            {
+                collision.gameObject.GetComponent<E_AIMovement>().wasHit = true;
+            }    
         }
         Destroy(gameObject);
     }

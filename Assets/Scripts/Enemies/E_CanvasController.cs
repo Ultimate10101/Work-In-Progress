@@ -32,8 +32,6 @@ public class E_CanvasController : MonoBehaviour
         if(timerActive)
         {
             TimeUntilDeactivation();
-
-            Debug.Log(timer);
         }
     }
 

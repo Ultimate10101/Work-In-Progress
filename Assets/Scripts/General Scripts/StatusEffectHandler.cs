@@ -13,6 +13,8 @@ public class StatusEffectHandler : MonoBehaviour
 
     public StatusEffects currentStatusEffect;
 
+    public bool playerIsStunned;
+
     private List<int> burnTimer = new List<int>();
 
 
@@ -35,6 +37,20 @@ public class StatusEffectHandler : MonoBehaviour
                 break;
 
             case StatusEffects.STUNNED:
+
+                if(gameObject.CompareTag("Player"))
+                {
+                    if (playerIsStunned)
+                    {
+                        StartCoroutine(PlayerCanMove());
+                        playerIsStunned = false;
+                    }
+                }
+                
+                if(gameObject.CompareTag("Enemy"))
+                {
+
+                }
 
                 break;
 
@@ -79,6 +95,12 @@ public class StatusEffectHandler : MonoBehaviour
             burnTimer.RemoveAll(i => i == 0);
             yield return new WaitForSeconds(1.0f);
         }
+    }
+
+    IEnumerator PlayerCanMove()
+    {
+        yield return new WaitForSeconds(3);
+        currentStatusEffect = StatusEffects.NEUTRAL;
     }
 
 

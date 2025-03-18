@@ -14,11 +14,13 @@ public class P_DevToolLite : MonoBehaviour
 
     [SerializeField] private float timeBetweenShots;
 
-    
+    private StatusEffectHandler playerStatus;
 
     // Start is called before the first frame update
     void Start()
     {
+        playerStatus = P_PlayerController.playerControllerRef.gameObject.GetComponent<StatusEffectHandler>();
+
         canFire = true;
     }
 
@@ -39,7 +41,7 @@ public class P_DevToolLite : MonoBehaviour
 
     void Fire()
     {
-        if (fireKey && canFire)
+        if (fireKey && canFire && playerStatus.currentStatusEffect != StatusEffectHandler.StatusEffects.STUNNED)
         {
             canFire = false;
 

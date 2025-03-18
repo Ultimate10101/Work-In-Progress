@@ -4,28 +4,28 @@ using UnityEngine;
 using UnityEngine.AI;
 
 
-public class E_AIMovementTest : MonoBehaviour
+public class E_AIMovement : MonoBehaviour
 {
     public EnemyState currentState;
 
-    private NavMeshAgent navMeshAgent;
+    protected NavMeshAgent navMeshAgent;
     [SerializeField] private float agrroRange;
     [SerializeField] private float attackRange;
 
-    [SerializeField] private float patrollStoppingDistance;
-    [SerializeField] private float attackStoppingDistance;
+    [SerializeField] protected float patrollStoppingDistance;
+    [SerializeField] protected float attackStoppingDistance;
 
-    [SerializeField] private float moveSpeed;
+    [SerializeField] protected float moveSpeed;
 
     [SerializeField] private bool willPatrolDelay;
-    private float delayTime;
+    protected float delayTime;
 
 
     [SerializeField] private Transform[] wayPoints;
 
-    private Vector3 target;
-    private Vector3 startPos;
-    int index;
+    protected Vector3 target;
+    protected Vector3 startPos;
+    private int index;
 
     public bool wasHit;
 
@@ -44,10 +44,20 @@ public class E_AIMovementTest : MonoBehaviour
         wasHit = false;
 
         delayTime = 4.0f;
+
+        index = 0;
+
+        target = wayPoints[index].position;
     }
 
     // Update is called once per framez
     void Update()
+    {
+        MoveState();
+    }
+
+
+    protected virtual void MoveState()
     {
         switch (currentState)
         {
@@ -55,7 +65,7 @@ public class E_AIMovementTest : MonoBehaviour
                 PatrollingLogic();
 
                 // GO TO CHASE STATE
-                if (PlayerInAgrroRange() || wasHit) 
+                if (PlayerInAgrroRange() || wasHit)
                 {
                     currentState = EnemyState.CHASING;
 
@@ -66,6 +76,7 @@ public class E_AIMovementTest : MonoBehaviour
                 break;
 
             case EnemyState.CHASING:
+
                 ChasingLogic();
 
                 // GO TO PATROLLING STATE
@@ -98,20 +109,25 @@ public class E_AIMovementTest : MonoBehaviour
                     navMeshAgent.stoppingDistance = patrollStoppingDistance;
                 }
                 break;
-        }      
+        }
     }
 
-    void LookAtPlayer()
+
+
+
+    protected void LookAtPlayer()
     {
-        Vector3 lookAt = new Vector3(P_PlayerController.playerControllerRef.gameObject.transform.position.x, gameObject.transform.position.y, P_PlayerController.playerControllerRef.gameObject.transform.position.z);
-        transform.LookAt(lookAt);
+        Quaternion targetRotation = Quaternion.LookRotation(P_PlayerController.playerControllerRef.gameObject.transform.position - transform.position);
+
+        // Smoothly rotate towards the target point.
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 5.0f * Time.deltaTime);
     }
 
-    int PatrollingLogic()
+    protected int PatrollingLogic()
     {
         if (willPatrolDelay && (delayTime > 0.0f))
         {
-             delayTime -= Time.deltaTime;
+            delayTime -= Time.deltaTime;
 
             return 0;
         }
@@ -128,18 +144,17 @@ public class E_AIMovementTest : MonoBehaviour
         return 1;
     }
 
-    void ChasingLogic()
+    protected void ChasingLogic()
     {
-
         navMeshAgent.destination = P_PlayerController.playerControllerRef.gameObject.transform.position;
     }
 
-    void AttackLogic()
+    protected void AttackLogic()
     {
         LookAtPlayer();
     }
 
-    void UpdateDestination()
+    protected void UpdateDestination()
     {
         index++;
 
@@ -148,20 +163,21 @@ public class E_AIMovementTest : MonoBehaviour
         {
             index = 0;
         }
-    }
 
-    void GoToPoint()
-    {
         target = wayPoints[index].position;
-        navMeshAgent.SetDestination(target);
     }
 
-    bool PlayerInAgrroRange()
+    protected void GoToPoint()
+    {
+        navMeshAgent.destination = target;
+    }
+
+    protected bool PlayerInAgrroRange()
     {
         return (Vector3.Distance(gameObject.transform.position, P_PlayerController.playerControllerRef.gameObject.transform.position) <= agrroRange);
     }
 
-    bool PlayerInAttackRange()
+    protected bool PlayerInAttackRange()
     {
         return (Vector3.Distance(gameObject.transform.position, P_PlayerController.playerControllerRef.gameObject.transform.position) <= attackRange);
     }

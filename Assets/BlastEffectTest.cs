@@ -40,6 +40,7 @@ public class BlastEffectTest : MonoBehaviour
         if(radius <= maxRadius)
         {
             SetPositions();
+            FindTargets();
 
             radius += Time.deltaTime * speed;
 
@@ -79,7 +80,8 @@ public class BlastEffectTest : MonoBehaviour
         {
             if(target.gameObject.CompareTag("Player"))
             {
-                //STUN PLAYER
+                target.gameObject.GetComponent<StatusEffectHandler>().currentStatusEffect = StatusEffectHandler.StatusEffects.STUNNED;
+                target.gameObject.GetComponent<StatusEffectHandler>().playerIsStunned = true;
             }
         }
     }

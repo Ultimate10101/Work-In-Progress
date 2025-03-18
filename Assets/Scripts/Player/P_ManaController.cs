@@ -42,11 +42,11 @@ public class P_ManaController : MonoBehaviour
 
     void ManaIncrease()
     {
-        if (P_ProjectileScript.enemyHit)
+        if (P_ProjectileLogic.enemyHit)
         {
             mana += manaIncVal;
             mana = Mathf.Clamp(mana, 0.0f, 50.0f);
-            P_ProjectileScript.enemyHit = false;
+            P_ProjectileLogic.enemyHit = false;
         }
     }
 }

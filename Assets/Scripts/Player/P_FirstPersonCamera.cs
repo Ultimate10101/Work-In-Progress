@@ -35,7 +35,7 @@ public class P_FirstPersonCamera : MonoBehaviour
         xRotation = Mathf.Clamp(xRotation, -90.0f, 90.0f);
 
         gameCam.transform.rotation = Quaternion.Euler(xRotation, yRotation, 0.0f);
-        player.transform.rotation = Quaternion.Euler(0,yRotation, 0.0f);
+        player.transform.rotation = Quaternion.Euler(0.0f,yRotation, 0.0f);
     }
 
     void LateUpdate()

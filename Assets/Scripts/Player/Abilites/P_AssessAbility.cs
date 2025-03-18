@@ -17,6 +17,8 @@ public class P_AssessAbility : Def_Ability
 
     private int duration;
 
+    private StatusEffectHandler playerStatus;
+
     void Start()
     {
         castTime = 1.0f;
@@ -30,8 +32,10 @@ public class P_AssessAbility : Def_Ability
         duration = 10;
 
         playerMana = gameObject.GetComponent<P_ManaController>();
-    }
 
+        playerStatus = gameObject.GetComponent<StatusEffectHandler>();
+
+    }
 
     void Update()
     {
@@ -78,7 +82,11 @@ public class P_AssessAbility : Def_Ability
         {
             Debug.Log("Spell missed target");
         }
-        
+
+
+        PlayerStun();
+
+
         StartCoroutine(CoolDownHandler());
 
         Debug.Log("Finished");
@@ -135,6 +143,12 @@ public class P_AssessAbility : Def_Ability
             return true;
         }
         return true;
+    }
+
+    void PlayerStun()
+    {
+        playerStatus.currentStatusEffect = StatusEffectHandler.StatusEffects.STUNNED;
+        playerStatus.playerIsStunned = true;
     }
 
 

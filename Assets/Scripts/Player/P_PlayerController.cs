@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class P_PlayerController : MonoBehaviour
@@ -29,6 +30,8 @@ public class P_PlayerController : MonoBehaviour
 
     private float playerHeight;
 
+    private StatusEffectHandler playerStatus;
+
     void Awake()
     {
         if (playerControllerRef == null)
@@ -44,6 +47,8 @@ public class P_PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        playerStatus = gameObject.GetComponent<StatusEffectHandler>();
+
         baseSpeed = speed;
 
         playerRb = GetComponent<Rigidbody>();
@@ -54,7 +59,11 @@ public class P_PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        PlayerInput();
+        if (playerStatus.currentStatusEffect != StatusEffectHandler.StatusEffects.STUNNED)
+        {
+            PlayerInput();
+        }
+        
 
         PlayerSprint();
 
@@ -131,7 +140,11 @@ public class P_PlayerController : MonoBehaviour
 
     void DragCheck()
     {
-        if(!isOnGround)
+        if (playerStatus.currentStatusEffect == StatusEffectHandler.StatusEffects.STUNNED)
+        {
+            playerRb.drag = 99;
+        }
+        else if (!isOnGround)
         {
             playerRb.drag = air_Drag;
         }

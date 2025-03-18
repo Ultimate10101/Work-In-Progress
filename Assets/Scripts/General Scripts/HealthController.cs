@@ -8,13 +8,19 @@ using UnityEngine.UI;
 
 public class HealthController : MonoBehaviour
 {
+    public enum LivingStatus
+    {
+        ALIVE,
+        DEAD
+    }
+
     [SerializeField] protected float maxHealth;
     [SerializeField] protected float health;
 
     [SerializeField] private Image healthBar;
     [SerializeField] private TextMeshProUGUI healthText;
 
-    protected LivingStatus creatureLivingStatus;
+    protected LivingStatus currentLivingStatus;
 
 
     void Start()
@@ -22,7 +28,7 @@ public class HealthController : MonoBehaviour
         healthText.text = health+"/"+maxHealth;
         maxHealth = health;
 
-        creatureLivingStatus = LivingStatus.ALIVE;
+        currentLivingStatus = LivingStatus.ALIVE;
     }
 
     protected virtual void Update()
@@ -56,7 +62,7 @@ public class HealthController : MonoBehaviour
     {
         if (health<=0.0f)
         {
-            creatureLivingStatus = LivingStatus.DEAD;
+            currentLivingStatus = LivingStatus.DEAD;
         }
     }
 }

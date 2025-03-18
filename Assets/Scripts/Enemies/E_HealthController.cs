@@ -14,7 +14,7 @@ public class E_HealthController : HealthController
     {
         base.Update();
 
-        if(creatureLivingStatus == LivingStatus.DEAD)
+        if(currentLivingStatus == LivingStatus.DEAD)
         {
             Destroy(gameObject);
         }
