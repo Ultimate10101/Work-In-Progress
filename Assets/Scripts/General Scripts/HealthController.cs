@@ -20,6 +20,16 @@ public class HealthController : MonoBehaviour
     [SerializeField] private Image healthBar;
     [SerializeField] private TextMeshProUGUI healthText;
 
+    public float MaxHealth
+    {
+        get { return maxHealth; }
+    }
+
+    public float Health
+    {
+        get { return health; }
+    }
+
     protected LivingStatus currentLivingStatus;
 
 

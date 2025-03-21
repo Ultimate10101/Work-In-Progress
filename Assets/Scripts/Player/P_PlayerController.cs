@@ -32,6 +32,7 @@ public class P_PlayerController : MonoBehaviour
 
     private StatusEffectHandler playerStatus;
 
+
     void Awake()
     {
         if (playerControllerRef == null)
