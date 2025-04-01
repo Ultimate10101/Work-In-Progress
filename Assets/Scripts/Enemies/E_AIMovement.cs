@@ -123,13 +123,13 @@ public class E_AIMovement : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 5.0f * Time.deltaTime);
     }
 
-    protected int PatrollingLogic()
+    protected void PatrollingLogic()
     {
         if (willPatrolDelay && (delayTime > 0.0f))
         {
             delayTime -= Time.deltaTime;
 
-            return 0;
+            return;
         }
 
         GoToPoint();
@@ -141,7 +141,7 @@ public class E_AIMovement : MonoBehaviour
             delayTime = 4.0f;
         }
 
-        return 1;
+        return;
     }
 
     protected void ChasingLogic()
