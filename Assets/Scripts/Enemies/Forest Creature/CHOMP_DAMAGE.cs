@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RUSH_DAMAGE : MonoBehaviour
+public class CHOMP_DAMAGE : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
@@ -10,11 +10,11 @@ public class RUSH_DAMAGE : MonoBehaviour
         {
             if (other.gameObject.GetComponent<P_ThickSkinnedAbility>().isActive)
             {
-                other.gameObject.GetComponent<P_ThickSkinnedAbility>().TakeDamage(20);
+                other.gameObject.GetComponent<P_ThickSkinnedAbility>().TakeDamage(10);
             }
             else
             {
-                other.gameObject.GetComponent<P_HealthController>().TakeDamage(20);
+                other.gameObject.GetComponent<P_HealthController>().TakeDamage(10);
             }
         }
     }

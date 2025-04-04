@@ -28,25 +28,19 @@ public class P_ManaController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ManaIncrease();
-
         UpdateManaUI_Info();
     }
 
     void UpdateManaUI_Info()
     {
-
-        manaGuage.fillAmount= Mathf.Clamp(mana/maxMana,0.0f,1.0f);
-        manaText.text = mana+"/"+maxMana;
+        mana = Mathf.Clamp(mana, 0.0f, 50.0f);
+        manaGuage.fillAmount = Mathf.Clamp(mana / maxMana, 0.0f, 1.0f);
+        manaText.text = mana + "/" + maxMana;
     }
 
-    void ManaIncrease()
+    public void ManaIncrease()
     {
-        if (P_ProjectileLogic.enemyHit)
-        {
-            mana += manaIncVal;
-            mana = Mathf.Clamp(mana, 0.0f, 50.0f);
-            P_ProjectileLogic.enemyHit = false;
-        }
+        mana += manaIncVal;
+      
     }
 }

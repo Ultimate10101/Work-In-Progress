@@ -7,15 +7,8 @@ public class P_ProjectileLogic : MonoBehaviour
 
     private float maxDistanceFromPlayer = 30.0f;
 
-    public static bool enemyHit;
-
     private int DAMAGE = 2; 
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        enemyHit = false;
-    }
 
     // Update is called once per frame
     void Update()
@@ -41,7 +34,9 @@ public class P_ProjectileLogic : MonoBehaviour
         // if projectile hits enemy, mana will increase at a constant value
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            enemyHit = true;
+
+            P_PlayerController.playerControllerRef.gameObject.GetComponent<P_ManaController>().ManaIncrease();
+
             collision.gameObject.GetComponent<E_HealthController>().TakeDamage(DAMAGE);
 
             if(collision.gameObject.GetComponent<E_AIMovement>().currentState == EnemyState.PATROLLING)

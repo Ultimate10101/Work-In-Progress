@@ -27,13 +27,6 @@ public class P_FireboltAbility : Def_Ability
         playerMana = gameObject.GetComponent<P_ManaController>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        CastInput();
-
-        Cast();
-    }
 
     protected override void CastInput()
     {

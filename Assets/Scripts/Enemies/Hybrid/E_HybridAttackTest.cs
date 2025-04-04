@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class E_HybridAttackTest : MonoBehaviour
 {
-    [SerializeField] BoxCollider RushHitBox;
+    [SerializeField] private RUSH_DAMAGE specialDamageToggle;
+
+    [SerializeField] private BoxCollider RushHitBox;
 
     private E_AIMovement enemyMoveState;
 
@@ -43,14 +45,16 @@ public class E_HybridAttackTest : MonoBehaviour
     {
         if (enemyMoveState.currentState == EnemyState.ATTACKING)
         {
-            if (specialReady)
+            if ((gameObject.GetComponent<E_HealthController>().Health <= 50.0f) && specialReady)
             {
                 CancelInvoke("UntilCanAct");
+                canAct = false;
                 specialReady = false;
 
-                //anim.SetTrigger("Berserk");
+                //anim.SetTrigger("Berserk"); ---> To do once animations are set
+                SpecialActivate();
 
-                Invoke("UntilCanAct", 5.0f);
+                Invoke("UntilCanAct", 4.0f);
 
             }
             else if (canAct)
@@ -85,9 +89,11 @@ public class E_HybridAttackTest : MonoBehaviour
     }
 
 
-    void SpecialAttack()
+    void SpecialActivate()
     {
-
+        timeUntilActAgain = 0.0f;
+        specialDamageToggle.specialActivated = true;
+       
     }
 
     void UntilCanAct()

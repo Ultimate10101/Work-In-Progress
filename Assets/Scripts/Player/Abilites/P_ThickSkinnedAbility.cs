@@ -44,7 +44,7 @@ public class P_ThickSkinnedAbility : Def_Ability
         barrierText.text = barrier + "/" + maxBarrier;
     }
 
-    void Update()
+    protected override void Update()
     {
         if(barrierBar.IsActive())
         {

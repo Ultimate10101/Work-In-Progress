@@ -29,19 +29,12 @@ public class P_AssessAbility : Def_Ability
 
         readyToCast = true;
 
-        duration = 10;
+        duration = 18;
 
         playerMana = gameObject.GetComponent<P_ManaController>();
 
         playerStatus = gameObject.GetComponent<StatusEffectHandler>();
 
-    }
-
-    void Update()
-    {
-        CastInput();
-
-        Cast();
     }
 
 

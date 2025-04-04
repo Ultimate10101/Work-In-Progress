@@ -22,4 +22,12 @@ public abstract class Def_Ability : MonoBehaviour
     protected abstract IEnumerator CastDelay();
     protected abstract IEnumerator CoolDownHandler();
 
+
+    protected virtual void Update()
+    {
+        CastInput();
+
+        Cast();
+    }
+
 }

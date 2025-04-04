@@ -7,6 +7,8 @@ using UnityEngine;
 
 public class P_CureAbility : Def_Ability
 {
+    private P_HealthController playerHealth;
+
     [SerializeField] private int healPercent;
     private float healPercentage;
 
@@ -23,15 +25,9 @@ public class P_CureAbility : Def_Ability
         readyToCast = true;
 
         playerMana = gameObject.GetComponent<P_ManaController>();
+        playerHealth = gameObject.GetComponent<P_HealthController>();
 
         healPercentage = healPercent / 100.0f;
-    }
-
-    void Update()
-    {
-        CastInput();
-
-        Cast();
     }
 
 
@@ -57,9 +53,9 @@ public class P_CureAbility : Def_Ability
     {
         yield return new WaitForSeconds(castTime);
 
-        float heal = (gameObject.GetComponent<P_HealthController>().MaxHealth * healPercentage);
+        float heal = (playerHealth.MaxHealth * healPercentage);
 
-        gameObject.GetComponent<P_HealthController>().HealHealth(heal);
+        playerHealth.HealHealth(heal);
 
         StartCoroutine(CoolDownHandler());
 

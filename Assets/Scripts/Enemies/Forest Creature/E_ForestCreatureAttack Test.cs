@@ -34,22 +34,34 @@ public class E_ForestCreatureAttackTest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Heal();
         Attack();
     }
+
+
+    void Heal()
+    {
+        if ((gameObject.GetComponent<E_HealthController>().Health <= 40.0f) && specialReady)
+        {
+            CancelInvoke("UntilCanAct");
+
+            canAct = false;
+            specialReady = false;
+
+            //anim.SetTrigger("ProtectMyself"); ---> To do once animations are set
+            SpecialActivate();
+
+            Invoke("UntilCanAct", 5.0f);
+
+        }
+    }
+
 
     void Attack()
     {
         if (enemyMoveState.currentState == EnemyState.ATTACKING)
         {
-            if ((gameObject.GetComponent<E_HealthController>().Health <= 40.0f) && specialReady)
-            {
-                CancelInvoke("UntilCanAct");
-                specialReady = false;
-
-                Invoke("UntilCanAct", 5.0f);
-
-            }
-            else if (canAct)
+            if (canAct)
             {
                 canAct = false;
 
@@ -76,9 +88,10 @@ public class E_ForestCreatureAttackTest : MonoBehaviour
     }
 
    
-    void SpecialAttack()
+    void SpecialActivate()
     {
-
+        gameObject.GetComponent<E_HealthController>().HealHealth(20.0f);
+        Debug.Log("I Run");
     }
 
     void UntilCanAct()
