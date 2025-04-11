@@ -136,7 +136,7 @@ public class P_PlayerController : MonoBehaviour
         float radius = 0.3f;
         RaycastHit hit;
 
-        isOnGround = Physics.SphereCast(transform.position, radius, Vector3.down, out hit, distance);
+        isOnGround = Physics.SphereCast(transform.position, radius, Vector3.down, out hit, distance, LayerMask.GetMask("Ground"));
     }
 
     void DragCheck()

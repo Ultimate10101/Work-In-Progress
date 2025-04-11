@@ -7,7 +7,7 @@ public class P_ProjectileLogic : MonoBehaviour
 
     private float maxDistanceFromPlayer = 30.0f;
 
-    private int DAMAGE = 2; 
+    private int DAMAGE = 5; 
 
 
     // Update is called once per frame
