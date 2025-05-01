@@ -49,16 +49,24 @@ public class P_AssessAbility : Def_Ability
         {
             Debug.Log("Casting");
             readyToCast = false;
+            P_ManageAbility.abilityCurrentlyCasting = true;
             playerMana.Mana -= manaCost;
 
             StartCoroutine(CastDelay());
         }
     }
 
+    protected override void InverseCast()
+    {
+        throw new System.NotImplementedException();
+    }
+
     protected override IEnumerator CastDelay()
     {
         yield return new WaitForSeconds(castTime);
-        
+
+        P_ManageAbility.abilityCurrentlyCasting = false;
+
         if (IsValidTarget()) 
         { 
             if(DurationBugFix())

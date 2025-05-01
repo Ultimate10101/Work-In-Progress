@@ -16,11 +16,13 @@ public class P_DevToolLite : MonoBehaviour
 
     private StatusEffectHandler playerStatus;
 
-    [SerializeField] private Animator anim;
+    private Animator playerAnim;
 
     // Start is called before the first frame update
     void Start()
     {
+        playerAnim = GetComponent<Animator>();
+
         playerStatus = P_PlayerController.playerControllerRef.gameObject.GetComponent<StatusEffectHandler>();
 
         canFire = true;
@@ -31,12 +33,11 @@ public class P_DevToolLite : MonoBehaviour
     {
         FireInput();
 
-        if (fireKey && canFire && playerStatus.currentStatusEffect != StatusEffectHandler.StatusEffects.STUNNED)
+        if (fireKey && canFire &&  playerStatus.currentStatusEffect != StatusEffectHandler.StatusEffects.STUNNED)
         {
-            Firing();
+            //Firing();
+            Fire_DTl();
         }
-
-        //Fire_DTl();
     }
 
 
@@ -48,9 +49,9 @@ public class P_DevToolLite : MonoBehaviour
 
     void Firing()
     {
-        if (!anim.GetCurrentAnimatorStateInfo(0).IsName("metarig_ShootingAnim_True")) 
-        { 
-            anim.SetBool("IsFiring", true);
+        if (!playerAnim.GetCurrentAnimatorStateInfo(0).IsName("metarig_Firing"))
+        {
+            playerAnim.SetTrigger("IsFiring");
         }
         Debug.Log("Playing");
 
@@ -59,7 +60,12 @@ public class P_DevToolLite : MonoBehaviour
 
     void Fire_DTl()
     {
-        Debug.Log("I work");
+        if (!playerAnim.GetCurrentAnimatorStateInfo(0).IsName("metarig_Firing"))
+        {
+            playerAnim.SetTrigger("IsFiring");
+        
+        }
+        
 
         canFire = false;
 
@@ -89,7 +95,7 @@ public class P_DevToolLite : MonoBehaviour
 
         Invoke("ShotCounter", timeBetweenShots);
 
-        anim.SetBool("IsFiring", false);
+       // anim.SetBool("IsFiring", false);
 
         Debug.Log("I exit");
 

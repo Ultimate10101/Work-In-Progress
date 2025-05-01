@@ -16,7 +16,6 @@ public class P_ProjectileLogic : MonoBehaviour
         ProjectileRangeCap();
     }
 
-    // Fix projectile Range Cap
     void ProjectileRangeCap()
     {
 

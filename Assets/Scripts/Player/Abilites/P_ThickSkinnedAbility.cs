@@ -67,10 +67,11 @@ public class P_ThickSkinnedAbility : Def_Ability
 
     protected override void Cast()
     {
-        if(readyToCast && thickSkinnedKey && ((playerMana.Mana - manaCost) >= 0.0f) && !isActive)
+        if(!P_ManageAbility.abilityCurrentlyCasting && readyToCast && thickSkinnedKey && ((playerMana.Mana - manaCost) >= 0.0f) && !isActive)
         {
             Debug.Log("Casting");
             readyToCast = false;
+            P_ManageAbility.abilityCurrentlyCasting = true;
             playerMana.Mana -= manaCost;
 
             SetBarrier();
@@ -79,9 +80,21 @@ public class P_ThickSkinnedAbility : Def_Ability
         }
     }
 
+    protected override void InverseCast()
+    {
+        if (!P_ManageAbility.abilityCurrentlyCasting && readyToCast && thickSkinnedKey)
+        {
+
+        }
+
+        throw new System.NotImplementedException();
+    }
+
     protected override IEnumerator CastDelay()
     {
         yield return new WaitForSeconds(castTime);
+
+        P_ManageAbility.abilityCurrentlyCasting = false;
 
         ActivateBarrier(true);
 

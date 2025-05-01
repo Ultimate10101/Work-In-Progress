@@ -35,10 +35,11 @@ public class P_FireboltAbility : Def_Ability
 
     protected override void Cast()
     {
-        if (readyToCast && fireboltKey && ((playerMana.Mana - manaCost) >= 0.0f))
+        if (!P_ManageAbility.abilityCurrentlyCasting && readyToCast && fireboltKey && ((playerMana.Mana - manaCost) >= 0.0f))
         {
             Debug.Log("Casting");
             readyToCast = false;
+            P_ManageAbility.abilityCurrentlyCasting = true;
             playerMana.Mana -= manaCost;
 
             StartCoroutine(CastDelay());
@@ -46,10 +47,21 @@ public class P_FireboltAbility : Def_Ability
         }
     }
 
+    protected override void InverseCast()
+    {
+        if (!P_ManageAbility.abilityCurrentlyCasting && readyToCast && fireboltKey)
+        {
+
+        }
+
+        throw new System.NotImplementedException();
+    }
 
     protected override IEnumerator CastDelay()
     {
         yield return new WaitForSeconds(castTime);
+
+        P_ManageAbility.abilityCurrentlyCasting = false;
 
         Fire();
 

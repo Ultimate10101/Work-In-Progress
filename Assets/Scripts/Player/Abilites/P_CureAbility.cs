@@ -38,7 +38,7 @@ public class P_CureAbility : Def_Ability
 
     protected override void Cast()
     {
-        if (readyToCast && cureKey && ((playerMana.Mana - manaCost) >= 0.0f))
+        if (!P_ManageAbility.abilityCurrentlyCasting && readyToCast && cureKey && ((playerMana.Mana - manaCost) >= 0.0f))
         {
             Debug.Log("Casting");
             readyToCast = false;
@@ -47,6 +47,16 @@ public class P_CureAbility : Def_Ability
             StartCoroutine(CastDelay());
 
         }
+    }
+
+    protected override void InverseCast()
+    {
+        if(!P_ManageAbility.abilityCurrentlyCasting && readyToCast && cureKey)
+        {
+
+        }
+
+        throw new System.NotImplementedException();
     }
 
     protected override IEnumerator CastDelay()

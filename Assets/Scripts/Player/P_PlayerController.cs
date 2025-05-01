@@ -32,6 +32,8 @@ public class P_PlayerController : MonoBehaviour
 
     private StatusEffectHandler playerStatus;
 
+    [SerializeField] private Animator playerAnim;
+
 
     void Awake()
     {
@@ -102,9 +104,13 @@ public class P_PlayerController : MonoBehaviour
         {
             playerRb.AddForce(move * air_Speed, ForceMode.Force);
         }
-        else
+        else if ((HorizontalInput != 0.0f || VerticalInput != 0.0f))
         {
             playerRb.AddForce(move * speed, ForceMode.Force);
+            if (!playerAnim.GetCurrentAnimatorStateInfo(0).IsName("metarig|Walking"))
+            {
+                playerAnim.SetTrigger("IsWalking");
+            }
         }
     }
         
@@ -127,6 +133,7 @@ public class P_PlayerController : MonoBehaviour
         if(jumpKey && isOnGround)
         {
             playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            playerAnim.SetTrigger("IsJumping");
         }
     }
 

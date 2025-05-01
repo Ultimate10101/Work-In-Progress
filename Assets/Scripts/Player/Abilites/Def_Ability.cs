@@ -14,10 +14,12 @@ public abstract class Def_Ability : MonoBehaviour
     protected bool targetSelf;
     protected bool readyToCast;
 
+
     protected P_ManaController playerMana;
 
 
     protected abstract void Cast();
+    protected abstract void InverseCast();
     protected abstract void CastInput();
     protected abstract IEnumerator CastDelay();
     protected abstract IEnumerator CoolDownHandler();
@@ -27,7 +29,16 @@ public abstract class Def_Ability : MonoBehaviour
     {
         CastInput();
 
-        Cast();
+        //if (!Inverse)
+        //{
+            Cast();
+        //}
+        //else
+        //{
+            InverseCast();
+        //}
+            
+
     }
 
 }
