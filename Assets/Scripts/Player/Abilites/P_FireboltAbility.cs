@@ -12,6 +12,10 @@ public class P_FireboltAbility : Def_Ability
 
     private bool fireboltKey;
 
+    P_HealthController playerHealth;
+
+    private float damageToSelf = 10.0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,9 +26,19 @@ public class P_FireboltAbility : Def_Ability
 
         manaCost = 15.0f;
 
+
+        // Mess with later
+        inverseCastTime = 0.5f;
+
+        inverseCoolDown = 0.5f;
+
+        inverseManaCost = 0.0f;
+
+
         readyToCast = true;
 
         playerMana = gameObject.GetComponent<P_ManaController>();
+        playerHealth = gameObject.GetComponent<P_HealthController>();
     }
 
 
@@ -35,11 +49,11 @@ public class P_FireboltAbility : Def_Ability
 
     protected override void Cast()
     {
-        if (!P_ManageAbility.abilityCurrentlyCasting && readyToCast && fireboltKey && ((playerMana.Mana - manaCost) >= 0.0f))
+        if (!abilityCurrentlyCasting && readyToCast && fireboltKey && ((playerMana.Mana - manaCost) >= 0.0f))
         {
             Debug.Log("Casting");
             readyToCast = false;
-            P_ManageAbility.abilityCurrentlyCasting = true;
+            abilityCurrentlyCasting = true;
             playerMana.Mana -= manaCost;
 
             StartCoroutine(CastDelay());
@@ -47,21 +61,13 @@ public class P_FireboltAbility : Def_Ability
         }
     }
 
-    protected override void InverseCast()
-    {
-        if (!P_ManageAbility.abilityCurrentlyCasting && readyToCast && fireboltKey)
-        {
-
-        }
-
-        throw new System.NotImplementedException();
-    }
-
     protected override IEnumerator CastDelay()
     {
         yield return new WaitForSeconds(castTime);
 
-        P_ManageAbility.abilityCurrentlyCasting = false;
+        abilityCurrentlyCasting = false;
+
+        playerHealth.TakeDamage(damageToSelf);
 
         Fire();
 
@@ -76,6 +82,35 @@ public class P_FireboltAbility : Def_Ability
         readyToCast = true;
         Debug.Log("Ready to cast again");
     }
+
+
+
+    // Inverse of Ability
+
+    protected override void InverseCast()
+    {
+        if (!abilityCurrentlyCasting && readyToCast && fireboltKey)
+        {
+
+        }
+
+        throw new System.NotImplementedException();
+    }
+
+    protected override IEnumerator InverseCastDelay()
+    {
+        yield return new WaitForSeconds(castTime);
+
+
+    }
+
+
+    protected override IEnumerator InverseCoolDownHandler()
+    {
+        throw new System.NotImplementedException();
+    }
+
+
 
 
     void Fire()

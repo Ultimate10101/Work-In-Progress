@@ -4,10 +4,17 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-// Barrier Spell for Player
+// Barrier Spell for Player when inverse is not toggled
+// Expolsion Spell that targets Enemy when Inverse is not toggled 
 
 public class P_ThickSkinnedAbility : Def_Ability
 {
+
+    [SerializeField] private Camera gameCam;
+
+    [SerializeField] private GameObject rocks;
+    private RaycastHit hit;
+
     [SerializeField] private GameObject barrierBG;
     [SerializeField] private Image barrierBar;
     [SerializeField] private TextMeshProUGUI barrierText;
@@ -32,6 +39,12 @@ public class P_ThickSkinnedAbility : Def_Ability
         manaCost = 20.0f;
 
         readyToCast = true;
+
+        inverseCastTime = 6.0f;
+
+        inverseCoolDown = 15.0f;
+
+        inverseManaCost = 25.0f;
 
         duration = 15;
 
@@ -65,13 +78,15 @@ public class P_ThickSkinnedAbility : Def_Ability
     }
 
 
+
+
     protected override void Cast()
     {
-        if(!P_ManageAbility.abilityCurrentlyCasting && readyToCast && thickSkinnedKey && ((playerMana.Mana - manaCost) >= 0.0f) && !isActive)
+        if(!abilityCurrentlyCasting && readyToCast && thickSkinnedKey && ((playerMana.Mana - manaCost) >= 0.0f) && !isActive)
         {
             Debug.Log("Casting");
             readyToCast = false;
-            P_ManageAbility.abilityCurrentlyCasting = true;
+            abilityCurrentlyCasting = true;
             playerMana.Mana -= manaCost;
 
             SetBarrier();
@@ -80,21 +95,11 @@ public class P_ThickSkinnedAbility : Def_Ability
         }
     }
 
-    protected override void InverseCast()
-    {
-        if (!P_ManageAbility.abilityCurrentlyCasting && readyToCast && thickSkinnedKey)
-        {
-
-        }
-
-        throw new System.NotImplementedException();
-    }
-
     protected override IEnumerator CastDelay()
     {
         yield return new WaitForSeconds(castTime);
 
-        P_ManageAbility.abilityCurrentlyCasting = false;
+        abilityCurrentlyCasting = false;
 
         ActivateBarrier(true);
 
@@ -117,6 +122,49 @@ public class P_ThickSkinnedAbility : Def_Ability
         ActivateBarrier(false);
 
     }
+
+
+    // Inverse of Ability
+
+    protected override void InverseCast()
+    {
+        if (!abilityCurrentlyCasting && readyToCast && thickSkinnedKey && ((playerMana.Mana - inverseManaCost) >= 0.0f) && AimingAtGround())
+        {
+            readyToCast = false;
+
+            abilityCurrentlyCasting = true;
+
+            playerMana.Mana -= inverseManaCost;
+
+            StartCoroutine(InverseCastDelay());
+        }
+
+        
+    }
+
+    protected override IEnumerator InverseCastDelay()
+    {
+        yield return new WaitForSeconds(inverseCastTime);
+
+        Expolsion();
+
+        abilityCurrentlyCasting = false;
+
+
+
+    }
+
+
+    protected override IEnumerator InverseCoolDownHandler()
+    {
+        yield return new WaitForSeconds(inverseCoolDown);
+
+        readyToCast = true;
+    }
+
+
+
+
 
 
     void UpdateBarrierUI_Info()
@@ -152,5 +200,21 @@ public class P_ThickSkinnedAbility : Def_Ability
             StopCoroutine(DurationHandler());
         }
     }
+
+
+    private bool AimingAtGround()
+    {
+        Ray ray = gameCam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+
+
+        return Physics.Raycast(ray, out hit, 75, LayerMask.GetMask("Ground"));
+
+    }
+
+    private void Expolsion()
+    {
+       Instantiate(rocks, hit.transform.position, rocks.transform.rotation);
+    }
+
 
 }

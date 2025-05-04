@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// Assess [information viewer] Spell for Player
+// Assess [information viewer] Menu Option for Dev Tool lite Menu
 
-public class P_AssessAbility : Def_Ability
+public class P_AssessAbility: MonoBehaviour 
 {
     [SerializeField] private Camera gameCam;
 
@@ -13,7 +13,12 @@ public class P_AssessAbility : Def_Ability
     private float currentTarget;
     private float previousTarget;
 
+    private float launchTime;
+    private float coolDown;
+  
+
     private bool accessKey;
+    private bool readyToActivate;
 
     private int duration;
 
@@ -21,51 +26,38 @@ public class P_AssessAbility : Def_Ability
 
     void Start()
     {
-        castTime = 1.0f;
-
+        launchTime = 0.5f;
         coolDown = 0.5f;
 
-        manaCost = 2.0f;
 
-        readyToCast = true;
+        readyToActivate = true;
 
         duration = 18;
-
-        playerMana = gameObject.GetComponent<P_ManaController>();
 
         playerStatus = gameObject.GetComponent<StatusEffectHandler>();
 
     }
 
 
-    protected override void CastInput()
+    void ActivateAssess()
     {
         accessKey = Input.GetKeyDown(KeyCode.G);
     }
 
-    protected override void Cast()
+    void Assess()
     {
-        if (readyToCast && accessKey && ((playerMana.Mana - manaCost) >= 0.0f))
+        if (readyToActivate && accessKey)
         {
             Debug.Log("Casting");
-            readyToCast = false;
-            P_ManageAbility.abilityCurrentlyCasting = true;
-            playerMana.Mana -= manaCost;
+            readyToActivate = false;
 
             StartCoroutine(CastDelay());
         }
     }
 
-    protected override void InverseCast()
+    private IEnumerator CastDelay()
     {
-        throw new System.NotImplementedException();
-    }
-
-    protected override IEnumerator CastDelay()
-    {
-        yield return new WaitForSeconds(castTime);
-
-        P_ManageAbility.abilityCurrentlyCasting = false;
+        yield return new WaitForSeconds(launchTime);
 
         if (IsValidTarget()) 
         { 
@@ -93,10 +85,10 @@ public class P_AssessAbility : Def_Ability
         Debug.Log("Finished");
     }
 
-    protected override IEnumerator CoolDownHandler()
+    private IEnumerator CoolDownHandler()
     {
         yield return new WaitForSeconds(coolDown);
-        readyToCast = true;
+        readyToActivate = true;
         Debug.Log("Ready to cast agian");
     }
     
