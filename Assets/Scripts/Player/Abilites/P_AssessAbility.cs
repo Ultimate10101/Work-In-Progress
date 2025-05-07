@@ -11,24 +11,40 @@ public class P_AssessAbility: MonoBehaviour
     private E_CanvasController enemyCanvas;
 
     private float currentTarget;
+
     private float previousTarget;
 
     private float launchTime;
+
     private float coolDown;
   
-
     private bool accessKey;
+
     private bool readyToActivate;
 
     private int duration;
 
     private StatusEffectHandler playerStatus;
 
+    public static P_AssessAbility assessAbilityRef;
+
+
+    void Awake()
+    {
+        if (assessAbilityRef == null)
+        {
+            assessAbilityRef = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
     void Start()
     {
         launchTime = 0.5f;
-        coolDown = 0.5f;
 
+        coolDown = 0.5f;
 
         readyToActivate = true;
 
@@ -39,12 +55,13 @@ public class P_AssessAbility: MonoBehaviour
     }
 
 
-    void ActivateAssess()
+    public void ActivateAssess()
     {
         accessKey = Input.GetKeyDown(KeyCode.G);
+        Debug.Log("Skibidi toilet ohio gyatt");
     }
 
-    void Assess()
+    public void Assess()
     {
         if (readyToActivate && accessKey)
         {
@@ -89,7 +106,7 @@ public class P_AssessAbility: MonoBehaviour
     {
         yield return new WaitForSeconds(coolDown);
         readyToActivate = true;
-        Debug.Log("Ready to cast agian");
+        Debug.Log("Ready to cast again");
     }
     
     void DurationHanlder()

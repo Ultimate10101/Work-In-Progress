@@ -7,11 +7,22 @@ using UnityEngine;
 public abstract class Def_Ability : MonoBehaviour
 {
     protected float castTime;
+
     protected float inverseCastTime;
+
     protected float coolDown;
+
     protected float inverseCoolDown;
 
     protected float manaCost;
+
+    public float ManaCost
+    {
+        get { return manaCost; }
+
+        set { manaCost = value; }
+    }
+
     protected float inverseManaCost;
    
     protected bool readyToCast;
