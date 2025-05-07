@@ -79,7 +79,6 @@ public class P_ThickSkinnedAbility : Def_Ability
 
 
 
-
     protected override void Cast()
     {
         if(!abilityCurrentlyCasting && readyToCast && thickSkinnedKey && ((playerMana.Mana - manaCost) >= 0.0f) && !isActive)
@@ -124,48 +123,6 @@ public class P_ThickSkinnedAbility : Def_Ability
     }
 
 
-    // Inverse of Ability
-
-    protected override void InverseCast()
-    {
-        if (!abilityCurrentlyCasting && readyToCast && thickSkinnedKey && ((playerMana.Mana - inverseManaCost) >= 0.0f) && AimingAtGround())
-        {
-            readyToCast = false;
-
-            abilityCurrentlyCasting = true;
-
-            playerMana.Mana -= inverseManaCost;
-
-            StartCoroutine(InverseCastDelay());
-        }
-
-        
-    }
-
-    protected override IEnumerator InverseCastDelay()
-    {
-        yield return new WaitForSeconds(inverseCastTime);
-
-        Expolsion();
-
-        abilityCurrentlyCasting = false;
-
-
-
-    }
-
-
-    protected override IEnumerator InverseCoolDownHandler()
-    {
-        yield return new WaitForSeconds(inverseCoolDown);
-
-        readyToCast = true;
-    }
-
-
-
-
-
 
     void UpdateBarrierUI_Info()
     {
@@ -194,12 +151,55 @@ public class P_ThickSkinnedAbility : Def_Ability
 
     private void CheckBarrierCondtion()
     {
-        if(barrier == 0.0f)
+        if (barrier == 0.0f)
         {
             ActivateBarrier(false);
             StopCoroutine(DurationHandler());
         }
     }
+
+
+
+
+
+
+    // Inverse of Ability
+
+    protected override void InverseCast()
+    {
+        if (!abilityCurrentlyCasting && readyToCast && thickSkinnedKey && ((playerMana.Mana - inverseManaCost) >= 0.0f) && AimingAtGround())
+        {
+            readyToCast = false;
+
+            abilityCurrentlyCasting = true;
+
+            playerMana.Mana -= inverseManaCost;
+
+            StartCoroutine(InverseCastDelay());
+        }
+
+        
+    }
+
+    protected override IEnumerator InverseCastDelay()
+    {
+        yield return new WaitForSeconds(inverseCastTime);
+
+        Expolsion();
+
+        abilityCurrentlyCasting = false;
+
+    }
+
+
+    protected override IEnumerator InverseCoolDownHandler()
+    {
+        yield return new WaitForSeconds(inverseCoolDown);
+
+        readyToCast = true;
+    }
+
+
 
 
     private bool AimingAtGround()

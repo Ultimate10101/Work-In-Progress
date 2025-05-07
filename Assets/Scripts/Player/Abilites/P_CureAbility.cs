@@ -17,7 +17,13 @@ public class P_CureAbility : Def_Ability
     private P_HealthController playerHealth;
 
     [SerializeField] private int healPercent;
-    private float healPercentage;
+    float healPercentage;
+
+    float healAmount;
+
+    float heal;
+
+    float healDelay;
 
     private bool cureKey;
 
@@ -25,9 +31,11 @@ public class P_CureAbility : Def_Ability
     {
         castTime = 2.0f;
 
-        coolDown = 4.0f;
+        coolDown = 20.0f;
 
         manaCost = 15.0f;
+
+        healDelay = 2.0f;
 
 
         inverseCastTime = 0.5f;
@@ -62,6 +70,9 @@ public class P_CureAbility : Def_Ability
             abilityCurrentlyCasting = true;
             playerMana.Mana -= manaCost;
 
+            heal = (playerHealth.MaxHealth * healPercentage);
+            healAmount = heal / 8;
+
             StartCoroutine(CastDelay());
 
         }
@@ -73,9 +84,7 @@ public class P_CureAbility : Def_Ability
 
         abilityCurrentlyCasting = false;
 
-        float heal = (playerHealth.MaxHealth * healPercentage);
-
-        playerHealth.HealHealth(heal);
+        StartCoroutine(HealOverTime());
 
         StartCoroutine(CoolDownHandler());
 
@@ -88,6 +97,17 @@ public class P_CureAbility : Def_Ability
         readyToCast = true;
         Debug.Log("Ready to cast agian");
     }
+
+    private IEnumerator HealOverTime()
+    {
+        for (float i  = 0; i< heal; i += healAmount)
+        {
+            yield return new WaitForSeconds(healDelay);
+
+            playerHealth.HealHealth(healAmount);
+        }
+    }
+
 
 
     // Inverse of Ability
@@ -113,7 +133,6 @@ public class P_CureAbility : Def_Ability
         abilityCurrentlyCasting = false;
 
         FireInverseCure();
-        playerMana.ManaIncrease();
 
         StartCoroutine(InverseCoolDownHandler());
     }

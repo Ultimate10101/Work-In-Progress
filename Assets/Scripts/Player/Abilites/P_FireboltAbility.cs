@@ -14,7 +14,7 @@ public class P_FireboltAbility : Def_Ability
 
     P_HealthController playerHealth;
 
-    private float damageToSelf = 10.0f;
+    private float damageToSelf = 15.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -89,17 +89,23 @@ public class P_FireboltAbility : Def_Ability
 
     protected override void InverseCast()
     {
-        if (!abilityCurrentlyCasting && readyToCast && fireboltKey)
+        if (!abilityCurrentlyCasting && readyToCast && fireboltKey && ((playerMana.Mana - inverseManaCost) >= 0.0f))
         {
+            readyToCast = false;
+            abilityCurrentlyCasting = true;
 
+            playerMana.Mana -= inverseManaCost;
+
+            StartCoroutine(InverseCastDelay());
         }
 
-        throw new System.NotImplementedException();
     }
 
     protected override IEnumerator InverseCastDelay()
     {
         yield return new WaitForSeconds(castTime);
+
+        Fire();
 
 
     }
@@ -107,7 +113,9 @@ public class P_FireboltAbility : Def_Ability
 
     protected override IEnumerator InverseCoolDownHandler()
     {
-        throw new System.NotImplementedException();
+        yield return new WaitForSeconds(inverseCoolDown);
+
+        readyToCast = true;
     }
 
 

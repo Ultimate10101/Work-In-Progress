@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
     private GameObject pauseMenu;
     private GameObject deathScreen;
 
-    private P_PlayerController player;
+    private Vector3 respawnPosition;
 
     // Start is called before the first frame update
     void Start()
@@ -113,27 +113,52 @@ public class GameManager : MonoBehaviour
     void Respawn()
     {
         // Set Player Back to the beginning and refresh enemies on map, but not puzzels
+        P_PlayerController.playerControllerRef.transform.position = respawnPosition;
+
     }
     
 
     void GameStatesTransition()
     {
+        switch (gameState)
+        {
+            case GameStates.GAME_INTRO:
+                break;
+            case GameStates.GAMEPLAY:
+                break;
+            case GameStates.GAMEND:
+                break;
+        }
+
         // Changes Game States and set variables
     }
 
     void PlayerInSectionTransition()
     {
+        switch (playerInSection)
+        {
+            case PlayerInSection.PLAYER_IN_COMBAT:
+                break;
+            case PlayerInSection.PLAYER_EXPLORING:
+                break;
+            case PlayerInSection.PLAYER_IN_PUZZEL:
+                break;
+        }
+
+
         // Changes Player States and Set variables
     }
 
 
     void GameInIntro()
     {
-
+       
     }
 
     void GameInGameplay()
     {
+        respawnPosition =  P_PlayerController.playerControllerRef.transform.position;
+
 
     }
 
