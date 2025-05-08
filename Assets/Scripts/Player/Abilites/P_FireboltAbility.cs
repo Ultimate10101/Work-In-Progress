@@ -110,16 +110,12 @@ public class P_FireboltAbility : Def_Ability
 
     }
 
-
     protected override IEnumerator InverseCoolDownHandler()
     {
         yield return new WaitForSeconds(inverseCoolDown);
 
         readyToCast = true;
     }
-
-
-
 
     void Fire()
     {

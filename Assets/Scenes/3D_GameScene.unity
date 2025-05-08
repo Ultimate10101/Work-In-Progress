@@ -301,7 +301,7 @@ GameObject:
   - component: {fileID: 20734952}
   - component: {fileID: 20734954}
   - component: {fileID: 20734953}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Image (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1202,7 +1202,7 @@ GameObject:
   - component: {fileID: 88456142}
   - component: {fileID: 88456144}
   - component: {fileID: 88456143}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Image (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2951,7 +2951,7 @@ GameObject:
   - component: {fileID: 210977705}
   - component: {fileID: 210977707}
   - component: {fileID: 210977706}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Image (14)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3306,7 +3306,7 @@ GameObject:
   - component: {fileID: 232593778}
   - component: {fileID: 232593777}
   - component: {fileID: 232593776}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Potency_Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5548,7 +5548,7 @@ GameObject:
   - component: {fileID: 368774479}
   - component: {fileID: 368774481}
   - component: {fileID: 368774480}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Image (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5854,7 +5854,7 @@ GameObject:
   - component: {fileID: 379160943}
   - component: {fileID: 379160945}
   - component: {fileID: 379160944}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8608,8 +8608,8 @@ GameObject:
   m_Component:
   - component: {fileID: 605293880}
   - component: {fileID: 605293881}
-  m_Layer: 0
-  m_Name: 22
+  m_Layer: 3
+  m_Name: Inverse Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9018,7 +9018,7 @@ GameObject:
   - component: {fileID: 618572569}
   - component: {fileID: 618572571}
   - component: {fileID: 618572570}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Image (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9544,7 +9544,7 @@ GameObject:
   - component: {fileID: 642971866}
   - component: {fileID: 642971868}
   - component: {fileID: 642971867}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Image (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9743,7 +9743,7 @@ GameObject:
   - component: {fileID: 659950102}
   - component: {fileID: 659950104}
   - component: {fileID: 659950103}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Image (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10260,7 +10260,7 @@ GameObject:
   - component: {fileID: 681801403}
   - component: {fileID: 681801402}
   - component: {fileID: 681801401}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Mana_Redux_Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10773,7 +10773,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 710401705}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Connector Storage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11140,8 +11140,8 @@ GameObject:
   m_Component:
   - component: {fileID: 751775594}
   - component: {fileID: 751775595}
-  m_Layer: 0
-  m_Name: 01
+  m_Layer: 3
+  m_Name: Potency Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13086,7 +13086,7 @@ GameObject:
   - component: {fileID: 860822325}
   - component: {fileID: 860822327}
   - component: {fileID: 860822326}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Image (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15013,13 +15013,13 @@ GameObject:
   - component: {fileID: 979102866}
   - component: {fileID: 979102865}
   - component: {fileID: 979102864}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Player_DTLCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &979102863
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15998,8 +15998,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1056493741}
   - component: {fileID: 1056493742}
-  m_Layer: 0
-  m_Name: 22
+  m_Layer: 3
+  m_Name: Assess Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16707,7 +16707,7 @@ GameObject:
   - component: {fileID: 1097296416}
   - component: {fileID: 1097296415}
   - component: {fileID: 1097296414}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Assess_Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16988,7 +16988,7 @@ GameObject:
   - component: {fileID: 1104127907}
   - component: {fileID: 1104127909}
   - component: {fileID: 1104127908}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Image (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17582,7 +17582,7 @@ GameObject:
   - component: {fileID: 1142130920}
   - component: {fileID: 1142130922}
   - component: {fileID: 1142130921}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Image (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17831,7 +17831,7 @@ GameObject:
   - component: {fileID: 1177390902}
   - component: {fileID: 1177390904}
   - component: {fileID: 1177390903}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Potency Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17877,7 +17877,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Potency
+  m_text: Potency (O)
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 81ea03e49d43d1e46bdeeb936919d11b, type: 2}
   m_sharedMaterial: {fileID: -6349337266256532784, guid: 81ea03e49d43d1e46bdeeb936919d11b, type: 2}
@@ -17940,7 +17940,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -24.875938, w: 0}
+  m_margin: {x: 0, y: 0, z: -45.82067, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -18610,12 +18610,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65308d683e2592f4cb9d941dbb0be81a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  P_DTLCanvas: {fileID: 1434713337}
+  P_DTLCanvas: {fileID: 979102862}
   PlayerCrosshair: {fileID: 1120900617}
-  assessAbility: {fileID: 0}
-  cureAbility: {fileID: 0}
-  fireboltAbility: {fileID: 0}
-  thickSkinnedAbility: {fileID: 0}
+  assessAbility: {fileID: 1224789326}
+  cureAbility: {fileID: 1224789325}
+  fireboltAbility: {fileID: 1224789328}
+  fireboltLogic: {fileID: 5928453863395793972, guid: 29d38b0d992ac2841902c65f85c06efa, type: 3}
+  thickSkinnedAbility: {fileID: 1224789327}
+  inverseKey: 0
 --- !u!1001 &1228977174
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19674,7 +19676,7 @@ GameObject:
   - component: {fileID: 1299706040}
   - component: {fileID: 1299706042}
   - component: {fileID: 1299706041}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Image (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20680,7 +20682,7 @@ GameObject:
   - component: {fileID: 1406819318}
   - component: {fileID: 1406819320}
   - component: {fileID: 1406819319}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Image (13)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21175,8 +21177,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1432878585}
   - component: {fileID: 1432878586}
-  m_Layer: 0
-  m_Name: 01 (1)
+  m_Layer: 3
+  m_Name: Mana Redux Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21260,13 +21262,13 @@ GameObject:
   - component: {fileID: 1434713338}
   - component: {fileID: 1434713340}
   - component: {fileID: 1434713339}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: DTLMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1434713338
 RectTransform:
   m_ObjectHideFlags: 0
@@ -23386,7 +23388,7 @@ GameObject:
   - component: {fileID: 1544672426}
   - component: {fileID: 1544672428}
   - component: {fileID: 1544672427}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Inverse Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23432,7 +23434,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Inverse
+  m_text: Inverse (P)
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 81ea03e49d43d1e46bdeeb936919d11b, type: 2}
   m_sharedMaterial: {fileID: -6349337266256532784, guid: 81ea03e49d43d1e46bdeeb936919d11b, type: 2}
@@ -23495,7 +23497,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -29.33699, w: 0}
+  m_margin: {x: 0, y: 0, z: -49.442368, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -23921,7 +23923,7 @@ GameObject:
   - component: {fileID: 1564786506}
   - component: {fileID: 1564786508}
   - component: {fileID: 1564786507}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Image (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37129,7 +37131,7 @@ GameObject:
   - component: {fileID: 1805194366}
   - component: {fileID: 1805194368}
   - component: {fileID: 1805194367}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Assess Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37175,7 +37177,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Assess
+  m_text: Assess (G)
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 81ea03e49d43d1e46bdeeb936919d11b, type: 2}
   m_sharedMaterial: {fileID: -6349337266256532784, guid: 81ea03e49d43d1e46bdeeb936919d11b, type: 2}
@@ -37238,7 +37240,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -17.749916, w: 0}
+  m_margin: {x: 0, y: 0, z: -39.761063, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -37681,7 +37683,7 @@ GameObject:
   - component: {fileID: 1814093182}
   - component: {fileID: 1814093184}
   - component: {fileID: 1814093183}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Image (12)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40425,7 +40427,7 @@ GameObject:
   - component: {fileID: 2027318700}
   - component: {fileID: 2027318702}
   - component: {fileID: 2027318701}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Mana Redux Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40471,7 +40473,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Mana Cost
+  m_text: Mana Cost (I)
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 81ea03e49d43d1e46bdeeb936919d11b, type: 2}
   m_sharedMaterial: {fileID: -6349337266256532784, guid: 81ea03e49d43d1e46bdeeb936919d11b, type: 2}
@@ -40534,7 +40536,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -26.151978, w: 0}
+  m_margin: {x: 0, y: 0, z: -36.732216, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -42244,7 +42246,7 @@ GameObject:
   - component: {fileID: 2139621806}
   - component: {fileID: 2139621805}
   - component: {fileID: 2139621804}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Inverse_Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
