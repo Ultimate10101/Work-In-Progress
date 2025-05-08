@@ -104,13 +104,12 @@ public class P_PlayerController : MonoBehaviour
         {
             playerRb.AddForce(move * air_Speed, ForceMode.Force);
         }
-        else if ((HorizontalInput != 0.0f || VerticalInput != 0.0f))
+        else
         {
             playerRb.AddForce(move * speed, ForceMode.Force);
-            if (!playerAnim.GetCurrentAnimatorStateInfo(0).IsName("metarig|Walking"))
-            {
-                playerAnim.SetTrigger("IsWalking");
-            }
+           
+            playerAnim.SetFloat("IsWalking", move.magnitude);
+            
         }
     }
         
