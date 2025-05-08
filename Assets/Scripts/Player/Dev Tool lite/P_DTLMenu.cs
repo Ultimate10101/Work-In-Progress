@@ -14,14 +14,32 @@ public class P_DTLMenu : MonoBehaviour
 
     public P_FireboltAbility fireboltAbility;
 
+    public P_FireboltLogic fireboltLogic;
+
     public P_ThickSkinnedAbility thickSkinnedAbility;
 
     private bool manaReduxKey;
 
-    private bool inverseKey;
+    public bool inverseKey;
 
     private bool increasePotencyKey;
     // Start is called before the first frame update
+
+    public static P_DTLMenu DTLMenuRef;
+
+
+    void Awake()
+    {
+        if (DTLMenuRef == null)
+        {
+            DTLMenuRef = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     void Start()
     {
         P_DTLCanvas.SetActive(false);
@@ -49,9 +67,9 @@ public class P_DTLMenu : MonoBehaviour
 
         DTLMenuOptions();
 
-        P_AssessAbility.assessAbilityRef.ActivateAssess();
+        assessAbility.ActivateAssess();
 
-        P_AssessAbility.assessAbilityRef.Assess();
+        assessAbility.Assess();
     }
 
 
@@ -66,18 +84,26 @@ public class P_DTLMenu : MonoBehaviour
 
     public void DTLMenuOptions()
     {
-        if(manaReduxKey)
+        if(P_DTLCanvas.activeSelf)
         {
-            cureAbility.ManaCost /= 2;
+            if(manaReduxKey)
+            {
+                cureAbility.ManaCost /= 2;
 
-            fireboltAbility.ManaCost /= 2;
+                fireboltAbility.ManaCost /= 2;
 
-            thickSkinnedAbility.ManaCost /= 2;
+                thickSkinnedAbility.ManaCost /= 2;
+            }
+
+            if(increasePotencyKey)
+            {
+                fireboltLogic.DAMAGE *= 2;
+            }
+
+            if(inverseKey)
+            {
+                
+            }
         }
-
-        //if(increasePotencyKey)
-        //{
-            //fireboltAbility.damage *= 2;
-        //}
     }
 }

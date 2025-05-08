@@ -26,20 +26,7 @@ public class P_AssessAbility: MonoBehaviour
 
     private StatusEffectHandler playerStatus;
 
-    public static P_AssessAbility assessAbilityRef;
-
-
-    void Awake()
-    {
-        if (assessAbilityRef == null)
-        {
-            assessAbilityRef = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
+    
     void Start()
     {
         launchTime = 0.5f;

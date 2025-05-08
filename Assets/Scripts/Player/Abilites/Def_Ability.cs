@@ -53,16 +53,14 @@ public abstract class Def_Ability : MonoBehaviour
     {
         CastInput();
 
-        //if (DevTool lite Menu option Inverse is not toggled)
-        //{
+        if(!P_DTLMenu.DTLMenuRef.inverseKey)
+        {
             Cast();
-        //}
-        //else
-        //{
+        }
+        else
+        {
             InverseCast();
-        //}
-            
-
+        }
     }
 
 }

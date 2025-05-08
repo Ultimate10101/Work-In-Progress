@@ -104,14 +104,10 @@ public class P_FireboltAbility : Def_Ability
 
     }
 
-
     protected override IEnumerator InverseCoolDownHandler()
     {
         throw new System.NotImplementedException();
     }
-
-
-
 
     void Fire()
     {
