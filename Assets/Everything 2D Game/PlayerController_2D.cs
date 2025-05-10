@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController_2D : MonoBehaviour
 {
-    private int speed = 10;
+    public string targetSceneName = "3D_GameScene";
+    private int speed = 20;
 
     Rigidbody2D playerRb2D;
 
@@ -45,5 +47,13 @@ public class PlayerController_2D : MonoBehaviour
         Vector2 newPosition = playerRb2D.position + delta;
         
         playerRb2D.MovePosition(newPosition);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.CompareTag("Bridge"))
+        {
+            SceneManager.LoadScene(targetSceneName);
+        }
     }
 }

@@ -7,6 +7,7 @@ TagManager:
   - Enemy
   - Firebolt_Projectile
   - Projectile
+  - Bridge
   layers:
   - Default
   - TransparentFX
