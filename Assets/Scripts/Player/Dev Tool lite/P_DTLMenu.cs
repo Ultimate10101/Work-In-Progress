@@ -1,29 +1,51 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class P_DTLMenu : MonoBehaviour
 {
+    [SerializeField] private Animator playerAnim;
+
+
     [SerializeField] private GameObject P_DTLCanvas;
 
-    [SerializeField] private GameObject PlayerCrosshair;
+    public bool DTL_MenuActive
+    {
+        get; private set;
+    }
+
+    //[SerializeField] private GameObject PlayerCrosshair;
+
 
     public P_AssessAbility assessAbility;
-
     public P_CureAbility cureAbility;
-
     public P_FireboltAbility fireboltAbility;
-
     public P_FireboltLogic fireboltLogic;
-
     public P_ThickSkinnedAbility thickSkinnedAbility;
+
+
+    private float c_StartingManaCost;
+    private float ts_StartingManaCost;
+    private float fb_StartingManaCost;
+
+    private float inverC_StartingManaCost;
+    private float inverTS_StartingManaCost;
 
     private bool manaReduxKey;
 
-    public bool inverseKey;
+    private bool inverseKey;
 
     private bool increasePotencyKey;
-    // Start is called before the first frame update
+
+
+    public bool Inverse;
+    private bool isIncreasePotencyAcitve;
+    private bool isReduceManaCostActive;
+
+    private int fb_startingDamage;
+    private int fbInverse_startingDamage;
 
     public static P_DTLMenu DTLMenuRef;
 
@@ -43,37 +65,51 @@ public class P_DTLMenu : MonoBehaviour
     void Start()
     {
         P_DTLCanvas.SetActive(false);
+
+        DTL_MenuActive = false;
+
+        StoreOGValues();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.M))
-        {
-            P_DTLCanvas.SetActive(!P_DTLCanvas.activeSelf);
-        }
+        ActivateMenu();
 
-        if(P_DTLCanvas.activeSelf)
-        {
-            PlayerCrosshair.SetActive(!PlayerCrosshair);
-        }
-
-        if(!P_DTLCanvas.activeSelf)
-        {
-            PlayerCrosshair.SetActive(PlayerCrosshair);
-        }
-
-        CastInputs();
+        MenuInputs();
 
         DTLMenuOptions();
 
-        assessAbility.ActivateAssess();
-
-        assessAbility.Assess();
     }
 
 
-    private void CastInputs()
+    private void ActivateMenu()
+    {
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            P_DTLCanvas.SetActive(!P_DTLCanvas.activeSelf);
+
+            if (P_DTLCanvas.activeSelf)
+            {
+                playerAnim.SetTrigger("Up");
+                playerAnim.SetBool("DTL_Active", true);
+
+                DTL_MenuActive = true;
+            }
+            else
+            {
+                playerAnim.SetBool("DTL_Active", false);
+
+                DTL_MenuActive = false;
+            }
+        }
+
+
+        //PlayerCrosshair.SetActive(!P_DTLCanvas.activeSelf);
+    }
+
+
+    private void MenuInputs()
     {
         manaReduxKey = Input.GetKeyDown(KeyCode.I);
 
@@ -84,26 +120,97 @@ public class P_DTLMenu : MonoBehaviour
 
     public void DTLMenuOptions()
     {
-        if(P_DTLCanvas.activeSelf)
+        if (DTL_MenuActive)
         {
-            if(manaReduxKey)
+            // Reduce Player's Magic Spells Mana Cost by half
+            if (manaReduxKey && isReduceManaCostActive)
             {
-                cureAbility.ManaCost /= 2;
+                playerAnim.SetTrigger("IsUsingOtherDTLOptions");
 
-                fireboltAbility.ManaCost /= 2;
+                isReduceManaCostActive = true;
 
-                thickSkinnedAbility.ManaCost /= 2;
+                StartCoroutine(ReduceManaCostDuration());
             }
 
-            if(increasePotencyKey)
+            // Increase Effectiveness of Player's Magic Spells
+            if (increasePotencyKey && !isIncreasePotencyAcitve)
             {
-                fireboltLogic.DAMAGE *= 2;
+                playerAnim.SetTrigger("IsUsingOtherDTLOptions");
+
+                isIncreasePotencyAcitve = true;
+
+                StartCoroutine(PotencyIncreaseDuration());
             }
 
-            if(inverseKey)
+            // Inverse Player's Magic Abilites
+            if (inverseKey)
             {
-                
+                playerAnim.SetTrigger("IsUsingOtherDTLOptions");
+
+                Inverse = !Inverse;
             }
+
+            // View Enemies' Weaknesses and abilites
+            assessAbility.ActivateAssess();
+
+            assessAbility.Assess(playerAnim);
         }
+
+
     }
+
+    // Add Healing into the Mix
+    private IEnumerator PotencyIncreaseDuration()
+    {
+        fireboltLogic.DAMAGE *= 2;
+        fireboltLogic.INVERSE_DAMAGE *= 2;
+
+        yield return new WaitForSeconds(15);
+
+        isIncreasePotencyAcitve = false;
+
+        fireboltLogic.DAMAGE = fb_startingDamage;
+        fireboltLogic.INVERSE_DAMAGE = fbInverse_startingDamage;
+
+    }
+
+
+    private IEnumerator ReduceManaCostDuration()
+    {
+        cureAbility.ManaCost /= 2;
+        fireboltAbility.ManaCost /= 2;
+        thickSkinnedAbility.ManaCost /= 2;
+
+        cureAbility.InverseManaCost /= 2;
+        thickSkinnedAbility.InverseManaCost /= 2;
+
+        yield return new WaitForSeconds(20);
+
+        isReduceManaCostActive = false;
+
+        cureAbility.ManaCost = c_StartingManaCost;
+        fireboltAbility.ManaCost = fb_StartingManaCost;
+        thickSkinnedAbility.ManaCost = ts_StartingManaCost;
+
+        cureAbility.InverseManaCost = inverC_StartingManaCost;
+        thickSkinnedAbility.InverseManaCost = inverTS_StartingManaCost;
+
+    }
+
+
+
+    public void StoreOGValues()
+    {
+        fb_startingDamage = fireboltLogic.DAMAGE;
+        fbInverse_startingDamage = fireboltLogic.INVERSE_DAMAGE;
+
+        c_StartingManaCost = cureAbility.ManaCost;
+        ts_StartingManaCost = thickSkinnedAbility.ManaCost;
+        fb_StartingManaCost = fireboltAbility.ManaCost;
+
+        inverC_StartingManaCost = cureAbility.InverseManaCost;
+        inverTS_StartingManaCost = thickSkinnedAbility.InverseManaCost;
+    }
+
 }
+

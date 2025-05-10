@@ -11,10 +11,6 @@ public class P_ThickSkinnedAbility : Def_Ability
 {
 
     [SerializeField] private Camera gameCam;
-
-    [SerializeField] private GameObject rocks;
-    private RaycastHit hit;
-
     [SerializeField] private GameObject barrierBG;
     [SerializeField] private Image barrierBar;
     [SerializeField] private TextMeshProUGUI barrierText;
@@ -30,23 +26,29 @@ public class P_ThickSkinnedAbility : Def_Ability
 
     public bool isActive;
 
+    private 
+
     void Start()
     {
-        castTime = 4.0f;
+        // Regular Magic variables
+        castTimeLengthOffset = 1.0f;
 
         coolDown = 8.0f;
 
         manaCost = 20.0f;
 
-        readyToCast = true;
-
-        inverseCastTime = 6.0f;
-
-        inverseCoolDown = 15.0f;
-
-        inverseManaCost = 25.0f;
-
         duration = 15;
+
+
+        // Inverse Magic variables
+        inverseCastTimeLengthOffset = 1.0f;
+
+        inverseCoolDown = 1.0f;
+
+        inverseManaCost = 0.0f;
+
+        
+        readyToCast = true;
 
         playerMana = gameObject.GetComponent<P_ManaController>();
 
@@ -59,16 +61,15 @@ public class P_ThickSkinnedAbility : Def_Ability
 
     protected override void Update()
     {
-        if(barrierBar.IsActive())
+        base.Update();
+
+        if (barrierBar.IsActive())
         {
             UpdateBarrierUI_Info();
+            CheckBarrierCondtion();
         }
 
-        CheckBarrierCondtion();
-
-        CastInput();
-
-        Cast();
+        
     }
 
 
@@ -83,12 +84,14 @@ public class P_ThickSkinnedAbility : Def_Ability
     {
         if(!abilityCurrentlyCasting && readyToCast && thickSkinnedKey && ((playerMana.Mana - manaCost) >= 0.0f) && !isActive)
         {
-            Debug.Log("Casting");
+            Debug.Log("Casting ThickSkinned");
             readyToCast = false;
             abilityCurrentlyCasting = true;
             playerMana.Mana -= manaCost;
 
             SetBarrier();
+
+            playerAnim.SetTrigger("IsShielding");
 
             StartCoroutine(CastDelay());
         }
@@ -96,7 +99,9 @@ public class P_ThickSkinnedAbility : Def_Ability
 
     protected override IEnumerator CastDelay()
     {
-        yield return new WaitForSeconds(castTime);
+        yield return new WaitForSeconds(playerAnim.GetCurrentAnimatorClipInfo(0)[0].clip.length - castTimeLengthOffset);
+
+        Debug.Log("ThickSkinned Casted");
 
         abilityCurrentlyCasting = false;
 
@@ -111,12 +116,13 @@ public class P_ThickSkinnedAbility : Def_Ability
     {
         yield return new WaitForSeconds(coolDown);
         readyToCast = true;
-        Debug.Log("Ready to cast agian");
+        Debug.Log("ThickSkinned cooldown recharged");
     }
 
     IEnumerator DurationHandler()
     {
         yield return new WaitForSeconds(duration);
+        Debug.Log("ThickSkinned Duration over");
 
         ActivateBarrier(false);
 
@@ -153,6 +159,8 @@ public class P_ThickSkinnedAbility : Def_Ability
     {
         if (barrier == 0.0f)
         {
+            Debug.Log("ThickSkinned barrier was broken");
+
             ActivateBarrier(false);
             StopCoroutine(DurationHandler());
         }
@@ -161,19 +169,21 @@ public class P_ThickSkinnedAbility : Def_Ability
 
 
 
-
-
     // Inverse of Ability
 
     protected override void InverseCast()
     {
-        if (!abilityCurrentlyCasting && readyToCast && thickSkinnedKey && ((playerMana.Mana - inverseManaCost) >= 0.0f) && AimingAtGround())
+        if (!abilityCurrentlyCasting && readyToCast && thickSkinnedKey && ((playerMana.Mana - inverseManaCost) >= 0.0f))
         {
+            Debug.Log("Casting Inverse ThickSkinned");
+
             readyToCast = false;
 
             abilityCurrentlyCasting = true;
 
             playerMana.Mana -= inverseManaCost;
+
+            playerAnim.SetTrigger("IsDebuffing");
 
             StartCoroutine(InverseCastDelay());
         }
@@ -183,11 +193,15 @@ public class P_ThickSkinnedAbility : Def_Ability
 
     protected override IEnumerator InverseCastDelay()
     {
-        yield return new WaitForSeconds(inverseCastTime);
+        yield return new WaitForSeconds(playerAnim.GetCurrentAnimatorClipInfo(0)[0].clip.length - inverseCastTimeLengthOffset);
 
-        Expolsion();
+        Debug.Log("Inverse ThickSkinned Casted");
 
         abilityCurrentlyCasting = false;
+
+        EnemyDoubleDamage();
+
+        StartCoroutine(InverseCoolDownHandler());
 
     }
 
@@ -197,23 +211,38 @@ public class P_ThickSkinnedAbility : Def_Ability
         yield return new WaitForSeconds(inverseCoolDown);
 
         readyToCast = true;
+
+        Debug.Log("Inverse ThickSkinned cooldown recharged");
     }
 
 
-
-
-    private bool AimingAtGround()
+    private void EnemyDoubleDamage()
     {
         Ray ray = gameCam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+        
+        RaycastHit hit;
+
+        Physics.Raycast(ray, out hit, 30.0f);
+
+        if (hit.collider != null && hit.collider.gameObject.CompareTag("Enemy"))
+        {
+            if (!hit.collider.gameObject.GetComponent<E_HealthController>().IsDoubleDamageActive)
+            {
+                hit.collider.gameObject.GetComponent<E_HealthController>().ActivateDoubleDamage(15);
+
+                Debug.Log("Enemy hit and effect active");
+            }
+            else
+            {
+                Debug.Log("Effect Already Active on this target");
+            }
+        }
+        else
+        {
+            Debug.Log("No valid Target was hit - double damage effect");
+        }
 
 
-        return Physics.Raycast(ray, out hit, 75, LayerMask.GetMask("Ground"));
-
-    }
-
-    private void Expolsion()
-    {
-       Instantiate(rocks, hit.transform.position, rocks.transform.rotation);
     }
 
 

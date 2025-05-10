@@ -58,14 +58,14 @@ public class HealthController : MonoBehaviour
         healthText.text = health + "/" + maxHealth;
     }
 
-    public void TakeDamage(float damage)
+    public virtual void TakeDamage(float damage)
     {
         health -= damage;
     }
 
     public void HealHealth(float health)
     {
-        this.health += health;
+        health += health;
     }
 
     public void Death()

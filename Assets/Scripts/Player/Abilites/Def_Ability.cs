@@ -6,9 +6,12 @@ using UnityEngine;
 
 public abstract class Def_Ability : MonoBehaviour
 {
-    protected float castTime;
 
-    protected float inverseCastTime;
+    [SerializeField] protected Animator playerAnim; 
+
+    protected float castTimeLengthOffset;
+
+    protected float inverseCastTimeLengthOffset;
 
     protected float coolDown;
 
@@ -24,6 +27,12 @@ public abstract class Def_Ability : MonoBehaviour
     }
 
     protected float inverseManaCost;
+
+    public float InverseManaCost
+    {
+        get { return inverseManaCost; }
+        set { inverseManaCost = value; }
+    }
    
     protected bool readyToCast;
 
@@ -51,15 +60,20 @@ public abstract class Def_Ability : MonoBehaviour
 
     protected virtual void Update()
     {
-        CastInput();
+        if (!P_DTLMenu.DTLMenuRef.DTL_MenuActive)
+        {
+            CastInput();
+        }
 
-        if(!P_DTLMenu.DTLMenuRef.inverseKey)
+        if(!P_DTLMenu.DTLMenuRef.Inverse)
         {
             Cast();
+            Debug.Log("Inverse not toggled");
         }
         else
         {
             InverseCast();
+            Debug.Log("Inverse toggled");
         }
     }
 

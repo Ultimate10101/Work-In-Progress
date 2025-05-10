@@ -10,7 +10,6 @@ public class E_CanvasController : MonoBehaviour
     [SerializeField] private Camera gameCam;
 
     public bool isActive;
-    private bool timerActive;
 
     private float timer;
 
@@ -18,8 +17,6 @@ public class E_CanvasController : MonoBehaviour
     private void Start()
     {
         isActive = false;
-
-        timerActive = false;
     }
 
     void Update()
@@ -29,7 +26,7 @@ public class E_CanvasController : MonoBehaviour
             HealthFacePlayer();
         }
 
-        if(timerActive)
+        if(isActive)
         {
             TimeUntilDeactivation();
         }
@@ -46,7 +43,6 @@ public class E_CanvasController : MonoBehaviour
     public void ActiveFor(int seconds)
     {
         timer = seconds;
-        timerActive = true;
     }
 
     public void TimeUntilDeactivation()
@@ -56,7 +52,6 @@ public class E_CanvasController : MonoBehaviour
         if(timer <= 0.0f)
         {
             CanvasActive(false);
-            timerActive = false;
         }
     }
 

@@ -4,15 +4,33 @@ using UnityEngine;
 
 public class P_FireboltLogic : MonoBehaviour
 {
-    private float maxDistanceFromPlayer = 20.0f;
+    private float maxDistanceFromPlayer = 70.0f;
 
-    public int DAMAGE = 20; 
+
+    private int damage = 30;
+
+    public int DAMAGE
+    {
+        get { return damage; }
+
+        set { damage = value; }
+    }
+
+
+    private int inverseDamage = 5;
+
+    public int INVERSE_DAMAGE
+    {
+        get { return inverseDamage; }
+
+        set { inverseDamage = value; }
+    }
 
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -21,7 +39,7 @@ public class P_FireboltLogic : MonoBehaviour
         ProjectileRangeCap();
     }
 
-     void ProjectileRangeCap()
+    void ProjectileRangeCap()
     {
 
         if (Vector3.Distance(gameObject.transform.position, P_PlayerController.playerControllerRef.transform.position) >= maxDistanceFromPlayer)
@@ -30,15 +48,24 @@ public class P_FireboltLogic : MonoBehaviour
         }
     }
 
-        private void OnCollisionEnter(Collision collision)
-    {
-        // Update portion later, use for testing now
 
-        // Projectile will be destroyed when hitting gameobject (enemy or environment)
-        // if projectile hits enemy, mana will increase at a constant value
+    private void OnCollisionEnter(Collision collision)
+    {
+
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            collision.gameObject.GetComponent<E_HealthController>().TakeDamage(DAMAGE);
+            if (!P_DTLMenu.DTLMenuRef.Inverse)
+            {
+                collision.gameObject.GetComponent<E_HealthController>().TakeDamage(DAMAGE);
+            }
+            else
+            {
+                collision.gameObject.GetComponent<E_HealthController>().TakeDamage(INVERSE_DAMAGE);
+
+                P_PlayerController.playerControllerRef.gameObject.GetComponent<P_ManaController>().ManaIncrease();
+
+            }
+
         }
         Destroy(gameObject);
     }
