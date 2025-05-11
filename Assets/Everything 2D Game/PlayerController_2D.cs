@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class PlayerController_2D : MonoBehaviour
 {
     public string targetSceneName = "3D_GameScene";
-    private int speed = 20;
+    [SerializeField] private int speed = 20;
 
     Rigidbody2D playerRb2D;
 
