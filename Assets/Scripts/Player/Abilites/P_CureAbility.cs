@@ -12,39 +12,56 @@ public class P_CureAbility : Def_Ability
     [SerializeField] private Transform attackPoint;
     [SerializeField] private GameObject cureShotPrefab;
 
-    private float shootForce;
+    private E_HealthController enemyHealth;
 
     private P_HealthController playerHealth;
 
     [SerializeField] private int healPercent;
     private float healPercentage;
+<<<<<<< Updated upstream
+=======
+
+    private float healAmount;
+
+    private float heal;
+
+    private float healDelay;
+>>>>>>> Stashed changes
 
     private bool cureKey;
 
+    private float currentTarget;
+
+    private float previousTarget;
+
     void Start()
     {
-        castTime = 2.0f;
+        // Regular Magic variables
+        castTimeLengthOffset = 0.0f;
 
         coolDown = 4.0f;
 
         manaCost = 15.0f;
 
+<<<<<<< Updated upstream
+=======
+        healDelay = 2.0f;
 
-        inverseCastTime = 0.5f;
+        healPercentage = healPercent / 100.0f;
+>>>>>>> Stashed changes
+
+        // Inverse Magic variables
+        inverseCastTimeLengthOffset = 0.5f;
 
         inverseCoolDown = 0.5f;
 
         inverseManaCost = 0.0f;
 
+
         readyToCast = true;
 
         playerMana = gameObject.GetComponent<P_ManaController>();
         playerHealth = gameObject.GetComponent<P_HealthController>();
-
-        healPercentage = healPercent / 100.0f;
-
-
-        shootForce = 10.0f;
     }
 
 
@@ -57,11 +74,19 @@ public class P_CureAbility : Def_Ability
     {
         if (!abilityCurrentlyCasting && readyToCast && cureKey && ((playerMana.Mana - manaCost) >= 0.0f))
         {
-            Debug.Log("Casting");
+            Debug.Log("Casting Restoration");
             readyToCast = false;
             abilityCurrentlyCasting = true;
             playerMana.Mana -= manaCost;
 
+<<<<<<< Updated upstream
+=======
+            heal = (playerHealth.MaxHealth * healPercentage);
+            healAmount = heal / 8;
+
+            playerAnim.SetTrigger("IsHealing");
+
+>>>>>>> Stashed changes
             StartCoroutine(CastDelay());
 
         }
@@ -69,10 +94,13 @@ public class P_CureAbility : Def_Ability
 
     protected override IEnumerator CastDelay()
     {
-        yield return new WaitForSeconds(castTime);
+        yield return new WaitForSeconds(playerAnim.GetCurrentAnimatorClipInfo(0)[0].clip.length - castTimeLengthOffset);
+
+        Debug.Log("Restoration Casted");
 
         abilityCurrentlyCasting = false;
 
+<<<<<<< Updated upstream
         float heal = (playerHealth.MaxHealth * healPercentage);
 
         playerHealth.HealHealth(heal);
@@ -80,15 +108,33 @@ public class P_CureAbility : Def_Ability
         StartCoroutine(CoolDownHandler());
 
         Debug.Log("Finished");
+=======
+        StartCoroutine(HealOverTime());
+>>>>>>> Stashed changes
     }
 
     protected override IEnumerator CoolDownHandler()
     {
         yield return new WaitForSeconds(coolDown);
         readyToCast = true;
-        Debug.Log("Ready to cast agian");
+        Debug.Log("Restoration cooldown recharged");
     }
 
+<<<<<<< Updated upstream
+=======
+    private IEnumerator HealOverTime()
+    {
+        for (float i = 0.0f; i < heal; i += healAmount)
+        {
+            yield return new WaitForSeconds(healDelay);
+
+            playerHealth.HealHealth(healAmount);
+        }
+        StartCoroutine(CoolDownHandler());
+    }
+
+
+>>>>>>> Stashed changes
 
     // Inverse of Ability
 
@@ -96,10 +142,14 @@ public class P_CureAbility : Def_Ability
     {
         if (!abilityCurrentlyCasting && readyToCast && cureKey && ((playerMana.Mana - inverseManaCost) >= 0.0f))
         {
+            Debug.Log("Casting Inverse Restoration");
+
             readyToCast = false;
             abilityCurrentlyCasting = true;
 
             playerMana.Mana -= inverseManaCost;
+
+            playerAnim.SetTrigger("IsUsingDot");
 
             StartCoroutine(InverseCastDelay());
         }
@@ -108,14 +158,27 @@ public class P_CureAbility : Def_Ability
 
     protected override IEnumerator InverseCastDelay()
     {
-        yield return new WaitForSeconds(inverseCastTime);
+        yield return new WaitForSeconds(playerAnim.GetCurrentAnimatorClipInfo(0)[0].clip.length - inverseCastTimeLengthOffset);
+
+        Debug.Log("Inverse Restoration Casted");
 
         abilityCurrentlyCasting = false;
 
+<<<<<<< Updated upstream
         FireInverseCure();
         playerMana.ManaIncrease();
 
         StartCoroutine(InverseCoolDownHandler());
+=======
+        if (IsTargetValid())
+        {
+            StartCoroutine(DamageOverTime());
+        }
+        else
+        {
+            StartCoroutine(InverseCoolDownHandler());
+        }
+>>>>>>> Stashed changes
     }
 
 
@@ -124,34 +187,48 @@ public class P_CureAbility : Def_Ability
         yield return new WaitForSeconds(inverseCoolDown);
 
         readyToCast = true;
+
+        Debug.Log("Inverse Restoration cooldown recharged");
+    }
+
+    private IEnumerator DamageOverTime()
+    {
+        for (float i = 0.0f; i < 15; i += 15/8)
+        {
+            yield return new WaitForSeconds(2.0f);
+
+            if (enemyHealth.gameObject != null)
+            {
+                enemyHealth.TakeDamage(15 / 8);
+                Debug.Log("Enemy took damage");
+            }
+            else 
+            {
+                StartCoroutine(InverseCoolDownHandler());
+                StopCoroutine(DamageOverTime());     
+            }
+        }
+        StartCoroutine(InverseCoolDownHandler());
     }
 
 
-
-    void FireInverseCure()
+    private bool IsTargetValid()
     {
-        // ray through middle of screen
         Ray ray = gameCam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+
         RaycastHit hit;
+        Physics.Raycast(ray, out hit, 30.0f);
 
-
-        Vector3 targetPoint;
-        if (Physics.Raycast(ray, out hit))
+        if (hit.collider != null && hit.collider.gameObject.CompareTag("Enemy"))
         {
-            targetPoint = hit.point;
+            Debug.Log("Enemy Targeted for Inverse Restoration");
+
+            enemyHealth = hit.collider.gameObject.GetComponent<E_HealthController>();
+
+            return true;
         }
-        else
-        {
-            targetPoint = ray.GetPoint(100.0f); // Point far away
-        }
-
-        Vector3 shootDir = targetPoint - attackPoint.position;
-
-        GameObject projectile = Instantiate(cureShotPrefab, attackPoint.position, cureShotPrefab.transform.rotation);
-
-        projectile.transform.forward = shootDir.normalized;
-
-        projectile.GetComponent<Rigidbody>().AddForce(shootDir.normalized * shootForce, ForceMode.Impulse);
+        Debug.Log(" No Enemy Targeted for Inverse Restoration");
+        return false;
     }
 
 }

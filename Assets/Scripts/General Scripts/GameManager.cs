@@ -1,10 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 
 public class GameManager : MonoBehaviour
@@ -43,25 +41,26 @@ public class GameManager : MonoBehaviour
     private GameStates gameState;
     private PlayerInSection playerInSection;
 
+<<<<<<< Updated upstream
 
     private GameObject pauseMenu;
     private GameObject deathScreen;
 
     private P_PlayerController player;
 
+=======
+>>>>>>> Stashed changes
     // Start is called before the first frame update
     void Start()
     {
         gameState = GameStates.GAME_INTRO;
         playerInSection = PlayerInSection.PLAYER_IN_NO_SECTION;
-
-        pauseMenu = null;
-        deathScreen = null;
     }
 
     // Update is called once per frame
     void Update()
     {
+<<<<<<< Updated upstream
     
     }
 
@@ -113,6 +112,9 @@ public class GameManager : MonoBehaviour
     void Respawn()
     {
         // Set Player Back to the beginning and refresh enemies on map, but not puzzels
+=======
+        
+>>>>>>> Stashed changes
     }
     
 
@@ -134,6 +136,10 @@ public class GameManager : MonoBehaviour
 
     void GameInGameplay()
     {
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 
     }
 

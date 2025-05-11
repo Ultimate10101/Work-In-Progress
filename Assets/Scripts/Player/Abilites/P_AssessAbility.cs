@@ -4,7 +4,7 @@ using UnityEngine;
 
 // Assess [information viewer] Menu Option for Dev Tool lite Menu
 
-public class P_AssessAbility: MonoBehaviour 
+public class P_AssessAbility : MonoBehaviour
 {
     [SerializeField] private Camera gameCam;
 
@@ -14,10 +14,10 @@ public class P_AssessAbility: MonoBehaviour
 
     private float previousTarget;
 
-    private float launchTime;
+    private float launchTimeOffset;
 
     private float coolDown;
-  
+
     private bool accessKey;
 
     private bool readyToActivate;
@@ -26,10 +26,10 @@ public class P_AssessAbility: MonoBehaviour
 
     private StatusEffectHandler playerStatus;
 
-    
+
     void Start()
     {
-        launchTime = 0.5f;
+        launchTimeOffset = 1.5f;
 
         coolDown = 0.5f;
 
@@ -48,24 +48,26 @@ public class P_AssessAbility: MonoBehaviour
         Debug.Log("Skibidi toilet ohio gyatt");
     }
 
-    public void Assess()
+    public void Assess(Animator playerAnim)
     {
         if (readyToActivate && accessKey)
         {
             Debug.Log("Casting");
             readyToActivate = false;
 
-            StartCoroutine(CastDelay());
+            playerAnim.SetTrigger("IsAssessing");
+
+            StartCoroutine(CastDelay(playerAnim));
         }
     }
 
-    private IEnumerator CastDelay()
+    private IEnumerator CastDelay(Animator playerAnim)
     {
-        yield return new WaitForSeconds(launchTime);
+        yield return new WaitForSeconds(playerAnim.GetCurrentAnimatorClipInfo(0)[0].clip.length + launchTimeOffset);
 
-        if (IsValidTarget()) 
-        { 
-            if(DurationBugFix())
+        if (IsValidTarget())
+        {
+            if (DurationBugFix())
             {
                 enemyCanvas.CanvasActive(true);
                 DurationHanlder();
@@ -73,7 +75,7 @@ public class P_AssessAbility: MonoBehaviour
                 enemyCanvas = null;
                 previousTarget = currentTarget;
             }
-            
+
         }
         else
         {
@@ -95,7 +97,7 @@ public class P_AssessAbility: MonoBehaviour
         readyToActivate = true;
         Debug.Log("Ready to cast again");
     }
-    
+
     void DurationHanlder()
     {
         enemyCanvas.ActiveFor(duration);
@@ -111,28 +113,26 @@ public class P_AssessAbility: MonoBehaviour
 
         if (hit.collider != null && hit.collider.gameObject.CompareTag("Enemy"))
         {
-            Debug.Log("Enemy Targeted");
+            Debug.Log("Enemy Targeted with Assess");
             enemyCanvas = hit.collider.gameObject.GetComponent<E_CanvasController>();
 
             currentTarget = enemyCanvas.GetInstanceID();
 
             return true;
         }
-        else
-        {
-            Debug.Log("Nothing was hit");
 
-            return false;
-        }
+        Debug.Log("Nothing was hit with Assess");
+        return false;
+
     }
 
 
-    // If access spell is already active on target, spell can't be casted on them again
+    // If access ability is already active on target, spell can't be casted on them again
     bool DurationBugFix()
     {
-        if(currentTarget == previousTarget)
+        if (currentTarget == previousTarget)
         {
-            if(enemyCanvas.isActive)
+            if (enemyCanvas.isActive)
             {
                 Debug.Log("Still Running");
                 return false;
