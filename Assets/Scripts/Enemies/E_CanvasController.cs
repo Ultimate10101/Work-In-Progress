@@ -5,7 +5,9 @@ using UnityEngine;
 
 public class E_CanvasController : MonoBehaviour
 {
-    [SerializeField] private GameObject enemyCanvas;
+    [SerializeField] private GameObject informationPanel;
+
+    [SerializeField] private GameObject healthBarBG;
 
     [SerializeField] private Camera gameCam;
 
@@ -21,43 +23,42 @@ public class E_CanvasController : MonoBehaviour
 
     void Update()
     {
-        if (enemyCanvas.activeSelf)
-        {
-            HealthFacePlayer();
-        }
+        FacePlayer();
 
-        if(isActive)
+        if (isActive)
         {
             TimeUntilDeactivation();
         }
     }
 
-    public void CanvasActive(bool activeStatus)
+    public void InformationPanelActivate(bool activeStatus, int seconds)
     {
 
-      enemyCanvas.SetActive(activeStatus);
-      isActive = activeStatus;
+        informationPanel.SetActive(activeStatus);
+        isActive = activeStatus;
 
-    }
-
-    public void ActiveFor(int seconds)
-    {
         timer = seconds;
     }
+
 
     public void TimeUntilDeactivation()
     {
         timer = Mathf.MoveTowards(timer, 0.0f, 1.0f * Time.deltaTime);
 
-        if(timer <= 0.0f)
+        if (timer <= 0.0f)
         {
-            CanvasActive(false);
+            InformationPanelActivate(false, 0);
         }
     }
 
-    void HealthFacePlayer()
+    void FacePlayer()
     {
-        Vector3 lookAt = new Vector3(gameCam.transform.position.x, enemyCanvas.transform.position.y, gameCam.transform.position.z);
-        enemyCanvas.transform.LookAt(lookAt, Vector3.down);
+        if (informationPanel.activeSelf)
+        {
+            informationPanel.transform.rotation = Quaternion.LookRotation(informationPanel.transform.position - gameCam.transform.position);
+        }
+
+        healthBarBG.transform.rotation = Quaternion.LookRotation(healthBarBG.transform.position - gameCam.transform.position);
+
     }
 }

@@ -10,7 +10,7 @@ public class MainMenuManager : MonoBehaviour
 {
     public void StartGame()
     {
-        SceneManager.LoadScene(0);  // --> PlaceHolder for Buildindex
+        SceneManager.LoadScene(1); 
     }
 
     public void QuitGame()
@@ -22,9 +22,4 @@ public class MainMenuManager : MonoBehaviour
 #endif
     }
 
-
-    void Settings()
-    {
-        // Look up how to do settings later
-    }
 }

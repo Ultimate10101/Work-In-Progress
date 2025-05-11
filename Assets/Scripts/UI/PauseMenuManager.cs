@@ -25,13 +25,6 @@ public class PauseMenuManager : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-
-    void Settings()
-    {
-        // Look up how to do settings later
-    }
-
-
     public void BackToMainMenu()
     {
         SceneManager.LoadScene(0); // --> PlaceHolder for Buildindex

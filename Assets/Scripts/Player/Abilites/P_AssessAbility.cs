@@ -45,7 +45,6 @@ public class P_AssessAbility : MonoBehaviour
     public void ActivateAssess()
     {
         accessKey = Input.GetKeyDown(KeyCode.G);
-        Debug.Log("Skibidi toilet ohio gyatt");
     }
 
     public void Assess(Animator playerAnim)
@@ -69,8 +68,7 @@ public class P_AssessAbility : MonoBehaviour
         {
             if (DurationBugFix())
             {
-                enemyCanvas.CanvasActive(true);
-                DurationHanlder();
+                enemyCanvas.InformationPanelActivate(true, duration);
 
                 enemyCanvas = null;
                 previousTarget = currentTarget;
@@ -96,11 +94,6 @@ public class P_AssessAbility : MonoBehaviour
         yield return new WaitForSeconds(coolDown);
         readyToActivate = true;
         Debug.Log("Ready to cast again");
-    }
-
-    void DurationHanlder()
-    {
-        enemyCanvas.ActiveFor(duration);
     }
 
     // Return true if Player is looking at Target the Spell is usuable on 

@@ -43,10 +43,7 @@ public class HealthController : MonoBehaviour
 
     protected virtual void Update()
     {
-        if (healthBar.IsActive()) 
-        {
-            UpdateHealthUI_Info();
-        }
+        UpdateHealthUI_Info();
 
         Death();
     }
