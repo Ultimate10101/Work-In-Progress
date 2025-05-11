@@ -1,3 +1,4 @@
+using Palmmedia.ReportGenerator.Core;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenuManager : MonoBehaviour
 {
+    [SerializeField] GameObject pauseMenu;
+    [SerializeField] GameObject settingsMenu;
+
     void Update()
     {
         PauseMenu();
@@ -12,17 +16,21 @@ public class PauseMenuManager : MonoBehaviour
 
     void PauseMenu()
     {
-        if (Input.GetKeyUp(KeyCode.Escape) && !gameObject.activeSelf)
+        Debug.Log("I'm running");
+
+        if (Input.GetKeyDown(KeyCode.Escape) && !pauseMenu.activeSelf && !settingsMenu.activeSelf)
         {
-            gameObject.SetActive(true);
+            pauseMenu.SetActive(true);
             Time.timeScale = 0.0f;
+            Cursor.lockState = CursorLockMode.None;
         }
     }
 
-    void ResumeGame()
+    public void ResumeGame()
     {
         Time.timeScale = 1.0f;
-        gameObject.SetActive(false);
+        pauseMenu.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void BackToMainMenu()

@@ -26,13 +26,6 @@ public class P_FireboltLogic : MonoBehaviour
         set { inverseDamage = value; }
     }
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -57,6 +50,7 @@ public class P_FireboltLogic : MonoBehaviour
             if (!P_DTLMenu.DTLMenuRef.Inverse)
             {
                 collision.gameObject.GetComponent<E_HealthController>().TakeDamage(DAMAGE);
+                collision.gameObject.GetComponent<BurnDamage>().ApplyTicks(5, 1.0f, 5);
             }
             else
             {
@@ -64,6 +58,11 @@ public class P_FireboltLogic : MonoBehaviour
 
                 P_PlayerController.playerControllerRef.gameObject.GetComponent<P_ManaController>().ManaIncrease();
 
+            }
+
+            if (collision.gameObject.GetComponent<E_AIMovement>().currentState == EnemyState.PATROLLING)
+            {
+                collision.gameObject.GetComponent<E_AIMovement>().wasHit = true;
             }
 
         }

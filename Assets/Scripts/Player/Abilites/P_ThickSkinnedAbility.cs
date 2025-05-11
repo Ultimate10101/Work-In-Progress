@@ -75,7 +75,7 @@ public class P_ThickSkinnedAbility : Def_Ability
 
     protected override void CastInput()
     {
-        thickSkinnedKey = Input.GetKey(KeyCode.H);
+        thickSkinnedKey = Input.GetKey(KeyCode.Q);
     }
 
 
@@ -229,6 +229,7 @@ public class P_ThickSkinnedAbility : Def_Ability
             if (!hit.collider.gameObject.GetComponent<E_HealthController>().IsDoubleDamageActive)
             {
                 hit.collider.gameObject.GetComponent<E_HealthController>().ActivateDoubleDamage(15);
+                hit.collider.gameObject.GetComponent<StatusEffectHandler>().ChangeStateActivity("DAMAGE_TAKEN_INCREASED", true);
 
                 Debug.Log("Enemy hit and effect active");
             }

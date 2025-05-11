@@ -4,104 +4,69 @@ using UnityEngine;
 
 public class StatusEffectHandler : MonoBehaviour
 {
-    public enum StatusEffects
+
+    private Dictionary<string, bool> StatusEffects = new Dictionary<string, bool>();
+
+    private List<string> ListOfStatusEffectsStates;
+
+    private void Start()
     {
-        NEUTRAL,
-        BURNING,
-        STUNNED
+        ListOfStatusEffectsStates = new List<string>();
+
+        AddStatusEffectsToList();
+
+        AddToDic();
     }
 
-    public StatusEffects currentStatusEffect;
-
-    public bool playerIsStunned;
-
-    private List<int> burnTimer = new List<int>();
-
-
-    void Start()
+    private void Update()
     {
-        currentStatusEffect = StatusEffects.NEUTRAL;
-    }
-
-    void Update()
-    {
-        //Activates necessary status effects
-        switch (currentStatusEffect)
+        if (StatusEffects["STUNNED"])
         {
-            case StatusEffects.BURNING:
-
-                ApplyBurn();
-
-                currentStatusEffect = StatusEffects.NEUTRAL;
-
-                break;
-
-            case StatusEffects.STUNNED:
-
-                if(gameObject.CompareTag("Player"))
-                {
-                    if (playerIsStunned)
-                    {
-                        StartCoroutine(PlayerCanMove());
-                        playerIsStunned = false;
-                    }
-                }
-                
-                if(gameObject.CompareTag("Enemy"))
-                {
-
-                }
-
-                break;
-
-
+            StartCoroutine(UnStun());
         }
     }
 
-    //Applies burning to an enemy hit by firebolt
-
-    private void OnCollisionEnter(Collision collision)
+    private void AddStatusEffectsToList()
     {
-        if (collision.gameObject.CompareTag("Firebolt_Projectile"))
-        {
-            currentStatusEffect = StatusEffects.BURNING;
-        }
+        ListOfStatusEffectsStates.Add("NEUTRAL"); // Always to be the first state
+
+        ListOfStatusEffectsStates.Add("STUNNED");
+        ListOfStatusEffectsStates.Add("HIT_BY_INVERSE_RESTORATION");
+        ListOfStatusEffectsStates.Add("DAMAGE_TAKEN_INCREASED");
+        ListOfStatusEffectsStates.Add("BURNING");
     }
 
-    private void ApplyBurn()
+    private void AddToDic()
     {
-        if (burnTimer.Count <= 0)
+        for (int i = 0; i < ListOfStatusEffectsStates.Count; i++)
         {
-            burnTimer.Add(3);
-            StartCoroutine(Burn());
-        }
-        else
-        {
-            burnTimer.Add(3);
-        }
-
-    }
-
-    IEnumerator Burn()
-    {
-        while (burnTimer.Count > 0)
-        {
-            for (int i = 0; i < burnTimer.Count; i++)
+            if (i == 0)
             {
-                burnTimer[i]--;
+                StatusEffects.Add(ListOfStatusEffectsStates[i], true);
             }
-            yield return new WaitForSeconds(1.0f);
-            gameObject.GetComponent<E_HealthController>().TakeDamage(5);
-            burnTimer.RemoveAll(i => i == 0);
-            yield return new WaitForSeconds(1.0f);
+            else
+            {
+                StatusEffects.Add(ListOfStatusEffectsStates[i], false);
+            }
         }
     }
 
-    IEnumerator PlayerCanMove()
+
+    public void ChangeStateActivity(string state, bool active)
     {
-        yield return new WaitForSeconds(3);
-        currentStatusEffect = StatusEffects.NEUTRAL;
+        StatusEffects[state] = active;
+    }
+
+    public bool GetState(string state)
+    {
+        return StatusEffects[state];   
     }
 
 
+    private IEnumerator UnStun()
+    {
+        yield return new WaitForSeconds(3.0f);
+
+        ChangeStateActivity("STUNNED", false);
+    }
 }

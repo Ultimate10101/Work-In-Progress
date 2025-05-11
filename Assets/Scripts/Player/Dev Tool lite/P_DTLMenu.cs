@@ -1,13 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Security;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class P_DTLMenu : MonoBehaviour
 {
     [SerializeField] private Animator playerAnim;
-
 
     [SerializeField] private GameObject P_DTLCanvas;
 
@@ -15,9 +12,6 @@ public class P_DTLMenu : MonoBehaviour
     {
         get; private set;
     }
-
-    //[SerializeField] private GameObject PlayerCrosshair;
-
 
     public P_AssessAbility assessAbility;
     public P_CureAbility cureAbility;
@@ -104,8 +98,6 @@ public class P_DTLMenu : MonoBehaviour
             }
         }
 
-
-        //PlayerCrosshair.SetActive(!P_DTLCanvas.activeSelf);
     }
 
 

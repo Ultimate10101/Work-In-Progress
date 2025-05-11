@@ -138,7 +138,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &81172241
 RectTransform:
   m_ObjectHideFlags: 0
@@ -733,7 +733,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -341.22754, y: 188.14076}
+  m_AnchoredPosition: {x: -288, y: 194}
   m_SizeDelta: {x: 260.9746, y: 84.8426}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &328236440
@@ -756,7 +756,14 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Place credits here to give congrats or something
+  m_text: "Mesh:\r\n\tMale base mesh arms - Orange Juice Games on Itch.io\r\n\tSlime
+    - MCSTEEG on Itch.io\r\n\tTurret (used in remix for slime enemies models)- Tvtig
+    on Itch.io\r\n\r\nFonts:\r\n\tpixuf - erytau on Itch.io\r\n\tAlpha Prota Font
+    - GGBotNet On Itch.io\r\nUI:\r\n\t2D Simple UI Pack - OARIELG on Unity Asset
+    Store\r\n\tFree UI Pack - Valley Land Games on Unity Asset Store\r\n\tClean Vector
+    Icons - Poneti on Unity Asset Store\r\n\r\nProgrammers:\r\n\tTroy Adrien\r\n\tCarlos
+    Sandoval\r\n\r\nGame Design:\r\n\tLeonardo Gonzalez\r\n\tTroy Adrien\r\n\tCarlos
+    Sandoval\r\n\r\nMusic:\r\nMain Menu Music - Snapshots - Ahjay Stelino"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 81ea03e49d43d1e46bdeeb936919d11b, type: 2}
   m_sharedMaterial: {fileID: -6349337266256532784, guid: 81ea03e49d43d1e46bdeeb936919d11b, type: 2}
@@ -783,8 +790,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 66.7
-  m_fontSizeBase: 66.7
+  m_fontSize: 35.34
+  m_fontSizeBase: 35.34
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1133,7 +1140,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &490596226
 RectTransform:
   m_ObjectHideFlags: 0

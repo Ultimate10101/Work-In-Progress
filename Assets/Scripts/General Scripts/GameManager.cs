@@ -1,8 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
+
 
 
 public class GameManager : MonoBehaviour
@@ -11,7 +10,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if(gameManagerRef == null)
+        if (gameManagerRef == null)
         {
             gameManagerRef = this;
         }
@@ -23,52 +22,28 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public enum GameStates
-    {
-        GAME_INTRO,
-        GAMEPLAY,
-        GAMEND
-    }
 
     public enum PlayerInSection
     {
-        PLAYER_IN_NO_SECTION,
         PLAYER_IN_COMBAT,
         PLAYER_EXPLORING,
-        PLAYER_IN_PUZZEL
+
     }
 
-    private GameStates gameState;
     private PlayerInSection playerInSection;
 
     // Start is called before the first frame update
     void Start()
     {
-        gameState = GameStates.GAME_INTRO;
-        playerInSection = PlayerInSection.PLAYER_IN_NO_SECTION;
+        playerInSection = PlayerInSection.PLAYER_EXPLORING;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-    }
-    
 
-    void GameStatesTransition()
-    {
-        switch (gameState)
-        {
-            case GameStates.GAME_INTRO:
-                break;
-            case GameStates.GAMEPLAY:
-                break;
-            case GameStates.GAMEND:
-                break;
-        }
-
-        // Changes Game States and set variables
     }
+
 
     void PlayerInSectionTransition()
     {
@@ -78,8 +53,6 @@ public class GameManager : MonoBehaviour
                 break;
             case PlayerInSection.PLAYER_EXPLORING:
                 break;
-            case PlayerInSection.PLAYER_IN_PUZZEL:
-                break;
         }
 
 
@@ -87,21 +60,6 @@ public class GameManager : MonoBehaviour
     }
 
 
-    void GameInIntro()
-    {
-       
-    }
-
-    void GameInGameplay()
-    {
-
-
-    }
-
-    void GameInEnd()
-    {
-
-    }
 
 
 }

@@ -7,9 +7,16 @@ public class E_CanvasController : MonoBehaviour
 {
     [SerializeField] private GameObject informationPanel;
 
-    [SerializeField] private GameObject healthBarBG;
+    [SerializeField] private GameObject enemyCanvas;
+
+    [SerializeField] private GameObject burningIcon;
+    [SerializeField] private GameObject dot_Icon;
+    [SerializeField] private GameObject StunnedIcon;
+    [SerializeField] private GameObject increasedDamageIcon;
 
     [SerializeField] private Camera gameCam;
+
+    private StatusEffectHandler enemyStatus;
 
     public bool isActive;
 
@@ -19,11 +26,15 @@ public class E_CanvasController : MonoBehaviour
     private void Start()
     {
         isActive = false;
+
+        enemyStatus = gameObject.GetComponent<StatusEffectHandler>();
     }
 
-    void Update()
+    private void Update()
     {
         FacePlayer();
+
+        UpdateIcons();
 
         if (isActive)
         {
@@ -51,14 +62,20 @@ public class E_CanvasController : MonoBehaviour
         }
     }
 
-    void FacePlayer()
+    private void FacePlayer()
     {
-        if (informationPanel.activeSelf)
-        {
-            informationPanel.transform.rotation = Quaternion.LookRotation(informationPanel.transform.position - gameCam.transform.position);
-        }
+        enemyCanvas.transform.rotation = Quaternion.LookRotation(enemyCanvas.transform.position - gameCam.transform.position);
 
-        healthBarBG.transform.rotation = Quaternion.LookRotation(healthBarBG.transform.position - gameCam.transform.position);
+    }
+
+
+    private void UpdateIcons()
+    {
+        burningIcon.SetActive(enemyStatus.GetState("BURNING"));
+        Debug.Log(enemyStatus.GetState("BURNING"));
+        dot_Icon.SetActive(enemyStatus.GetState("HIT_BY_INVERSE_RESTORATION"));
+        StunnedIcon.SetActive(enemyStatus.GetState("STUNNED"));
+        increasedDamageIcon.SetActive(enemyStatus.GetState("DAMAGE_TAKEN_INCREASED")); ;
 
     }
 }

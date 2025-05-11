@@ -12,7 +12,7 @@ public class P_CureAbility : Def_Ability
     [SerializeField] private Transform attackPoint;
     [SerializeField] private GameObject cureShotPrefab;
 
-    private E_HealthController enemyHealth;
+    private GameObject enemy;
 
     private P_HealthController playerHealth;
 
@@ -144,7 +144,13 @@ public class P_CureAbility : Def_Ability
 
         if (IsTargetValid())
         {
-            StartCoroutine(DamageOverTime());
+            enemy.GetComponent<InverseRestorationDamage>().ApplyTicks(5, 1.5f, 4);
+
+            if (enemy.GetComponent<E_AIMovement>().currentState == EnemyState.PATROLLING)
+            {
+                enemy.GetComponent<E_AIMovement>().wasHit = true;
+            }
+
         }
         else
         {
@@ -162,26 +168,6 @@ public class P_CureAbility : Def_Ability
         Debug.Log("Inverse Restoration cooldown recharged");
     }
 
-    private IEnumerator DamageOverTime()
-    {
-        for (float i = 0.0f; i < 15; i += 15/8)
-        {
-            yield return new WaitForSeconds(2.0f);
-
-            if (enemyHealth.gameObject != null)
-            {
-                enemyHealth.TakeDamage(15 / 8);
-                Debug.Log("Enemy took damage");
-            }
-            else 
-            {
-                StartCoroutine(InverseCoolDownHandler());
-                StopCoroutine(DamageOverTime());     
-            }
-        }
-        StartCoroutine(InverseCoolDownHandler());
-    }
-
 
     private bool IsTargetValid()
     {
@@ -194,7 +180,7 @@ public class P_CureAbility : Def_Ability
         {
             Debug.Log("Enemy Targeted for Inverse Restoration");
 
-            enemyHealth = hit.collider.gameObject.GetComponent<E_HealthController>();
+            enemy = hit.collider.gameObject;
 
             return true;
         }

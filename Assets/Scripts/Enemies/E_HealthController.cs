@@ -57,6 +57,7 @@ public class E_HealthController : HealthController
         if(timer<= 0.0f)
         {
             isDoubleDamageActive=false;
+            gameObject.GetComponent<StatusEffectHandler>().ChangeStateActivity("DAMAGE_TAKEN_INCREASED", false);
         }
     }
 

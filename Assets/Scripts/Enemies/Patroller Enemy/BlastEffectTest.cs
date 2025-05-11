@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BlastEffectTest : MonoBehaviour
@@ -78,10 +79,9 @@ public class BlastEffectTest : MonoBehaviour
         col = Physics.OverlapSphere(transform.position, radius);
         foreach(Collider target in col)
         {
-            if(target.gameObject.CompareTag("Player"))
+            if(target.gameObject.GetComponent<StatusEffectHandler>()!= null)
             {
-                target.gameObject.GetComponent<StatusEffectHandler>().currentStatusEffect = StatusEffectHandler.StatusEffects.STUNNED;
-                target.gameObject.GetComponent<StatusEffectHandler>().playerIsStunned = true;
+                target.gameObject.GetComponent<StatusEffectHandler>().ChangeStateActivity("STUNNED", true);
             }
         }
     }

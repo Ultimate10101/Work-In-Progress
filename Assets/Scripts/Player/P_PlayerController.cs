@@ -62,7 +62,7 @@ public class P_PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (playerStatus.currentStatusEffect != StatusEffectHandler.StatusEffects.STUNNED)
+        if (!playerStatus.GetState("STUNNED"))
         {
             PlayerInput();
         }
@@ -147,7 +147,7 @@ public class P_PlayerController : MonoBehaviour
 
     void DragCheck()
     {
-        if (playerStatus.currentStatusEffect == StatusEffectHandler.StatusEffects.STUNNED)
+        if (playerStatus.GetState("STUNNED"))
         {
             playerRb.drag = 99;
         }

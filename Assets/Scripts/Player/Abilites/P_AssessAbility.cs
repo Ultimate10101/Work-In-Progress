@@ -24,8 +24,6 @@ public class P_AssessAbility : MonoBehaviour
 
     private int duration;
 
-    private StatusEffectHandler playerStatus;
-
 
     void Start()
     {
@@ -36,8 +34,6 @@ public class P_AssessAbility : MonoBehaviour
         readyToActivate = true;
 
         duration = 18;
-
-        playerStatus = gameObject.GetComponent<StatusEffectHandler>();
 
     }
 
@@ -79,9 +75,6 @@ public class P_AssessAbility : MonoBehaviour
         {
             Debug.Log("Spell missed target");
         }
-
-
-        PlayerStun();
 
 
         StartCoroutine(CoolDownHandler());
@@ -133,12 +126,6 @@ public class P_AssessAbility : MonoBehaviour
             return true;
         }
         return true;
-    }
-
-    void PlayerStun()
-    {
-        playerStatus.currentStatusEffect = StatusEffectHandler.StatusEffects.STUNNED;
-        playerStatus.playerIsStunned = true;
     }
 
 

@@ -29,6 +29,8 @@ public class E_AIMovement : MonoBehaviour
 
     public bool wasHit;
 
+    private StatusEffectHandler enemyStatus;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -48,12 +50,18 @@ public class E_AIMovement : MonoBehaviour
         index = 0;
 
         target = wayPoints[index].position;
+
+        enemyStatus = GetComponent<StatusEffectHandler>();
     }
 
     // Update is called once per framez
     void Update()
     {
-        MoveState();
+        if (!enemyStatus.GetState("STUNNED"))
+        {
+            MoveState();
+        }
+        
     }
 
 
