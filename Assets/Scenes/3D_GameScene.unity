@@ -23099,7 +23099,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Potency (O)
+  m_text: Potency (X)
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 81ea03e49d43d1e46bdeeb936919d11b, type: 2}
   m_sharedMaterial: {fileID: -6349337266256532784, guid: 81ea03e49d43d1e46bdeeb936919d11b, type: 2}
@@ -33137,7 +33137,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Inverse (P)
+  m_text: Inverse (R)
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 81ea03e49d43d1e46bdeeb936919d11b, type: 2}
   m_sharedMaterial: {fileID: -6349337266256532784, guid: 81ea03e49d43d1e46bdeeb936919d11b, type: 2}
@@ -37446,7 +37446,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Assess (G)
+  m_text: Assess (T)
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 81ea03e49d43d1e46bdeeb936919d11b, type: 2}
   m_sharedMaterial: {fileID: -6349337266256532784, guid: 81ea03e49d43d1e46bdeeb936919d11b, type: 2}
@@ -41049,7 +41049,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Mana Cost (I)
+  m_text: Mana Cost (C)
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 81ea03e49d43d1e46bdeeb936919d11b, type: 2}
   m_sharedMaterial: {fileID: -6349337266256532784, guid: 81ea03e49d43d1e46bdeeb936919d11b, type: 2}
