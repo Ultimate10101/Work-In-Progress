@@ -38,7 +38,10 @@ public class E_HybridAttackTest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Attack();
+        if (!GameManager.gameManagerRef.GameOver)
+        {
+            Attack();
+        }
     }
 
     void Attack()
@@ -62,7 +65,7 @@ public class E_HybridAttackTest : MonoBehaviour
 
                 canAct = false;
 
-                if (!anim.GetCurrentAnimatorStateInfo(0).IsName("H_Attack_Test"))
+                if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Slime_Rig_Attack_Tr"))
                 {
                     
                     anim.SetTrigger("Rush");

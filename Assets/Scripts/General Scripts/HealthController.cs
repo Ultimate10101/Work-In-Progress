@@ -62,7 +62,7 @@ public class HealthController : MonoBehaviour
 
     public void HealHealth(float health)
     {
-        health += health;
+        this.health += health;
     }
 
     public void Death()

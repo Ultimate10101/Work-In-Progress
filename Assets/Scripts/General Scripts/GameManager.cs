@@ -8,6 +8,16 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager gameManagerRef;
 
+    private bool gameOver;
+
+    public bool GameOver
+    {
+      get { return gameOver; } 
+    }
+
+
+    [SerializeField] GameObject deathScreen;
+
     private void Awake()
     {
         if (gameManagerRef == null)
@@ -35,13 +45,22 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameOver = false;
+
+        deathScreen.SetActive(false);
+
         playerInSection = PlayerInSection.PLAYER_EXPLORING;
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if(P_PlayerController.playerControllerRef.GetComponent<P_HealthController>().GetLivingStatus() == HealthController.LivingStatus.DEAD)
+        {
+            gameOver = true;
+            deathScreen.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+        }
     }
 
 

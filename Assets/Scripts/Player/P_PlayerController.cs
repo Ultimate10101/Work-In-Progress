@@ -62,7 +62,7 @@ public class P_PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!playerStatus.GetState("STUNNED"))
+        if (!playerStatus.GetState("STUNNED") || !GameManager.gameManagerRef.GameOver)
         {
             PlayerInput();
         }

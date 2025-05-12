@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class E_PatrollerAttackTest : MonoBehaviour
+public class E_PatrollerAttack : MonoBehaviour
 {
     [SerializeField] private GameObject projectile;
 
@@ -35,7 +35,10 @@ public class E_PatrollerAttackTest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Attack();
+        if (!GameManager.gameManagerRef.GameOver)
+        {
+            Attack();
+        }
     }
 
 
@@ -62,7 +65,7 @@ public class E_PatrollerAttackTest : MonoBehaviour
             { 
                 canAct = false;
 
-                if (!anim.GetCurrentAnimatorStateInfo(0).IsName("RP_Attack_Test"))
+                if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Slime_Rig|Attack"))
                 {
                     anim.SetTrigger("Fire");
                 }

@@ -20,6 +20,8 @@ public class P_ThickSkinnedAbility : Def_Ability
     [SerializeField] private float maxBarrier;
     [SerializeField] private float barrier;
 
+    [SerializeField] private ParticleSystem rockEffect;
+
     private int duration;
 
     private bool thickSkinnedKey;
@@ -93,6 +95,8 @@ public class P_ThickSkinnedAbility : Def_Ability
 
             playerAnim.SetTrigger("IsShielding");
 
+            rockEffect.Play();
+
             StartCoroutine(CastDelay());
         }
     }
@@ -102,6 +106,8 @@ public class P_ThickSkinnedAbility : Def_Ability
         yield return new WaitForSeconds(playerAnim.GetCurrentAnimatorClipInfo(0)[0].clip.length - castTimeLengthOffset);
 
         Debug.Log("ThickSkinned Casted");
+
+        rockEffect.Stop();
 
         abilityCurrentlyCasting = false;
 
@@ -185,6 +191,8 @@ public class P_ThickSkinnedAbility : Def_Ability
 
             playerAnim.SetTrigger("IsDebuffing");
 
+            rockEffect.Play();
+
             StartCoroutine(InverseCastDelay());
         }
 
@@ -194,6 +202,8 @@ public class P_ThickSkinnedAbility : Def_Ability
     protected override IEnumerator InverseCastDelay()
     {
         yield return new WaitForSeconds(playerAnim.GetCurrentAnimatorClipInfo(0)[0].clip.length - inverseCastTimeLengthOffset);
+
+        rockEffect.Stop();
 
         Debug.Log("Inverse ThickSkinned Casted");
 

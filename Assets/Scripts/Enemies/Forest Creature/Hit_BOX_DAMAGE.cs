@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CHOMP_DAMAGE : MonoBehaviour
+public class Hit_BOX_DAMAGE : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {

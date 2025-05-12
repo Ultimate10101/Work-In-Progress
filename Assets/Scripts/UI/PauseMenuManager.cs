@@ -1,6 +1,7 @@
 using Palmmedia.ReportGenerator.Core;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,7 +12,11 @@ public class PauseMenuManager : MonoBehaviour
 
     void Update()
     {
-        PauseMenu();
+        if (!GameManager.gameManagerRef.GameOver)
+        {
+            PauseMenu();
+        }
+        
     }
 
     void PauseMenu()

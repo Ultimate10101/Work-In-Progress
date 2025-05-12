@@ -9,8 +9,6 @@ using UnityEngine;
 public class P_CureAbility : Def_Ability
 {
     [SerializeField] private Camera gameCam;
-    [SerializeField] private Transform attackPoint;
-    [SerializeField] private GameObject cureShotPrefab;
 
     private GameObject enemy;
 
@@ -27,9 +25,7 @@ public class P_CureAbility : Def_Ability
 
     private bool cureKey;
 
-    private float currentTarget;
-
-    private float previousTarget;
+    [SerializeField] private ParticleSystem healingEffect;
 
     void Start()
     {
@@ -80,12 +76,16 @@ public class P_CureAbility : Def_Ability
 
             StartCoroutine(CastDelay());
 
+            healingEffect.Play();
         }
+
     }
 
     protected override IEnumerator CastDelay()
     {
         yield return new WaitForSeconds(playerAnim.GetCurrentAnimatorClipInfo(0)[0].clip.length - castTimeLengthOffset);
+
+        healingEffect.Stop();
 
         Debug.Log("Restoration Casted");
 
@@ -152,10 +152,7 @@ public class P_CureAbility : Def_Ability
             }
 
         }
-        else
-        {
-            StartCoroutine(InverseCoolDownHandler());
-        }
+        StartCoroutine(InverseCoolDownHandler());
     }
 
 

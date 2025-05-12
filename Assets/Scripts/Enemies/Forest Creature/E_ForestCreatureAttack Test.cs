@@ -5,7 +5,7 @@ using UnityEngine;
 public class E_ForestCreatureAttackTest : MonoBehaviour
 {
 
-    [SerializeField] BoxCollider chompHitBox;
+    [SerializeField] BoxCollider hitBox;
 
     private E_AIMovement enemyMoveState;
 
@@ -28,14 +28,18 @@ public class E_ForestCreatureAttackTest : MonoBehaviour
 
         anim = GetComponent<Animator>();
 
-        chompHitBox.enabled = false;
+        hitBox.enabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Heal();
-        Attack();
+        if (!GameManager.gameManagerRef.GameOver)
+        {
+            Heal();
+            Attack();
+        }
+           
     }
 
 
@@ -65,11 +69,11 @@ public class E_ForestCreatureAttackTest : MonoBehaviour
             {
                 canAct = false;
 
-                if (!anim.GetCurrentAnimatorStateInfo(0).IsName("FC_Attack_Test"))
+                if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Slime_Rig_Attack_Tr"))
                 {
+
                     anim.SetTrigger("Attack");
                 }
-
                 Invoke("UntilCanAct", timeUntilActAgain);
 
             }
@@ -79,19 +83,19 @@ public class E_ForestCreatureAttackTest : MonoBehaviour
 
     void ActivateHitBox()
     {
-        chompHitBox.enabled = true;
+        hitBox.enabled = true;
     }
 
     void DeactivateHitBox()
     {
-        chompHitBox.enabled = false;
+        hitBox.enabled = false;
     }
 
    
     void SpecialActivate()
     {
-        gameObject.GetComponent<E_HealthController>().HealHealth(20.0f);
-        Debug.Log("I Run");
+        gameObject.GetComponent<E_HealthController>().HealHealth(50.0f);
+        Debug.Log("I'm getting Healed");
     }
 
     void UntilCanAct()
