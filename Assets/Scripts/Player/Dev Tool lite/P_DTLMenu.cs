@@ -103,11 +103,11 @@ public class P_DTLMenu : MonoBehaviour
 
     private void MenuInputs()
     {
-        manaReduxKey = Input.GetKeyDown(KeyCode.I);
+        manaReduxKey = Input.GetKeyDown(KeyCode.C);
 
-        increasePotencyKey = Input.GetKeyDown(KeyCode.O);
+        increasePotencyKey = Input.GetKeyDown(KeyCode.X);
 
-        inverseKey = Input.GetKeyDown(KeyCode.P);
+        inverseKey = Input.GetKeyDown(KeyCode.R);
     }
 
     public void DTLMenuOptions()
