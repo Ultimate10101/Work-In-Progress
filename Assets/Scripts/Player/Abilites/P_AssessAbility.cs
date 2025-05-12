@@ -40,7 +40,7 @@ public class P_AssessAbility : MonoBehaviour
 
     public void ActivateAssess()
     {
-        accessKey = Input.GetKeyDown(KeyCode.G);
+        accessKey = Input.GetKeyDown(KeyCode.T);
     }
 
     public void Assess(Animator playerAnim)
