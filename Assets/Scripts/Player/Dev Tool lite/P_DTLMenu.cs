@@ -60,7 +60,6 @@ public class P_DTLMenu : MonoBehaviour
     {
         P_DTLCanvas.SetActive(false);
 
-        DTL_MenuActive = false;
 
         StoreOGValues();
     }
@@ -68,7 +67,6 @@ public class P_DTLMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ActivateMenu();
 
         MenuInputs();
 
@@ -77,28 +75,6 @@ public class P_DTLMenu : MonoBehaviour
     }
 
 
-    private void ActivateMenu()
-    {
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            P_DTLCanvas.SetActive(!P_DTLCanvas.activeSelf);
-
-            if (P_DTLCanvas.activeSelf)
-            {
-                playerAnim.SetTrigger("Up");
-                playerAnim.SetBool("DTL_Active", true);
-
-                DTL_MenuActive = true;
-            }
-            else
-            {
-                playerAnim.SetBool("DTL_Active", false);
-
-                DTL_MenuActive = false;
-            }
-        }
-
-    }
 
 
     private void MenuInputs()
@@ -112,8 +88,6 @@ public class P_DTLMenu : MonoBehaviour
 
     public void DTLMenuOptions()
     {
-        if (DTL_MenuActive)
-        {
             // Reduce Player's Magic Spells Mana Cost by half
             if (manaReduxKey && isReduceManaCostActive)
             {
@@ -146,7 +120,6 @@ public class P_DTLMenu : MonoBehaviour
             assessAbility.ActivateAssess();
 
             assessAbility.Assess(playerAnim);
-        }
 
 
     }
