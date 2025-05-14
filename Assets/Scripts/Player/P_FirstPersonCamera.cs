@@ -24,7 +24,20 @@ public class P_FirstPersonCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!GameManager.gameManagerRef.GamePaused && !GameManager.gameManagerRef.GameOver)
+        {
+            CameraMovement();
+        }
+    }
 
+    void LateUpdate()
+    {
+        gameCam.transform.position = transform.position;
+    
+    }
+
+    private void CameraMovement()
+    {
         float mouseX = Input.GetAxisRaw("Mouse X") * sensitivityX;
         float mouseY = Input.GetAxisRaw("Mouse Y") * sensitivityY;
 
@@ -35,13 +48,7 @@ public class P_FirstPersonCamera : MonoBehaviour
         xRotation = Mathf.Clamp(xRotation, -90.0f, 90.0f);
 
         gameCam.transform.rotation = Quaternion.Euler(xRotation, yRotation, 0.0f);
-        player.transform.rotation = Quaternion.Euler(0.0f,yRotation, 0.0f);
-    }
-
-    void LateUpdate()
-    {
-        gameCam.transform.position = transform.position;
-    
+        player.transform.rotation = Quaternion.Euler(0.0f, yRotation, 0.0f);
     }
 
 

@@ -27,6 +27,7 @@ public class PauseMenuManager : MonoBehaviour
         {
             pauseMenu.SetActive(true);
             Time.timeScale = 0.0f;
+            GameManager.gameManagerRef.GamePaused = true;
             Cursor.lockState = CursorLockMode.None;
         }
     }
@@ -35,11 +36,12 @@ public class PauseMenuManager : MonoBehaviour
     {
         Time.timeScale = 1.0f;
         pauseMenu.SetActive(false);
+        GameManager.gameManagerRef.GamePaused = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void BackToMainMenu()
     {
-        SceneManager.LoadScene(0); // --> PlaceHolder for Buildindex
+        SceneManager.LoadScene("MainMenu"); 
     }
 }

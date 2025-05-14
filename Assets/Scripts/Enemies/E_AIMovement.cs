@@ -57,7 +57,7 @@ public class E_AIMovement : MonoBehaviour
     // Update is called once per framez
     void Update()
     {
-        if (!enemyStatus.GetState("STUNNED") || !GameManager.gameManagerRef.GameOver)
+        if (!enemyStatus.GetState("STUNNED") && !GameManager.gameManagerRef.GameOver)
         {
             MoveState();
         }
@@ -88,7 +88,7 @@ public class E_AIMovement : MonoBehaviour
                 ChasingLogic();
 
                 // GO TO PATROLLING STATE
-                if ((Vector3.Distance(gameObject.transform.position, startPos) > 35.0f))
+                if ((Vector3.Distance(gameObject.transform.position, startPos) > 20.0f))
                 {
                     currentState = EnemyState.PATROLLING;
 

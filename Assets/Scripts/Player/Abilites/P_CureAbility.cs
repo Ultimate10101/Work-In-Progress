@@ -12,25 +12,25 @@ public class P_CureAbility : Def_Ability
 
     private GameObject enemy;
 
-    private P_HealthController playerHealth;
-
     [SerializeField] private int healPercent;
     private float healPercentage;
-
     private float healAmount;
-
     private float heal;
-
     private float healDelay;
 
     private bool cureKey;
 
     [SerializeField] private ParticleSystem healingEffect;
+    [SerializeField] private ParticleSystem takingDamageEffect;
+
+    [SerializeField] private AnimationClip restoration;
+    [SerializeField] private AnimationClip inverseRestoration;
+
+    private P_HealthController playerHealth;
 
     void Start()
     {
         // Regular Magic variables
-        castTimeLengthOffset = 0.0f;
 
         coolDown = 20.0f;
 
@@ -41,11 +41,10 @@ public class P_CureAbility : Def_Ability
         healPercentage = healPercent / 100.0f;
 
         // Inverse Magic variables
-        inverseCastTimeLengthOffset = 0.5f;
 
-        inverseCoolDown = 0.5f;
+        inverseCoolDown = 8.0f;
 
-        inverseManaCost = 0.0f;
+        inverseManaCost = 10.0f;
 
 
         readyToCast = true;
@@ -83,7 +82,7 @@ public class P_CureAbility : Def_Ability
 
     protected override IEnumerator CastDelay()
     {
-        yield return new WaitForSeconds(playerAnim.GetCurrentAnimatorClipInfo(0)[0].clip.length - castTimeLengthOffset);
+        yield return new WaitForSeconds(restoration.length);
 
         healingEffect.Stop();
 
@@ -129,6 +128,8 @@ public class P_CureAbility : Def_Ability
 
             playerAnim.SetTrigger("IsUsingDot");
 
+            takingDamageEffect.Play();
+
             StartCoroutine(InverseCastDelay());
         }
     }
@@ -136,11 +137,13 @@ public class P_CureAbility : Def_Ability
 
     protected override IEnumerator InverseCastDelay()
     {
-        yield return new WaitForSeconds(playerAnim.GetCurrentAnimatorClipInfo(0)[0].clip.length - inverseCastTimeLengthOffset);
+        yield return new WaitForSeconds(inverseRestoration.length);
 
         Debug.Log("Inverse Restoration Casted");
 
         abilityCurrentlyCasting = false;
+
+        takingDamageEffect.Stop();
 
         if (IsTargetValid())
         {

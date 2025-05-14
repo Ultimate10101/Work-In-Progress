@@ -40,7 +40,7 @@ public abstract class Def_Ability : MonoBehaviour
     protected P_ManaController playerMana;
 
 
-    public static bool abilityCurrentlyCasting;
+    protected static bool abilityCurrentlyCasting;
 
 
     protected abstract void Cast();

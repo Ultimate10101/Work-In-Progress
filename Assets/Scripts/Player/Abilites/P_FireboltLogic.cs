@@ -6,6 +6,8 @@ public class P_FireboltLogic : MonoBehaviour
 {
     private float maxDistanceFromPlayer = 70.0f;
 
+    [SerializeField] private GameObject explosion;
+
 
     private int damage = 30;
 
@@ -65,6 +67,11 @@ public class P_FireboltLogic : MonoBehaviour
                 collision.gameObject.GetComponent<E_AIMovement>().wasHit = true;
             }
 
+        }
+
+        if (!P_DTLMenu.DTLMenuRef.Inverse)
+        {
+            Instantiate(explosion, transform.position, Quaternion.identity);
         }
         Destroy(gameObject);
     }

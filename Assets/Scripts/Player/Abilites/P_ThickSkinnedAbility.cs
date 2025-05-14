@@ -9,8 +9,8 @@ using UnityEngine.UI;
 
 public class P_ThickSkinnedAbility : Def_Ability
 {
-
     [SerializeField] private Camera gameCam;
+
     [SerializeField] private GameObject barrierBG;
     [SerializeField] private Image barrierBar;
     [SerializeField] private TextMeshProUGUI barrierText;
@@ -28,12 +28,12 @@ public class P_ThickSkinnedAbility : Def_Ability
 
     public bool isActive;
 
-    private 
+    [SerializeField] private AnimationClip thickSkinned;
+    [SerializeField] private AnimationClip inverseThickSkinned;
 
     void Start()
     {
         // Regular Magic variables
-        castTimeLengthOffset = 1.0f;
 
         coolDown = 8.0f;
 
@@ -43,11 +43,10 @@ public class P_ThickSkinnedAbility : Def_Ability
 
 
         // Inverse Magic variables
-        inverseCastTimeLengthOffset = 1.0f;
 
-        inverseCoolDown = 1.0f;
+        inverseCoolDown = 6.0f;
 
-        inverseManaCost = 0.0f;
+        inverseManaCost = 10.0f;
 
         
         readyToCast = true;
@@ -103,7 +102,7 @@ public class P_ThickSkinnedAbility : Def_Ability
 
     protected override IEnumerator CastDelay()
     {
-        yield return new WaitForSeconds(playerAnim.GetCurrentAnimatorClipInfo(0)[0].clip.length - castTimeLengthOffset);
+        yield return new WaitForSeconds(thickSkinned.length);
 
         Debug.Log("ThickSkinned Casted");
 
@@ -201,7 +200,7 @@ public class P_ThickSkinnedAbility : Def_Ability
 
     protected override IEnumerator InverseCastDelay()
     {
-        yield return new WaitForSeconds(playerAnim.GetCurrentAnimatorClipInfo(0)[0].clip.length - inverseCastTimeLengthOffset);
+        yield return new WaitForSeconds(inverseThickSkinned.length);
 
         rockEffect.Stop();
 

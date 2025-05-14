@@ -13,7 +13,8 @@ public class P_DTLMenu : MonoBehaviour
         get; private set;
     }
 
-    public P_AssessAbility assessAbility;
+    public P_AssessFunction assessFunction;
+
     public P_CureAbility cureAbility;
     public P_FireboltAbility fireboltAbility;
     public P_FireboltLogic fireboltLogic;
@@ -115,7 +116,7 @@ public class P_DTLMenu : MonoBehaviour
         if (DTL_MenuActive)
         {
             // Reduce Player's Magic Spells Mana Cost by half
-            if (manaReduxKey && isReduceManaCostActive)
+            if (manaReduxKey && !isReduceManaCostActive)
             {
                 playerAnim.SetTrigger("IsUsingOtherDTLOptions");
 
@@ -143,9 +144,9 @@ public class P_DTLMenu : MonoBehaviour
             }
 
             // View Enemies' Weaknesses and abilites
-            assessAbility.ActivateAssess();
+            assessFunction.ActivateAssess();
 
-            assessAbility.Assess(playerAnim);
+            assessFunction.Assess(playerAnim);
         }
 
 
@@ -157,7 +158,7 @@ public class P_DTLMenu : MonoBehaviour
         fireboltLogic.DAMAGE *= 2;
         fireboltLogic.INVERSE_DAMAGE *= 2;
 
-        yield return new WaitForSeconds(15);
+        yield return new WaitForSeconds(20);
 
         isIncreasePotencyAcitve = false;
 
