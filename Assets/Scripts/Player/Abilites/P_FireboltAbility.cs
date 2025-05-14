@@ -5,31 +5,34 @@ using UnityEngine;
 public class P_FireboltAbility : Def_Ability
 {
     [SerializeField] private Camera gameCam;
+
     [SerializeField] private Transform attackPoint;
     [SerializeField] private GameObject fireboltPrefab;
     [SerializeField] private GameObject ArcaneShotPrefab;
-    
+
+
+    [SerializeField] private AnimationClip fireBolt;
+    [SerializeField] private AnimationClip arcaneShot;
+
     [SerializeField] private float shootForce;
 
     private bool fireboltKey;
 
-    P_HealthController playerHealth;
-
     private float damageToSelf = 15.0f;
+
+    P_HealthController playerHealth;
 
     // Start is called before the first frame update
     void Start()
     {
         // Regular Magic variables
-        castTimeLengthOffset = 1.0f;
 
-        coolDown = 3.0f;
+        coolDown = 5.0f;
 
         manaCost = 20.0f;
 
 
         // Inverse Magic variables
-        inverseCastTimeLengthOffset = 2.0f;
 
         inverseCoolDown = 0.5f;
 
@@ -66,7 +69,9 @@ public class P_FireboltAbility : Def_Ability
 
     protected override IEnumerator CastDelay()
     {
-        yield return new WaitForSeconds(playerAnim.GetCurrentAnimatorClipInfo(0)[0].clip.length - castTimeLengthOffset);
+        //yield return new WaitForSeconds(playerAnim.GetCurrentAnimatorClipInfo(0)[0].clip.length - castTimeLengthOffset);
+
+        yield return new WaitForSeconds(fireBolt.length);
 
         Debug.Log("Firebolt Casted");
 
@@ -111,7 +116,7 @@ public class P_FireboltAbility : Def_Ability
 
     protected override IEnumerator InverseCastDelay()
     {
-        yield return new WaitForSeconds(playerAnim.GetCurrentAnimatorClipInfo(0)[0].clip.length - inverseCastTimeLengthOffset);
+        yield return new WaitForSeconds(arcaneShot.length - inverseCastTimeLengthOffset);
 
         Debug.Log("ArcaneShot casted");
 

@@ -55,7 +55,6 @@ public class E_PatrollerAttack : MonoBehaviour
                 canAct = false;
                 specialReady = false;
 
-                //anim.SetTrigger("AllOrNothing"); ---> To do once animations are set
                 SpecialAttack();
 
                 Invoke("UntilCanAct", 5.0f);

@@ -12,11 +12,15 @@ public class PlayerMagicAbilityText : MonoBehaviour
     {
         if (!P_DTLMenu.DTLMenuRef.Inverse)
         {
-            playerMagicAbilityTextButtons.text = "Q - Use Thickskinned" + "\n" + "E - Use Firebolt" + "\n" + "F - Use Restoration";
+            playerMagicAbilityTextButtons.text = "Q - Use Thickskinned" + "\n" + "      - Shield Yourself" + 
+                                                "\n" + "E - Use Firebolt" + "\n" + "        - Deal Damage" + 
+                                                "\n"+ "F - Use Restoration" + "\n" + "      - Heal health over time";
         }
         else
         {
-            playerMagicAbilityTextButtons.text = "Q - Inflict Increse Damage Taken" + "\n" + "E - Use Arcane Shot" + "\n" + "F - Inflict Damage Over Time";
+            playerMagicAbilityTextButtons.text = "Q - Inflict Increse Damage Taken" + "\n" +"       - Enemy takes more Damage" +
+                                                "\n" + "E - Use Arcane Shot" + "\n" + "     - Restore Mana" +
+                                                "\n" + "F - Inflict Damage Over Time" + "\n" + "        - Enemy Takes Damage Over Time";
         }
     }
 }

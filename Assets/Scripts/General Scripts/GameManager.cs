@@ -15,6 +15,14 @@ public class GameManager : MonoBehaviour
       get { return gameOver; } 
     }
 
+    private bool gamePaused;
+
+    public bool GamePaused
+    {
+        get { return gamePaused; }
+        set { gamePaused = value; }   
+    }
+
 
     [SerializeField] GameObject deathScreen;
 
@@ -28,7 +36,6 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        DontDestroyOnLoad(gameObject);
     }
 
 
@@ -46,6 +53,8 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         gameOver = false;
+
+        gamePaused = false;
 
         deathScreen.SetActive(false);
 
