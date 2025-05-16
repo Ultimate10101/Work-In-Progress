@@ -9,7 +9,7 @@ public class DeathScreenManager : MonoBehaviour
 
     public void BackToMainMenu()
     {
-        SceneManager.LoadScene("MainMenu"); 
+        SceneManager.LoadScene("MainMenu", LoadSceneMode.Single); 
     }
 
 
@@ -17,7 +17,7 @@ public class DeathScreenManager : MonoBehaviour
     {
         // Set Player Back to the beginning and refresh enemies on map, but not puzzels
         //P_PlayerController.playerControllerRef.transform.position = respawnPosition;
-        SceneManager.LoadScene("3D_GameScene");
+        SceneManager.LoadScene("3D_GameScene", LoadSceneMode.Single);
 
     }
 }

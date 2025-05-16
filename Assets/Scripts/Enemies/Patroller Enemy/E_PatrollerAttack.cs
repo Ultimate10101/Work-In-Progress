@@ -42,7 +42,6 @@ public class E_PatrollerAttack : MonoBehaviour
     }
 
 
-
     void Attack()
     {
 

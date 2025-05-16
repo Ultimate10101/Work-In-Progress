@@ -27,7 +27,10 @@ public class PlayerController_2D : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        PlayerInput();
+        if (!GameManager_2D.gameManager2DRef.isStoryPanelRunning)
+        {
+            PlayerInput();
+        }        
     }
 
     private void FixedUpdate()

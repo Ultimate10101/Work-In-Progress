@@ -11,8 +11,8 @@ public class P_FirstPersonCamera : MonoBehaviour
     private float xRotation;
     private float yRotation;
 
-    private int sensitivityX = 10;
-    private int sensitivityY = 10;
+    private int sensitivityX = 5;
+    private int sensitivityY = 5;
 
     // Start is called before the first frame update
     void Start()

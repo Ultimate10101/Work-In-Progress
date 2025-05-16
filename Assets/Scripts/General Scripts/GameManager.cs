@@ -1,5 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 using UnityEngine;
 
 
@@ -13,6 +17,17 @@ public class GameManager : MonoBehaviour
     public bool GameOver
     {
       get { return gameOver; } 
+      set { gameOver = value; }
+    }
+
+
+    private bool gameWin;
+
+    public bool GameWin
+    {
+        get { return GameWin; }
+        set { gameWin = value; }
+
     }
 
     private bool gamePaused;
@@ -23,8 +38,17 @@ public class GameManager : MonoBehaviour
         set { gamePaused = value; }   
     }
 
+    private bool isStoryPanelRunning;
 
-    [SerializeField] GameObject deathScreen;
+    public bool IsStoryPanelRunning
+    {
+        get { return isStoryPanelRunning; }
+
+    }
+
+    [SerializeField] private GameObject deathScreen;
+    [SerializeField] private GameObject storyPanel;
+    [SerializeField] private GameObject winScreen;
 
     private void Awake()
     {
@@ -64,11 +88,23 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(P_PlayerController.playerControllerRef.GetComponent<P_HealthController>().GetLivingStatus() == HealthController.LivingStatus.DEAD)
+        if(gameOver)
         {
-            gameOver = true;
             deathScreen.SetActive(true);
             Cursor.lockState = CursorLockMode.None;
+        }
+
+        if(gameWin)
+        {
+
+            winScreen.SetActive(true);
+
+#if UNITY_EDITOR
+            EditorApplication.ExitPlaymode();
+#else
+            Application.Quit();
+#endif
+
         }
     }
 

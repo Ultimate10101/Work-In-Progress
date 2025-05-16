@@ -317,6 +317,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4503f83298b12514d8dd4a06dd9cd8ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainMenuButtons:
+  - {fileID: 1162240120}
+  - {fileID: 1495369015}
+  - {fileID: 1969250112}
 --- !u!114 &125670186
 MonoBehaviour:
   m_ObjectHideFlags: 0

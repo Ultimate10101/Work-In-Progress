@@ -1,7 +1,5 @@
-using Palmmedia.ReportGenerator.Core;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -42,6 +40,7 @@ public class PauseMenuManager : MonoBehaviour
 
     public void BackToMainMenu()
     {
-        SceneManager.LoadScene("MainMenu"); 
+        Time.timeScale = 1.0f;
+        SceneManager.LoadScene("MainMenu", LoadSceneMode.Single); 
     }
 }
