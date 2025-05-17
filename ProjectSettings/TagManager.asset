@@ -20,7 +20,7 @@ TagManager:
   - PlayerCharacter
   - Projectile
   - Ground
-  - Enemy
+  - Boss
   - 
   - 
   - 

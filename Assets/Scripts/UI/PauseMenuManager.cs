@@ -5,10 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenuManager : MonoBehaviour
 {
-    [SerializeField] GameObject pauseMenu;
-    [SerializeField] GameObject settingsMenu;
+    [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private GameObject settingsMenu;
 
-    [SerializeField] AudioClip pauseSound;
+    [SerializeField] private AudioClip pauseSound;
 
     void Update()
     {
@@ -19,7 +19,7 @@ public class PauseMenuManager : MonoBehaviour
         
     }
 
-    void PauseMenu()
+    private void PauseMenu()
     {
         Debug.Log("I'm running");
 
@@ -28,8 +28,6 @@ public class PauseMenuManager : MonoBehaviour
 
 
             AudioManager.audioManagerRef.PlaySFX(pauseSound);
-
-            AudioListener.pause = true;
 
             pauseMenu.SetActive(true);
             Time.timeScale = 0.0f;
@@ -40,7 +38,6 @@ public class PauseMenuManager : MonoBehaviour
 
     public void ResumeGame()
     {
-        AudioListener.pause = false;
 
         AudioManager.audioManagerRef.PlaySFX(pauseSound);
 

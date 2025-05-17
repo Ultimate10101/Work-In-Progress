@@ -12,25 +12,25 @@ public class PlayerMagicAbilityText : MonoBehaviour
 
     private P_PlayerController player;
 
-    P_ThickSkinnedAbility thickSkinnedMana;
-    P_ThickSkinnedAbility inverseThickSkinnedMana;
+    P_ThickSkinnedAbility thickSkinnedInfo;
+    P_ThickSkinnedAbility inverseThickSkinnedInfo;
 
-    P_CureAbility restorationMana;
-    P_CureAbility inverseRestorationMana;
+    P_CureAbility restorationInfo;
+    P_CureAbility inverseRestorationInfo;
 
-    P_FireboltAbility fireboltMana;
-    P_FireboltAbility arcaneShotMana;
+    P_FireboltAbility fireboltInfo;
+    P_FireboltAbility arcaneShotInfo;
 
     private void Start()
     {
-        thickSkinnedMana  = P_PlayerController.playerControllerRef.GetComponent<P_ThickSkinnedAbility>();
-        inverseThickSkinnedMana = P_PlayerController.playerControllerRef.GetComponent<P_ThickSkinnedAbility>();
+        thickSkinnedInfo = P_PlayerController.playerControllerRef.GetComponent<P_ThickSkinnedAbility>();
+        inverseThickSkinnedInfo = P_PlayerController.playerControllerRef.GetComponent<P_ThickSkinnedAbility>();
 
-        restorationMana = P_PlayerController.playerControllerRef.GetComponent<P_CureAbility>();
-        inverseRestorationMana = P_PlayerController.playerControllerRef.GetComponent<P_CureAbility>();
+        restorationInfo = P_PlayerController.playerControllerRef.GetComponent<P_CureAbility>();
+        inverseRestorationInfo = P_PlayerController.playerControllerRef.GetComponent<P_CureAbility>();
 
-        fireboltMana = P_PlayerController.playerControllerRef.GetComponent<P_FireboltAbility>();
-        arcaneShotMana = P_PlayerController.playerControllerRef.GetComponent<P_FireboltAbility>();
+        fireboltInfo = P_PlayerController.playerControllerRef.GetComponent<P_FireboltAbility>();
+        arcaneShotInfo = P_PlayerController.playerControllerRef.GetComponent<P_FireboltAbility>();
     }
 
 
@@ -45,16 +45,16 @@ public class PlayerMagicAbilityText : MonoBehaviour
     {
         if (!P_DTLMenu.DTLMenuRef.Inverse)
         {
-            fireboltMaigcPrompt.text = "Left click - Deal Damage\r\nMana Cost: " + fireboltMana.ManaCost +"\r\nReady To Use: " + fireboltMana.ReadyToCast;
-            restorationMaigcPrompt.text = "F - Heal over time\r\nMana Cost: " + restorationMana.ManaCost + "\r\nReady To Use: " + restorationMana.ReadyToCast;
-            thickSkinnedMagicPrompt.text = "Q - Shield Yourself\r\nMana Cost: " + thickSkinnedMana.ManaCost +"\r\nReady To Use: " + thickSkinnedMana.ReadyToCast;
+            fireboltMaigcPrompt.text = "Left click - Deal Damage\r\nMana Cost: " + fireboltInfo.ManaCost +"\r\nReady To Use: " + fireboltInfo.ReadyToCast;
+            restorationMaigcPrompt.text = "F - Heal over time\r\nMana Cost: " + restorationInfo.ManaCost + "\r\nReady To Use: " + restorationInfo.ReadyToCast;
+            thickSkinnedMagicPrompt.text = "Q - Shield Yourself\r\nMana Cost: " + thickSkinnedInfo.ManaCost +"\r\nReady To Use: " + thickSkinnedInfo.ReadyToCast;
 
         }
         else
         {
-            fireboltMaigcPrompt.text = "Left click  - Restore Mana\r\nMana Cost: " + fireboltMana.InverseManaCost + "\r\nReady To Use: " + fireboltMana.InverseReadyToCast;
-            restorationMaigcPrompt.text = "F - Inflict Damage Over Time\r\nMana Cost: " + restorationMana.InverseManaCost + "\r\nReady To Use: " + restorationMana.InverseReadyToCast;
-            thickSkinnedMagicPrompt.text = "Q - Inflict Increse Damage Taken\r\nMana Cost: " + thickSkinnedMana.InverseManaCost + "\r\nReady To Use: " + thickSkinnedMana.InverseReadyToCast;
+            fireboltMaigcPrompt.text = "Left click  - Restore Mana\r\nMana Cost: " + arcaneShotInfo.InverseManaCost + "\r\nReady To Use: " + arcaneShotInfo.InverseReadyToCast;
+            restorationMaigcPrompt.text = "F - Inflict Damage Over Time\r\nMana Cost: " + inverseRestorationInfo.InverseManaCost + "\r\nReady To Use: " + inverseRestorationInfo.InverseReadyToCast;
+            thickSkinnedMagicPrompt.text = "Q - Inflict Increse Damage Taken\r\nMana Cost: " + inverseThickSkinnedInfo.InverseManaCost + "\r\nReady To Use: " + inverseThickSkinnedInfo.InverseReadyToCast;
         }
     } 
 }

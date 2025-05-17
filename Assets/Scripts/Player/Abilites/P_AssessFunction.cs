@@ -18,6 +18,11 @@ public class P_AssessFunction : MonoBehaviour
 
     private bool readyToActivate;
 
+    public bool ReadyToActivate
+    {
+        get { return readyToActivate; }
+    }
+
     private int duration;
 
     [SerializeField] private AudioClip assessAudioClip;

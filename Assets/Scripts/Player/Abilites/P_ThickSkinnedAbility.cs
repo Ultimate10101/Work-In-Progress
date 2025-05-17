@@ -39,8 +39,6 @@ public class P_ThickSkinnedAbility : Def_Ability
 
         manaCost = 20.0f;
 
-        duration = 15;
-
 
         // Inverse Magic variables
 
@@ -115,8 +113,6 @@ public class P_ThickSkinnedAbility : Def_Ability
 
         ActivateBarrier(true);
 
-        StartCoroutine(DurationHandler());
-
         StartCoroutine(CoolDownHandler());
     }
 
@@ -125,15 +121,6 @@ public class P_ThickSkinnedAbility : Def_Ability
         yield return new WaitForSeconds(coolDown);
         readyToCast = true;
         Debug.Log("ThickSkinned cooldown recharged");
-    }
-
-    IEnumerator DurationHandler()
-    {
-        yield return new WaitForSeconds(duration);
-        Debug.Log("ThickSkinned Duration over");
-
-        ActivateBarrier(false);
-
     }
 
 
@@ -145,7 +132,7 @@ public class P_ThickSkinnedAbility : Def_Ability
         barrierText.text = barrier + "/" + maxBarrier;
     }
 
-    void ActivateBarrier(bool status)
+    private void ActivateBarrier(bool status)
     {
         barrierBG.SetActive(status);
         isActive = status;
@@ -165,12 +152,11 @@ public class P_ThickSkinnedAbility : Def_Ability
 
     private void CheckBarrierCondtion()
     {
-        if (barrier == 0.0f)
+        if (barrier <= 0.0f)
         {
             Debug.Log("ThickSkinned barrier was broken");
 
             ActivateBarrier(false);
-            StopCoroutine(DurationHandler());
         }
     }
 

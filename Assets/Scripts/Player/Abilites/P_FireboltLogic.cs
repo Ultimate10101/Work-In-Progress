@@ -9,7 +9,7 @@ public class P_FireboltLogic : MonoBehaviour
     [SerializeField] private GameObject explosion;
 
 
-    private int damage = 30;
+    private int damage = 40;
 
     public int DAMAGE
     {

@@ -26,6 +26,15 @@ public class P_CureAbility : Def_Ability
     [SerializeField] private AnimationClip restoration;
     [SerializeField] private AnimationClip inverseRestoration;
 
+    private float inverseDamage = 5.0f;
+
+    public float InverseDamage
+    {
+        get { return inverseDamage; }
+        set { inverseDamage = value; }
+    }
+
+
     private P_HealthController playerHealth;
 
     void Start()
@@ -154,7 +163,7 @@ public class P_CureAbility : Def_Ability
 
         if (IsTargetValid())
         {
-            enemy.GetComponent<InverseRestorationDamage>().ApplyTicks(5, 1.5f, 4);
+            enemy.GetComponent<InverseRestorationDamage>().ApplyTicks(5, 1.5f, inverseDamage);
 
             if (enemy.GetComponent<E_AIMovement>().currentState == EnemyState.PATROLLING)
             {

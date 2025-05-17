@@ -50,9 +50,9 @@ public class P_FireboltAbility : Def_Ability
 
     protected override void CastInput()
     {
-        fireboltKey = Input.GetMouseButtonDown(0);
+        fireboltKey = Input.GetKeyDown(KeyCode.Mouse0);
 
-        arcaneShotKey = Input.GetMouseButton(0);
+        arcaneShotKey = Input.GetKey(KeyCode.Mouse0);
     }
 
     protected override void Cast()
@@ -103,7 +103,7 @@ public class P_FireboltAbility : Def_Ability
 
     protected override void InverseCast()
     {
-        if (!abilityCurrentlyCasting && readyToInverseCast && fireboltKey && ((playerMana.Mana - inverseManaCost) >= 0.0f))
+        if (!abilityCurrentlyCasting && readyToInverseCast && arcaneShotKey && ((playerMana.Mana - inverseManaCost) >= 0.0f))
         {
             readyToInverseCast = false;
             abilityCurrentlyCasting = true;
@@ -122,7 +122,7 @@ public class P_FireboltAbility : Def_Ability
 
     protected override IEnumerator InverseCastDelay()
     {
-        yield return new WaitForSeconds(arcaneShot.length - inverseCastTimeLengthOffset);
+        yield return new WaitForSeconds(arcaneShot.length/2);
 
         AudioManager.audioManagerRef.PlaySFX(inverseMagicSFX);
 
@@ -144,7 +144,7 @@ public class P_FireboltAbility : Def_Ability
         Debug.Log("ArcaneShot cooldown recharged");
     }
 
-    void Fire()
+    private void Fire()
     {
         // ray through middle of screen
         Ray ray = gameCam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));

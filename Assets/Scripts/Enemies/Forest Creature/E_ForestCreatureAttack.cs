@@ -5,7 +5,9 @@ using UnityEngine;
 public class E_ForestCreatureAttackTest : E_EnemyAttack
 {
 
-    [SerializeField] BoxCollider hitBox;
+    [SerializeField] private BoxCollider hitBox;
+
+    [SerializeField] private GameObject healEffect;
 
     // Start is called before the first frame update
     protected override void Start()
@@ -68,6 +70,7 @@ public class E_ForestCreatureAttackTest : E_EnemyAttack
 
     void Heal()
     {
+        Instantiate(healEffect, transform.position, healEffect.transform.rotation);
         gameObject.GetComponent<E_HealthController>().HealHealth(50.0f);
         Debug.Log("I'm getting Healed");
     }

@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class KillEffect : MonoBehaviour
 {
+    [SerializeField] private int killEffectTime;
     // Start is called before the first frame update
     void Start()
     {
-        Destroy(gameObject, 1.0f);
+        Destroy(gameObject, killEffectTime);
     }
 
  

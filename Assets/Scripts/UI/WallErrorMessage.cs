@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class WallErrorMessage : MonoBehaviour
 {
-    private bool active;
+    private bool activate;
 
    void Start()
     {
-        active = false;
+        activate = false;
     }
 
     void Update()
     {
-        if(gameObject.activeSelf && !active)
+        if(gameObject.activeSelf && !activate)
         {
-            active = true;
+            activate = true;
             StartCoroutine(Deactivate());
         }
     }
@@ -24,7 +24,7 @@ public class WallErrorMessage : MonoBehaviour
     {
         yield return new WaitForSeconds(10);
         gameObject.SetActive(false);
-        active = false;
+        activate = false;
 
     }
 }

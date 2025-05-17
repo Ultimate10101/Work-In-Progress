@@ -3,7 +3,10 @@ guid: 895f6cef11dcba742b3fedb2666cbad4
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - healthBar: {instanceID: 0}
+  - healthText: {instanceID: 0}
+  - DeathSomke: {fileID: 573605077079379742, guid: ae2181e24ada3d046bb1b5ee16d698f5, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

@@ -4,37 +4,64 @@ using UnityEngine;
 
 public class BattleSection : MonoBehaviour
 {
-    private Collider[] col;
+    public Collider[] col;
 
-    [SerializeField] GameObject battleRestrictionArea;
-
-    public int enemyCount;
+    [SerializeField] private GameObject[] battleRestrictionWalls;
 
 
+    private bool bossEncounterActive;
 
     // Start is called before the first frame update
     void Start()
     {
-        enemyCount = 0;
+       bossEncounterActive = false;
+       
+        ToggleWallMessageState(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        EnemiesInArea();
-
-        if (enemyCount == 0)
+        if (!BossAlive() && bossEncounterActive)
         {
-            battleRestrictionArea.SetActive(false);
+            battleRestrictionWalls[3].SetActive(false);
+            ToggleWallMessageState(false);
         }
     }
 
 
-    private void EnemiesInArea()
+    private bool BossAlive()
     {
-        col = Physics.OverlapSphere(transform.position, 50, LayerMask.GetMask("Enemy"));
+        col = Physics.OverlapSphere(transform.position, 100, LayerMask.GetMask("Boss"));
 
-        enemyCount = col.Length;
+        if(col.Length > 0 )
+        {
+            return true;
+        }
+        return false;
+    }
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            gameObject.GetComponent<Collider>().enabled = false;
+            battleRestrictionWalls[0].SetActive(true);
+            bossEncounterActive = true;
+            ToggleWallMessageState(true);
+        }
+        
+    }
+
+
+    private void ToggleWallMessageState(bool active)
+    {
+
+        foreach (GameObject item in battleRestrictionWalls)
+        {
+            item.GetComponent<RestrictionWalls>().enabled = active;
+        }
     }
 
 }

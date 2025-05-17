@@ -8,6 +8,8 @@ public class E_HealthController : HealthController
     private bool isDoubleDamageActive;
     private float timer;
 
+    [SerializeField] private GameObject DeathSomke;
+
     public bool IsDoubleDamageActive
     {
         get { return isDoubleDamageActive; } 
@@ -20,6 +22,7 @@ public class E_HealthController : HealthController
 
         if(currentLivingStatus == LivingStatus.DEAD)
         {
+            Instantiate(DeathSomke, transform.position, DeathSomke.transform.rotation);
             Destroy(gameObject);
         }
 

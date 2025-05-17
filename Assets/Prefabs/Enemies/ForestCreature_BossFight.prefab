@@ -362,6 +362,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackRate: 0
   hitBox: {fileID: 5482136809793522561}
+  healEffect: {fileID: 7252433282122090435, guid: 76e366cf40d569f4090c8254c1931737, type: 3}
 --- !u!114 &5886696359202676014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -378,6 +379,7 @@ MonoBehaviour:
   health: 80
   healthBar: {fileID: 9065837497665261147}
   healthText: {fileID: 7359534509745998602}
+  DeathSomke: {fileID: 0}
 --- !u!114 &3445660210828279794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -396,7 +398,6 @@ MonoBehaviour:
   dot_Icon: {fileID: 827917236110990712}
   StunnedIcon: {fileID: 3233160489942528338}
   increasedDamageIcon: {fileID: 6142631096366822073}
-  gameCam: {fileID: 0}
   isActive: 0
 --- !u!114 &8000977032186964954
 MonoBehaviour:

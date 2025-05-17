@@ -38,11 +38,22 @@ public class P_DTLMenu : MonoBehaviour
 
 
     public bool Inverse;
+
     private bool isIncreasePotencyAcitve;
+    public bool IncreasePotencyAcitve
+    {
+        get { return !isIncreasePotencyAcitve; }
+    }
+
     private bool isReduceManaCostActive;
+    public bool ReduceManaCostActive
+    {
+        get { return !isReduceManaCostActive; }
+    }
 
     private int firebolt_StartingDamage;
     private int firebolInverse_StartingDamage;
+    private float dot_StartingDamage;
 
     public static P_DTLMenu DTLMenuRef;
 
@@ -72,7 +83,7 @@ public class P_DTLMenu : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.Tab))
+        if (Input.GetKeyDown(KeyCode.CapsLock))
         {
             DTL_Menu.SetActive(!DTL_Menu.activeSelf);
             DTL_MenuActive = DTL_Menu.activeSelf;
@@ -130,7 +141,7 @@ public class P_DTLMenu : MonoBehaviour
     public void DTLMenuOptions()
     {
             // Reduce Player's Magic Spells Mana Cost by half
-            if (manaReduxKey && isReduceManaCostActive)
+            if (manaReduxKey && !isReduceManaCostActive)
             {
                 playerAnim.SetTrigger("IsUsingOtherDTLOptions");
 
@@ -171,12 +182,16 @@ public class P_DTLMenu : MonoBehaviour
         fireboltLogic.DAMAGE *= 2;
         fireboltLogic.INVERSE_DAMAGE *= 2;
 
+        cureAbility.InverseDamage *= 2;
+
         yield return new WaitForSeconds(15);
 
         isIncreasePotencyAcitve = false;
 
         fireboltLogic.DAMAGE = firebolt_StartingDamage;
         fireboltLogic.INVERSE_DAMAGE = firebolInverse_StartingDamage;
+
+        cureAbility.InverseDamage = dot_StartingDamage;
 
     }
 
@@ -209,6 +224,8 @@ public class P_DTLMenu : MonoBehaviour
     {
         firebolt_StartingDamage = fireboltLogic.DAMAGE;
         firebolInverse_StartingDamage = fireboltLogic.INVERSE_DAMAGE;
+
+        dot_StartingDamage = cureAbility.InverseDamage;
 
         restoration_StartingManaCost = cureAbility.ManaCost;
         thickskinned_StartingManaCost = thickSkinnedAbility.ManaCost;
