@@ -9,6 +9,7 @@ TagManager:
   - Projectile
   - Bridge
   - Audio
+  - Ground
   layers:
   - Default
   - TransparentFX
