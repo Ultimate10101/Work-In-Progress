@@ -8,6 +8,7 @@ TagManager:
   - Firebolt_Projectile
   - Projectile
   - Bridge
+  - Audio
   layers:
   - Default
   - TransparentFX

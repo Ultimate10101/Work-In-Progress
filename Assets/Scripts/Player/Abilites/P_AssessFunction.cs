@@ -20,6 +20,8 @@ public class P_AssessFunction : MonoBehaviour
 
     private int duration;
 
+    //AudioManager audioManager;
+
 
     void Start()
     {
@@ -45,6 +47,7 @@ public class P_AssessFunction : MonoBehaviour
         {
             Debug.Log("Casting");
             readyToActivate = false;
+            //audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<audioManager>();
 
             playerAnim.SetTrigger("IsAssessing");
 
