@@ -7,9 +7,14 @@ public class E_SlimeKingAttack : E_EnemyAttack
 {
     [SerializeField] private GameObject windWave;
 
+    [SerializeField] private GameObject minions; 
+
     [SerializeField] private GroundCheck slimeGroundCheck;
 
+    [SerializeField] private Transform[] spawnPoints;
+
     private Rigidbody slimeKingRb;
+
 
 
     protected override void Start()
@@ -35,19 +40,16 @@ public class E_SlimeKingAttack : E_EnemyAttack
 
             slimeGroundCheck.gameObject.SetActive(false);
 
-            Debug.Log("Five Big Booms baby");
-
             LaunchAirWave();
 
             slimeKingRb.isKinematic = true;
 
-            GetComponent<NavMeshAgent>().enabled = true;
+            gameObject.GetComponent<NavMeshAgent>().enabled = true;
 
             Invoke("UntilCanAct", attackRate);
 
 
         }
-
     }
 
 
@@ -73,15 +75,13 @@ public class E_SlimeKingAttack : E_EnemyAttack
     {
         if (canAct)
         {
-            Debug.Log("Up We GOOOOOO");
-
             attackRate = 1.0f;
 
             canAct = false;
 
             slimeKingRb.isKinematic = false;
 
-            GetComponent<NavMeshAgent>().enabled = false;
+            gameObject.GetComponent<NavMeshAgent>().enabled = false;
 
 
             slimeKingRb.AddForce(Vector3.up * 20.0f, ForceMode.Impulse);
@@ -102,14 +102,32 @@ public class E_SlimeKingAttack : E_EnemyAttack
 
     private void LaunchAirWave()
     {
-
-        Debug.Log("I HIT THE GROUND ARRRRRRGGGGG");
-        //Instantiate(windWave, transform.position + new Vector3(0.0f, 1f), windWave.transform.rotation);
+        Instantiate(windWave, transform.position + new Vector3(0.0f, -1f), windWave.transform.rotation);
     }
 
 
     public void SummonAdds()
     {
+        for (int i = 0; i < 5; i++)
+        {
+            Instantiate(minions, RandomPos(), minions.transform.rotation);
+        }
+    }
+
+    private Vector3 RandomPos()
+    {
+       Vector3 pos = Vector3.zero;
+
+       Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
+
+
+        float xPos = spawnPoint.position.x;
+        float zPos = spawnPoint.position.z;
+
+        pos = new Vector3(xPos, minions.transform.position.y, zPos);
+
+        return pos;
+
 
     }
 }

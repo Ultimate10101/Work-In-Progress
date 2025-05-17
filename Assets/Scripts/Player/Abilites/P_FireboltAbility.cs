@@ -17,6 +17,7 @@ public class P_FireboltAbility : Def_Ability
     [SerializeField] private float shootForce;
 
     private bool fireboltKey;
+    private bool arcaneShotKey;
 
     private float damageToSelf = 15.0f;
 
@@ -48,7 +49,9 @@ public class P_FireboltAbility : Def_Ability
 
     protected override void CastInput()
     {
-        fireboltKey = Input.GetKeyDown(KeyCode.E);
+        fireboltKey = Input.GetMouseButtonDown(0);
+
+        arcaneShotKey = Input.GetMouseButton(0);
     }
 
     protected override void Cast()

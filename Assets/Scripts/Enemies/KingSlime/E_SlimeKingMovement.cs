@@ -1,3 +1,7 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
 public class E_SlimeKingMovement : E_AIMovement
 {
 
@@ -6,7 +10,12 @@ public class E_SlimeKingMovement : E_AIMovement
         switch (currentState)
         {
             case EnemyState.PATROLLING:
-                PatrollingLogic();
+
+                if(wayPoints.Length != 0)
+                {
+                    PatrollingLogic();
+                }
+                    
 
                 // GO TO CHASE STATE
                 if (PlayerInAgrroRange() || wasHit)
@@ -38,6 +47,10 @@ public class E_SlimeKingMovement : E_AIMovement
                 {
                     navMeshAgent.speed = moveSpeed;
                     currentState = EnemyState.PATROLLING;
+
+                    Debug.Log("X-Men To Me");
+
+                    gameObject.GetComponent<E_SlimeKingAttack>().SummonAdds();
 
                     navMeshAgent.stoppingDistance = patrollStoppingDistance;
                 }

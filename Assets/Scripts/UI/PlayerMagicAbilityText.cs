@@ -5,22 +5,56 @@ using UnityEngine;
 
 public class PlayerMagicAbilityText : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI playerMagicAbilityTextButtons;
+    [SerializeField] private TextMeshProUGUI fireboltMaigcPrompt;
+    [SerializeField] private TextMeshProUGUI restorationMaigcPrompt;
+    [SerializeField] private TextMeshProUGUI thickSkinnedMagicPrompt;
+
+
+    private P_PlayerController player;
+
+    P_ThickSkinnedAbility thickSkinnedMana;
+    P_ThickSkinnedAbility inverseThickSkinnedMana;
+
+    P_CureAbility restorationMana;
+    P_CureAbility inverseRestorationMana;
+
+    P_FireboltAbility fireboltMana;
+    P_FireboltAbility arcaneShotMana;
+
+    private void Start()
+    {
+        thickSkinnedMana  = P_PlayerController.playerControllerRef.GetComponent<P_ThickSkinnedAbility>();
+        inverseThickSkinnedMana = P_PlayerController.playerControllerRef.GetComponent<P_ThickSkinnedAbility>();
+
+        restorationMana = P_PlayerController.playerControllerRef.GetComponent<P_CureAbility>();
+        inverseRestorationMana = P_PlayerController.playerControllerRef.GetComponent<P_CureAbility>();
+
+        fireboltMana = P_PlayerController.playerControllerRef.GetComponent<P_FireboltAbility>();
+        arcaneShotMana = P_PlayerController.playerControllerRef.GetComponent<P_FireboltAbility>();
+    }
+
 
     // Update is called once per frame
     void Update()
     {
+        UpdateText();
+    }
+
+
+    private void UpdateText()
+    {
         if (!P_DTLMenu.DTLMenuRef.Inverse)
         {
-            playerMagicAbilityTextButtons.text = "Q - Use Thickskinned" + "\n" + "      - Shield Yourself" + 
-                                                "\n" + "E - Use Firebolt" + "\n" + "        - Deal Damage" + 
-                                                "\n"+ "F - Use Restoration" + "\n" + "      - Heal health over time";
+            fireboltMaigcPrompt.text = "Left click - Deal Damage\r\nMana Cost: " + fireboltMana.ManaCost;
+            restorationMaigcPrompt.text = "F - Heal over time\r\nMana Cost: " + restorationMana.ManaCost;
+            thickSkinnedMagicPrompt.text = "Q - Shield Yourself\r\nMana Cost: " + thickSkinnedMana.ManaCost;
+
         }
         else
         {
-            playerMagicAbilityTextButtons.text = "Q - Inflict Increse Damage Taken" + "\n" +"       - Enemy takes more Damage" +
-                                                "\n" + "E - Use Arcane Shot" + "\n" + "     - Restore Mana" +
-                                                "\n" + "F - Inflict Damage Over Time" + "\n" + "        - Enemy Takes Damage Over Time";
+            fireboltMaigcPrompt.text = "Left click  - Restore Mana\r\nMana Cost: " + fireboltMana.InverseManaCost;
+            restorationMaigcPrompt.text = "F - Inflict Damage Over Time\r\nMana Cost: " + restorationMana.InverseManaCost;
+            thickSkinnedMagicPrompt.text = "Q - Inflict Increse Damage Taken\r\nMana Cost: " + thickSkinnedMana.InverseManaCost;
         }
-    }
+    } 
 }

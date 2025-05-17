@@ -14,8 +14,6 @@ public class E_CanvasController : MonoBehaviour
     [SerializeField] private GameObject StunnedIcon;
     [SerializeField] private GameObject increasedDamageIcon;
 
-    [SerializeField] private Camera gameCam;
-
     private StatusEffectHandler enemyStatus;
 
     public bool isActive;
@@ -64,7 +62,7 @@ public class E_CanvasController : MonoBehaviour
 
     private void FacePlayer()
     {
-        enemyCanvas.transform.rotation = Quaternion.LookRotation(enemyCanvas.transform.position - gameCam.transform.position);
+        enemyCanvas.transform.rotation = Quaternion.LookRotation(enemyCanvas.transform.position -  P_PlayerController.playerControllerRef.transform.position);
 
     }
 
@@ -72,7 +70,6 @@ public class E_CanvasController : MonoBehaviour
     private void UpdateIcons()
     {
         burningIcon.SetActive(enemyStatus.GetState("BURNING"));
-        Debug.Log(enemyStatus.GetState("BURNING"));
         dot_Icon.SetActive(enemyStatus.GetState("HIT_BY_INVERSE_RESTORATION"));
         StunnedIcon.SetActive(enemyStatus.GetState("STUNNED"));
         increasedDamageIcon.SetActive(enemyStatus.GetState("DAMAGE_TAKEN_INCREASED")); ;

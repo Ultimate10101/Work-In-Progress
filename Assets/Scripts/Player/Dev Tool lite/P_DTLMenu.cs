@@ -6,26 +6,29 @@ public class P_DTLMenu : MonoBehaviour
 {
     [SerializeField] private Animator playerAnim;
 
-    [SerializeField] private GameObject P_DTLCanvas;
+    [SerializeField] private GameObject DTL_Menu;
+
+    [SerializeField] private GameObject normalMenu;
+    [SerializeField] private GameObject inverseMenu;
 
     public bool DTL_MenuActive
     {
         get; private set;
     }
 
-    public P_AssessFunction assessAbility;
+    public P_AssessFunction assessFunction;
     public P_CureAbility cureAbility;
     public P_FireboltAbility fireboltAbility;
     public P_FireboltLogic fireboltLogic;
     public P_ThickSkinnedAbility thickSkinnedAbility;
 
 
-    private float c_StartingManaCost;
-    private float ts_StartingManaCost;
-    private float fb_StartingManaCost;
+    private float restoration_StartingManaCost;
+    private float thickskinned_StartingManaCost;
+    private float firebolt_StartingManaCost;
 
-    private float inverC_StartingManaCost;
-    private float inverTS_StartingManaCost;
+    private float inverRestoration_StartingManaCost;
+    private float inverThickskinned_StartingManaCost;
 
     private bool manaReduxKey;
 
@@ -38,8 +41,8 @@ public class P_DTLMenu : MonoBehaviour
     private bool isIncreasePotencyAcitve;
     private bool isReduceManaCostActive;
 
-    private int fb_startingDamage;
-    private int fbInverse_startingDamage;
+    private int firebolt_StartingDamage;
+    private int firebolInverse_StartingDamage;
 
     public static P_DTLMenu DTLMenuRef;
 
@@ -58,8 +61,7 @@ public class P_DTLMenu : MonoBehaviour
 
     void Start()
     {
-        P_DTLCanvas.SetActive(false);
-
+        DTL_Menu.SetActive(false);
 
         StoreOGValues();
     }
@@ -68,10 +70,47 @@ public class P_DTLMenu : MonoBehaviour
     void Update()
     {
 
-        MenuInputs();
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            DTL_Menu.SetActive(!DTL_Menu.activeSelf);
+            DTL_MenuActive = DTL_Menu.activeSelf;
 
-        DTLMenuOptions();
+            if (DTL_MenuActive)
+            {
+                playerAnim.SetTrigger("Up");
 
+                playerAnim.SetBool("DTL_Active", true);
+            }
+
+        }
+
+
+
+        if (Inverse)
+        {
+            normalMenu.SetActive(false);
+            inverseMenu.SetActive(true);
+        }
+        else
+        {
+            normalMenu.SetActive(true);
+            inverseMenu.SetActive(false);
+        }
+
+
+
+        if (DTL_MenuActive)
+        {
+            MenuInputs();
+
+            DTLMenuOptions();
+        }
+        else
+        {
+            playerAnim.SetBool("DTL_Active", false);
+        }
+
+       
     }
 
 
@@ -116,10 +155,10 @@ public class P_DTLMenu : MonoBehaviour
                 Inverse = !Inverse;
             }
 
-            // View Enemies' Weaknesses and abilites
-            assessAbility.ActivateAssess();
+        // View Enemies' Weaknesses and abilites
+        assessFunction.ActivateAssess();
 
-            assessAbility.Assess(playerAnim);
+        assessFunction.Assess(playerAnim);
 
 
     }
@@ -134,8 +173,8 @@ public class P_DTLMenu : MonoBehaviour
 
         isIncreasePotencyAcitve = false;
 
-        fireboltLogic.DAMAGE = fb_startingDamage;
-        fireboltLogic.INVERSE_DAMAGE = fbInverse_startingDamage;
+        fireboltLogic.DAMAGE = firebolt_StartingDamage;
+        fireboltLogic.INVERSE_DAMAGE = firebolInverse_StartingDamage;
 
     }
 
@@ -153,12 +192,12 @@ public class P_DTLMenu : MonoBehaviour
 
         isReduceManaCostActive = false;
 
-        cureAbility.ManaCost = c_StartingManaCost;
-        fireboltAbility.ManaCost = fb_StartingManaCost;
-        thickSkinnedAbility.ManaCost = ts_StartingManaCost;
+        cureAbility.ManaCost = restoration_StartingManaCost;
+        fireboltAbility.ManaCost = firebolt_StartingManaCost;
+        thickSkinnedAbility.ManaCost = thickskinned_StartingManaCost;
 
-        cureAbility.InverseManaCost = inverC_StartingManaCost;
-        thickSkinnedAbility.InverseManaCost = inverTS_StartingManaCost;
+        cureAbility.InverseManaCost = inverRestoration_StartingManaCost;
+        thickSkinnedAbility.InverseManaCost = inverThickskinned_StartingManaCost;
 
     }
 
@@ -166,15 +205,15 @@ public class P_DTLMenu : MonoBehaviour
 
     public void StoreOGValues()
     {
-        fb_startingDamage = fireboltLogic.DAMAGE;
-        fbInverse_startingDamage = fireboltLogic.INVERSE_DAMAGE;
+        firebolt_StartingDamage = fireboltLogic.DAMAGE;
+        firebolInverse_StartingDamage = fireboltLogic.INVERSE_DAMAGE;
 
-        c_StartingManaCost = cureAbility.ManaCost;
-        ts_StartingManaCost = thickSkinnedAbility.ManaCost;
-        fb_StartingManaCost = fireboltAbility.ManaCost;
+        restoration_StartingManaCost = cureAbility.ManaCost;
+        thickskinned_StartingManaCost = thickSkinnedAbility.ManaCost;
+        firebolt_StartingManaCost = fireboltAbility.ManaCost;
 
-        inverC_StartingManaCost = cureAbility.InverseManaCost;
-        inverTS_StartingManaCost = thickSkinnedAbility.InverseManaCost;
+        inverRestoration_StartingManaCost = cureAbility.InverseManaCost;
+        inverThickskinned_StartingManaCost = thickSkinnedAbility.InverseManaCost;
     }
 
 }

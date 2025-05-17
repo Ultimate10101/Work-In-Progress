@@ -1,11 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class BlastEffectTest : MonoBehaviour
+public class WindWaveEffect : MonoBehaviour
 {
-
     private LineRenderer lineRenderer;
 
     private float radius = 0.0f;
@@ -14,13 +12,15 @@ public class BlastEffectTest : MonoBehaviour
 
     private float angleBetweenPoints = 0.0f;
 
-    private float speed = 10.0f;
+    private float speed = 30.0f;
 
-    private float maxRadius = 10.0f;
+    private float maxRadius = 100.0f;
 
     private Vector3[] positions = new Vector3[30];
 
     private Collider[] col;
+
+    private bool playerFound;
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +30,7 @@ public class BlastEffectTest : MonoBehaviour
         lineRenderer.enabled = true;
         lineRenderer.positionCount = pointCount;
 
+        playerFound = false;
 
         FindPoints();
 
@@ -39,17 +40,21 @@ public class BlastEffectTest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(radius <= maxRadius)
+        if (radius <= maxRadius)
         {
             SetPositions();
-            FindTargets();
+
+            if (!playerFound)
+            {
+                FindTargets();
+            }
 
             radius += Time.deltaTime * speed;
 
             lineRenderer.widthMultiplier = (maxRadius - radius) / maxRadius;
         }
         else
-        { 
+        {
             Destroy(gameObject);
         }
     }
@@ -69,21 +74,33 @@ public class BlastEffectTest : MonoBehaviour
 
     void SetPositions()
     {
-        for (int i = 0;i < pointCount; i++)
+        for (int i = 0; i < pointCount; i++)
         {
             lineRenderer.SetPosition(i, positions[i] * radius);
+
         }
     }
 
-    void FindTargets()
+    private void FindTargets()
     {
         col = Physics.OverlapSphere(transform.position, radius);
-        foreach(Collider target in col)
+
+        foreach (Collider target in col)
         {
-            if(target.gameObject.GetComponent<StatusEffectHandler>()!= null)
+            if (target.gameObject.GetComponent<P_HealthController>() != null)
             {
-                target.gameObject.GetComponent<StatusEffectHandler>().ChangeStateActivity("STUNNED", true);
+                playerFound = true;
+
+                Debug.Log("Player has been shooked");
+
+                target.gameObject.GetComponent<P_HealthController>().TakeDamage(20);
+
             }
         }
+
     }
+
+
+
+
 }

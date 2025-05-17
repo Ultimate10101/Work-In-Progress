@@ -21,7 +21,7 @@ public class E_AIMovement : MonoBehaviour
     protected float delayTime;
 
 
-    [SerializeField] private Transform[] wayPoints;
+    [SerializeField] protected Transform[] wayPoints;
 
     protected Vector3 target;
     protected Vector3 startPos;
@@ -49,8 +49,11 @@ public class E_AIMovement : MonoBehaviour
 
         index = 0;
 
-        target = wayPoints[index].position;
-
+        if(wayPoints.Length != 0 )
+        {
+            target = wayPoints[index].position;
+        }
+           
         enemyStatus = GetComponent<StatusEffectHandler>();
     }
 
@@ -70,8 +73,11 @@ public class E_AIMovement : MonoBehaviour
         switch (currentState)
         {
             case EnemyState.PATROLLING:
-                PatrollingLogic();
-
+                if(wayPoints.Length != 0)
+                {
+                    PatrollingLogic();
+                }
+                   
                 // GO TO CHASE STATE
                 if (PlayerInAgrroRange() || wasHit)
                 {
@@ -87,18 +93,8 @@ public class E_AIMovement : MonoBehaviour
 
                 ChasingLogic();
 
-                // GO TO PATROLLING STATE
-                if ((Vector3.Distance(gameObject.transform.position, startPos) > 20.0f))
-                {
-                    currentState = EnemyState.PATROLLING;
-
-                    navMeshAgent.stoppingDistance = patrollStoppingDistance;
-
-                    transform.position = startPos;
-                    Debug.Log("Back to Patrolling");
-                }
                 // GO TO ATTACK STATE
-                else if (PlayerInAttackRange())
+                if (PlayerInAttackRange())
                 {
                     navMeshAgent.speed = 0f;
                     currentState = EnemyState.ATTACKING;

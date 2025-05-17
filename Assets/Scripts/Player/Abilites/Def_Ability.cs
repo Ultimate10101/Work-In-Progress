@@ -60,7 +60,7 @@ public abstract class Def_Ability : MonoBehaviour
 
     protected virtual void Update()
     {
-        if (!P_DTLMenu.DTLMenuRef.DTL_MenuActive || !GameManager.gameManagerRef.GameOver)
+        if (!GameManager.gameManagerRef.GameOver)
         {
             CastInput();
         }

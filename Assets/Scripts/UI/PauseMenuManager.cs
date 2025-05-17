@@ -21,7 +21,7 @@ public class PauseMenuManager : MonoBehaviour
     {
         Debug.Log("I'm running");
 
-        if (Input.GetKeyDown(KeyCode.Escape) && !pauseMenu.activeSelf && !settingsMenu.activeSelf)
+        if (Input.GetKeyDown(KeyCode.Escape) && !pauseMenu.activeSelf && !settingsMenu.activeSelf && !GameManager.gameManagerRef.IsStoryPanelRunning)
         {
             pauseMenu.SetActive(true);
             Time.timeScale = 0.0f;

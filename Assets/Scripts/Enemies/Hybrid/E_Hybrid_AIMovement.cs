@@ -18,7 +18,7 @@ public class E_Hybrid_AIMovement : E_AIMovement
                     PlayerTaunt();
                 }
                 // PATROL
-                else
+                else if (wayPoints.Length != 0)
                 {
                     PatrollingLogic();
                 }
@@ -45,18 +45,8 @@ public class E_Hybrid_AIMovement : E_AIMovement
 
                 ChasingLogic();
 
-                // GO TO PATROLLING STATE
-                if ((Vector3.Distance(gameObject.transform.position, startPos) > 35.0f))
-                {
-                    currentState = EnemyState.PATROLLING;
-
-                    navMeshAgent.stoppingDistance = patrollStoppingDistance;
-
-                    transform.position = startPos;
-                    Debug.Log("Back to Patrolling");
-                }
                 // GO TO ATTACK STATE
-                else if (PlayerInAttackRange())
+                if (PlayerInAttackRange())
                 {
                     navMeshAgent.speed = 0f;
                     currentState = EnemyState.ATTACKING;
