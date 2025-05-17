@@ -31,8 +31,6 @@ public class E_AIMovement : MonoBehaviour
 
     private StatusEffectHandler enemyStatus;
 
-    protected E_EnemyAttack enemyAttack;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -54,14 +52,12 @@ public class E_AIMovement : MonoBehaviour
         target = wayPoints[index].position;
 
         enemyStatus = GetComponent<StatusEffectHandler>();
-
-        enemyAttack = GetComponent<E_EnemyAttack>();
     }
 
     // Update is called once per framez
     void Update()
     {
-        if (!enemyStatus.GetState("STUNNED") && !GameManager.gameManagerRef.GameOver && navMeshAgent.enabled)
+        if (!enemyStatus.GetState("STUNNED") && !GameManager.gameManagerRef.GameOver)
         {
             MoveState();
         }
