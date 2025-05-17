@@ -5,10 +5,13 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
-  - Firebolt_Projectile
   - Projectile
+<<<<<<< Updated upstream
   - Bridge
   - Audio
+=======
+  - Ground
+>>>>>>> Stashed changes
   layers:
   - Default
   - TransparentFX
