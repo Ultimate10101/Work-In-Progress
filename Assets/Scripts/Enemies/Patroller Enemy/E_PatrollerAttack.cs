@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class E_PatrollerAttack : E_EnemyAttack
+public class E_PatrollerAttack : MonoBehaviour
 {
     [SerializeField] private GameObject projectile;
 
@@ -11,48 +11,74 @@ public class E_PatrollerAttack : E_EnemyAttack
 
     [SerializeField] private GameObject specialAttack;
 
+    private E_AIMovement enemyMoveState;
 
-    protected override void SpecialAttack()
+    private bool canAct;
+    private bool specialReady;
+
+    [SerializeField] private float timeUntilActAgain;
+
+    private Animator anim;
+
+    // Start is called before the first frame update
+    void Start()
     {
-        if ((gameObject.GetComponent<E_HealthController>().Health <= 40.0f) && specialReady)
+        canAct = true;
+
+        specialReady = true;
+
+        enemyMoveState = gameObject.GetComponent<E_AIMovement>();
+
+        anim = gameObject.GetComponent<Animator>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (!GameManager.gameManagerRef.GameOver)
         {
-            CancelInvoke("UntilCanAct");
-
-            canAct = false;
-            specialReady = false;
-
-            attackRate = 5.0f;
-
-            LaunchShockWave();
-
-            Invoke("UntilCanAct", attackRate);
-
+            Attack();
         }
     }
 
 
-    protected override void BasicAttack()
+    void Attack()
     {
-        if (canAct)
+
+        if (enemyMoveState.currentState == EnemyState.ATTACKING)
         {
-            attackRate = 1.0f;
-
-            canAct = false;
-
-            if (!enemyAnim.GetCurrentAnimatorStateInfo(0).IsName("Slime_Rig|Attack"))
+            if ((gameObject.GetComponent<E_HealthController>().Health <= 40.0f) && specialReady)
             {
-                enemyAnim.SetTrigger("Fire"); //---> Using Animation Event will tigger FireProjectile
+                CancelInvoke("UntilCanAct");
+
+                canAct = false;
+                specialReady = false;
+
+                SpecialAttack();
+
+                Invoke("UntilCanAct", 5.0f);
+
             }
-            Invoke("UntilCanAct", attackRate);
+            else if (canAct)
+            { 
+                canAct = false;
 
+                if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Slime_Rig|Attack"))
+                {
+                    anim.SetTrigger("Fire");
+                }
+                Invoke("UntilCanAct", timeUntilActAgain);
+
+            }
         }
-
+        
+        
     }
 
-    void FireProjectile()
+    void BaseAttack()
     {
 
-        GameObject projectile_ = Instantiate(projectile, attackPoint1.position, Quaternion.identity);
+        GameObject projectile_ =  Instantiate(projectile, attackPoint1.position, Quaternion.identity);
         GameObject projectile_1 = Instantiate(projectile, attackPoint2.position, Quaternion.identity);
 
         projectile_.GetComponent<Rigidbody>().AddForce(transform.forward * 20f, ForceMode.Impulse);
@@ -60,10 +86,13 @@ public class E_PatrollerAttack : E_EnemyAttack
 
     }
 
-    void LaunchShockWave()
+    void SpecialAttack()
     {
-        Instantiate(specialAttack, transform.position + new Vector3(0.0f, 1f), specialAttack.transform.rotation);
+       Instantiate(specialAttack, transform.position + new Vector3(0.0f, 1f), specialAttack.transform.rotation);
     }
 
-
+    void UntilCanAct()
+    {
+        canAct = true;
+    }
 }
