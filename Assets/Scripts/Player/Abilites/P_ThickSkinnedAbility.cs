@@ -50,6 +50,7 @@ public class P_ThickSkinnedAbility : Def_Ability
 
         
         readyToCast = true;
+        readyToInverseCast = true;
 
         playerMana = gameObject.GetComponent<P_ManaController>();
 
@@ -95,6 +96,8 @@ public class P_ThickSkinnedAbility : Def_Ability
             playerAnim.SetTrigger("IsShielding");
 
             rockEffect.Play();
+
+            AudioManager.audioManagerRef.PlaySFX(magicSFX);
 
             StartCoroutine(CastDelay());
         }
@@ -178,11 +181,13 @@ public class P_ThickSkinnedAbility : Def_Ability
 
     protected override void InverseCast()
     {
-        if (!abilityCurrentlyCasting && readyToCast && thickSkinnedKey && ((playerMana.Mana - inverseManaCost) >= 0.0f))
+        if (!abilityCurrentlyCasting && readyToInverseCast && thickSkinnedKey && ((playerMana.Mana - inverseManaCost) >= 0.0f))
         {
+            AudioManager.audioManagerRef.PlaySFX(inverseMagicSFX);
+
             Debug.Log("Casting Inverse ThickSkinned");
 
-            readyToCast = false;
+            readyToInverseCast = false;
 
             abilityCurrentlyCasting = true;
 
@@ -219,7 +224,7 @@ public class P_ThickSkinnedAbility : Def_Ability
     {
         yield return new WaitForSeconds(inverseCoolDown);
 
-        readyToCast = true;
+        readyToInverseCast = true;
 
         Debug.Log("Inverse ThickSkinned cooldown recharged");
     }

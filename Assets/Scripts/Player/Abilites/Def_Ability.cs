@@ -36,11 +36,28 @@ public abstract class Def_Ability : MonoBehaviour
    
     protected bool readyToCast;
 
+    public bool ReadyToCast
+    {
+        get { return readyToCast; }
+    }
+
+
+    protected bool readyToInverseCast;
+
+    public bool InverseReadyToCast
+    {
+        get { return readyToInverseCast; }
+    }
+
 
     protected P_ManaController playerMana;
 
 
     protected static bool abilityCurrentlyCasting;
+
+
+    [SerializeField] protected AudioClip magicSFX;
+    [SerializeField] protected AudioClip inverseMagicSFX;
 
 
     protected abstract void Cast();

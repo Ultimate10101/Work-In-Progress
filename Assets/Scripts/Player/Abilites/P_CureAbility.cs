@@ -48,6 +48,7 @@ public class P_CureAbility : Def_Ability
 
 
         readyToCast = true;
+        readyToInverseCast = true;
 
         playerMana = gameObject.GetComponent<P_ManaController>();
         playerHealth = gameObject.GetComponent<P_HealthController>();
@@ -75,6 +76,8 @@ public class P_CureAbility : Def_Ability
 
             StartCoroutine(CastDelay());
 
+            AudioManager.audioManagerRef.PlaySFX(magicSFX);
+
             healingEffect.Play();
         }
 
@@ -83,6 +86,7 @@ public class P_CureAbility : Def_Ability
     protected override IEnumerator CastDelay()
     {
         yield return new WaitForSeconds(restoration.length);
+
 
         healingEffect.Stop();
 
@@ -117,11 +121,14 @@ public class P_CureAbility : Def_Ability
 
     protected override void InverseCast()
     {
-        if (!abilityCurrentlyCasting && readyToCast && cureKey && ((playerMana.Mana - inverseManaCost) >= 0.0f))
+        if (!abilityCurrentlyCasting && readyToInverseCast && cureKey && ((playerMana.Mana - inverseManaCost) >= 0.0f))
         {
+
+            AudioManager.audioManagerRef.PlaySFX(inverseMagicSFX);
+
             Debug.Log("Casting Inverse Restoration");
 
-            readyToCast = false;
+            readyToInverseCast = false;
             abilityCurrentlyCasting = true;
 
             playerMana.Mana -= inverseManaCost;
@@ -163,7 +170,7 @@ public class P_CureAbility : Def_Ability
     {
         yield return new WaitForSeconds(inverseCoolDown);
 
-        readyToCast = true;
+        readyToInverseCast = true;
 
         Debug.Log("Inverse Restoration cooldown recharged");
     }

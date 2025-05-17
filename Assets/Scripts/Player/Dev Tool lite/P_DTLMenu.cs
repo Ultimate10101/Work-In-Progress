@@ -63,6 +63,8 @@ public class P_DTLMenu : MonoBehaviour
     {
         DTL_Menu.SetActive(false);
 
+        Inverse = false;
+
         StoreOGValues();
     }
 

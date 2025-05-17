@@ -16,7 +16,6 @@ public class SlimeCOntroller : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Debug.Log(GameManager_2D.gameManager2DRef.IsStoryPanelRunning);
         if(!GameManager_2D.gameManager2DRef.IsStoryPanelRunning)
         {
             slimeRb.AddForce((player.transform.position - gameObject.transform.position).normalized * 1.0f, ForceMode2D.Force);

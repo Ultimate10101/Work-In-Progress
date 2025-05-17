@@ -41,6 +41,7 @@ public class P_FireboltAbility : Def_Ability
 
 
         readyToCast = true;
+        readyToInverseCast = true;
 
         playerMana = gameObject.GetComponent<P_ManaController>();
         playerHealth = gameObject.GetComponent<P_HealthController>();
@@ -72,9 +73,10 @@ public class P_FireboltAbility : Def_Ability
 
     protected override IEnumerator CastDelay()
     {
-        //yield return new WaitForSeconds(playerAnim.GetCurrentAnimatorClipInfo(0)[0].clip.length - castTimeLengthOffset);
 
         yield return new WaitForSeconds(fireBolt.length);
+
+        AudioManager.audioManagerRef.PlaySFX(magicSFX);
 
         Debug.Log("Firebolt Casted");
 
@@ -101,9 +103,9 @@ public class P_FireboltAbility : Def_Ability
 
     protected override void InverseCast()
     {
-        if (!abilityCurrentlyCasting && readyToCast && fireboltKey && ((playerMana.Mana - inverseManaCost) >= 0.0f))
+        if (!abilityCurrentlyCasting && readyToInverseCast && fireboltKey && ((playerMana.Mana - inverseManaCost) >= 0.0f))
         {
-            readyToCast = false;
+            readyToInverseCast = false;
             abilityCurrentlyCasting = true;
 
             Debug.Log("Casting ArcaneShot");
@@ -111,6 +113,7 @@ public class P_FireboltAbility : Def_Ability
             playerMana.Mana -= inverseManaCost;
 
             playerAnim.SetTrigger("IsArcaneShooting");
+
 
             StartCoroutine(InverseCastDelay());
         }
@@ -120,6 +123,8 @@ public class P_FireboltAbility : Def_Ability
     protected override IEnumerator InverseCastDelay()
     {
         yield return new WaitForSeconds(arcaneShot.length - inverseCastTimeLengthOffset);
+
+        AudioManager.audioManagerRef.PlaySFX(inverseMagicSFX);
 
         Debug.Log("ArcaneShot casted");
 
@@ -134,7 +139,7 @@ public class P_FireboltAbility : Def_Ability
     {
         yield return new WaitForSeconds(inverseCoolDown);
 
-        readyToCast = true;
+        readyToInverseCast = true;
 
         Debug.Log("ArcaneShot cooldown recharged");
     }

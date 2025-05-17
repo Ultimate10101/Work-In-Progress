@@ -8,7 +8,7 @@ public class GameManager_2D : MonoBehaviour
 
     [SerializeField] private StoryPanel storyPanel;
 
-    public bool isStoryPanelRunning;
+    private bool isStoryPanelRunning;
 
     public bool IsStoryPanelRunning
     {

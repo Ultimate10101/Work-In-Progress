@@ -45,16 +45,16 @@ public class PlayerMagicAbilityText : MonoBehaviour
     {
         if (!P_DTLMenu.DTLMenuRef.Inverse)
         {
-            fireboltMaigcPrompt.text = "Left click - Deal Damage\r\nMana Cost: " + fireboltMana.ManaCost;
-            restorationMaigcPrompt.text = "F - Heal over time\r\nMana Cost: " + restorationMana.ManaCost;
-            thickSkinnedMagicPrompt.text = "Q - Shield Yourself\r\nMana Cost: " + thickSkinnedMana.ManaCost;
+            fireboltMaigcPrompt.text = "Left click - Deal Damage\r\nMana Cost: " + fireboltMana.ManaCost +"\r\nReady To Use: " + fireboltMana.ReadyToCast;
+            restorationMaigcPrompt.text = "F - Heal over time\r\nMana Cost: " + restorationMana.ManaCost + "\r\nReady To Use: " + restorationMana.ReadyToCast;
+            thickSkinnedMagicPrompt.text = "Q - Shield Yourself\r\nMana Cost: " + thickSkinnedMana.ManaCost +"\r\nReady To Use: " + thickSkinnedMana.ReadyToCast;
 
         }
         else
         {
-            fireboltMaigcPrompt.text = "Left click  - Restore Mana\r\nMana Cost: " + fireboltMana.InverseManaCost;
-            restorationMaigcPrompt.text = "F - Inflict Damage Over Time\r\nMana Cost: " + restorationMana.InverseManaCost;
-            thickSkinnedMagicPrompt.text = "Q - Inflict Increse Damage Taken\r\nMana Cost: " + thickSkinnedMana.InverseManaCost;
+            fireboltMaigcPrompt.text = "Left click  - Restore Mana\r\nMana Cost: " + fireboltMana.InverseManaCost + "\r\nReady To Use: " + fireboltMana.InverseReadyToCast;
+            restorationMaigcPrompt.text = "F - Inflict Damage Over Time\r\nMana Cost: " + restorationMana.InverseManaCost + "\r\nReady To Use: " + restorationMana.InverseReadyToCast;
+            thickSkinnedMagicPrompt.text = "Q - Inflict Increse Damage Taken\r\nMana Cost: " + thickSkinnedMana.InverseManaCost + "\r\nReady To Use: " + thickSkinnedMana.InverseReadyToCast;
         }
     } 
 }

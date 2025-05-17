@@ -13,6 +13,23 @@ public class AudioManager : MonoBehaviour
     public AudioClip fireboltSFX;
     public AudioClip thickSkinnedSFX;
 
+
+
+    public static AudioManager audioManagerRef;
+
+    private void Awake()
+    {
+        if (audioManagerRef == null)
+        {
+            audioManagerRef = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+
     private void Start()
     {
         musicSource.clip = backgroundMusic;

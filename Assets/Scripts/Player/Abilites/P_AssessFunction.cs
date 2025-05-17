@@ -20,7 +20,7 @@ public class P_AssessFunction : MonoBehaviour
 
     private int duration;
 
-    //AudioManager audioManager;
+    [SerializeField] private AudioClip assessAudioClip;
 
 
     void Start()
@@ -47,7 +47,6 @@ public class P_AssessFunction : MonoBehaviour
         {
             Debug.Log("Casting");
             readyToActivate = false;
-            //audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<audioManager>();
 
             playerAnim.SetTrigger("IsAssessing");
 
@@ -58,6 +57,8 @@ public class P_AssessFunction : MonoBehaviour
     private IEnumerator CastDelay(Animator playerAnim)
     {
         yield return new WaitForSeconds(playerAnim.GetCurrentAnimatorClipInfo(0)[0].clip.length + launchTimeOffset);
+
+        AudioManager.audioManagerRef.PlaySFX(assessAudioClip);
 
         if (IsValidTarget())
         {
