@@ -13,7 +13,7 @@ public class P_DTLMenu : MonoBehaviour
         get; private set;
     }
 
-    public P_AssessAbility assessAbility;
+    public P_AssessFunction assessAbility;
     public P_CureAbility cureAbility;
     public P_FireboltAbility fireboltAbility;
     public P_FireboltLogic fireboltLogic;
