@@ -82,7 +82,14 @@ public class P_FireboltAbility : Def_Ability
 
         abilityCurrentlyCasting = false;
 
-        playerHealth.TakeDamage(damageToSelf);
+        if(gameObject.GetComponent<P_ThickSkinnedAbility>().isActive)
+        {
+            gameObject.GetComponent<P_ThickSkinnedAbility>().TakeDamage(10);
+        }
+        else
+        {
+            playerHealth.TakeDamage(damageToSelf);
+        }       
 
         Fire();
 

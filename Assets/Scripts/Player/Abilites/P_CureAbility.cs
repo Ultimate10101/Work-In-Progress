@@ -12,11 +12,9 @@ public class P_CureAbility : Def_Ability
 
     private GameObject enemy;
 
-    [SerializeField] private int healPercent;
-    private float healPercentage;
-    private float healAmount;
     private float heal;
     private float healDelay;
+    private int  healAmount;
 
     private bool cureKey;
 
@@ -47,7 +45,9 @@ public class P_CureAbility : Def_Ability
 
         healDelay = 2.0f;
 
-        healPercentage = healPercent / 100.0f;
+        healAmount = 5;
+
+        heal = 45;
 
         // Inverse Magic variables
 
@@ -77,10 +77,7 @@ public class P_CureAbility : Def_Ability
             readyToCast = false;
             abilityCurrentlyCasting = true;
             playerMana.Mana -= manaCost;
-
-            heal = (playerHealth.MaxHealth * healPercentage);
-            healAmount = heal / 8;
-
+  
             playerAnim.SetTrigger("IsHealing");
 
             StartCoroutine(CastDelay());
@@ -115,7 +112,7 @@ public class P_CureAbility : Def_Ability
 
     private IEnumerator HealOverTime()
     {
-        for (float i = 0.0f; i < heal; i += healAmount)
+        for (int i = 0; i < heal; i += healAmount)
         {
             yield return new WaitForSeconds(healDelay);
 
