@@ -45,7 +45,7 @@ public class PlayerMagicAbilityText : MonoBehaviour
     {
         if (!P_DTLMenu.DTLMenuRef.Inverse)
         {
-            fireboltMaigcPrompt.text = "Left click - Deal Damage\r\nMana Cost: " + fireboltInfo.ManaCost +"\r\nReady To Use: " + fireboltInfo.ReadyToCast;
+            fireboltMaigcPrompt.text = "Left click - Deal Damage & Take Damage\r\nMana Cost: " + fireboltInfo.ManaCost +"\r\nReady To Use: " + fireboltInfo.ReadyToCast;
             restorationMaigcPrompt.text = "F - Heal over time\r\nMana Cost: " + restorationInfo.ManaCost + "\r\nReady To Use: " + restorationInfo.ReadyToCast;
             thickSkinnedMagicPrompt.text = "Q - Shield Yourself\r\nMana Cost: " + thickSkinnedInfo.ManaCost +"\r\nReady To Use: " + thickSkinnedInfo.ReadyToCast;
 

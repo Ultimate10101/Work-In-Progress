@@ -15,6 +15,8 @@ public class E_SlimeKingAttack : E_EnemyAttack
 
     private Rigidbody slimeKingRb;
 
+    private bool readToSummon;
+
 
 
     protected override void Start()
@@ -24,6 +26,8 @@ public class E_SlimeKingAttack : E_EnemyAttack
         slimeKingRb = GetComponent<Rigidbody>();
 
         slimeKingRb.isKinematic = true;
+
+        readToSummon = true;
 
     }
 
@@ -83,8 +87,9 @@ public class E_SlimeKingAttack : E_EnemyAttack
 
             gameObject.GetComponent<NavMeshAgent>().enabled = false;
 
+            attackRate = 10.0f;
 
-            slimeKingRb.AddForce(Vector3.up * 20.0f, ForceMode.Impulse);
+            slimeKingRb.AddForce(Vector3.up * 2000.0f, ForceMode.Impulse);
 
             StartCoroutine(GroundCheckEnableDelay());
 
@@ -108,10 +113,25 @@ public class E_SlimeKingAttack : E_EnemyAttack
 
     public void SummonAdds()
     {
-        for (int i = 0; i < 5; i++)
+        if (readToSummon)
         {
-            Instantiate(minions, RandomPos(), minions.transform.rotation);
+            readToSummon = false;
+
+            for (int i = 0; i < 3; i++)
+            {
+                Instantiate(minions, RandomPos(), minions.transform.rotation);
+            }
+
+            StartCoroutine(CoolDown());
         }
+        
+    }
+
+
+    IEnumerator CoolDown()
+    {
+        yield return new WaitForSeconds(30.0f);
+        readToSummon = true;
     }
 
     private Vector3 RandomPos()

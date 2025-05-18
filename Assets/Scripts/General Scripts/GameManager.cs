@@ -99,12 +99,7 @@ public class GameManager : MonoBehaviour
 
             winScreen.SetActive(true);
 
-#if UNITY_EDITOR
-            EditorApplication.ExitPlaymode();
-#else
-            Application.Quit();
-#endif
-
+            StartCoroutine(Delay());
         }
     }
 
@@ -123,7 +118,16 @@ public class GameManager : MonoBehaviour
         // Changes Player States and Set variables
     }
 
+    IEnumerator Delay()
+    {
+        yield return new WaitForSeconds(3.0f);
 
+#if UNITY_EDITOR
+        EditorApplication.ExitPlaymode();
+#else
+            Application.Quit();
+#endif
+    }
 
 
 }

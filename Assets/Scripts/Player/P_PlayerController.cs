@@ -13,7 +13,7 @@ public class P_PlayerController : MonoBehaviour
     private float HorizontalInput;
     private float VerticalInput;
 
-    [SerializeField] private float speed;
+    private float speed;
     [SerializeField] private float air_Speed;
     [SerializeField] private float baseSpeed;
     [SerializeField] private float maxSpeed;
@@ -52,7 +52,9 @@ public class P_PlayerController : MonoBehaviour
     {
         playerStatus = gameObject.GetComponent<StatusEffectHandler>();
 
-        baseSpeed = speed;
+        speed = maxSpeed;
+
+        baseSpeed = maxSpeed - 100;
 
         playerRb = GetComponent<Rigidbody>();
 
@@ -67,9 +69,9 @@ public class P_PlayerController : MonoBehaviour
         {
             PlayerInput();
         }
-        
 
-        PlayerSprint();
+
+        PlayerWalk();
 
         PlayerJump();
 
@@ -115,15 +117,15 @@ public class P_PlayerController : MonoBehaviour
     }
         
 
-    void PlayerSprint()
+    void PlayerWalk()
     {
         if(sprintKey && (HorizontalInput != 0.0f || VerticalInput != 0.0f))
         {
-            speed = maxSpeed;
+            speed = baseSpeed;
         }
         else
         {
-            speed = baseSpeed;
+            speed = maxSpeed;
         }
    
     }

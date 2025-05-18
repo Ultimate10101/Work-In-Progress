@@ -14,7 +14,7 @@ public class WindWaveEffect : MonoBehaviour
 
     private float speed = 30.0f;
 
-    private float maxRadius = 100.0f;
+    private float maxRadius = 30.0f;
 
     private Vector3[] positions = new Vector3[30];
 
@@ -93,7 +93,7 @@ public class WindWaveEffect : MonoBehaviour
 
                 Debug.Log("Player has been shooked");
 
-                target.gameObject.GetComponent<P_HealthController>().TakeDamage(20);
+                target.gameObject.GetComponent<P_HealthController>().TakeDamage(10);
 
             }
         }
