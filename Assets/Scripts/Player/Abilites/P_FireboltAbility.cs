@@ -122,7 +122,7 @@ public class P_FireboltAbility : Def_Ability
 
     protected override IEnumerator InverseCastDelay()
     {
-        yield return new WaitForSeconds(arcaneShot.length/2);
+        yield return new WaitForSeconds(arcaneShot.length/4);
 
         AudioManager.audioManagerRef.PlaySFX(inverseMagicSFX);
 

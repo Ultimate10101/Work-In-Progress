@@ -14,7 +14,7 @@ public class WindWaveEffect : MonoBehaviour
 
     private float speed = 30.0f;
 
-    private float maxRadius = 100.0f;
+    private float maxRadius = 30.0f;
 
     private Vector3[] positions = new Vector3[30];
 
