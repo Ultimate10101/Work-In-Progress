@@ -379,7 +379,7 @@ MonoBehaviour:
   health: 80
   healthBar: {fileID: 9065837497665261147}
   healthText: {fileID: 7359534509745998602}
-  DeathSomke: {fileID: 0}
+  DeathSomke: {fileID: 573605077079379742, guid: ae2181e24ada3d046bb1b5ee16d698f5, type: 3}
 --- !u!114 &3445660210828279794
 MonoBehaviour:
   m_ObjectHideFlags: 0

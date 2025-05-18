@@ -87,8 +87,9 @@ public class E_SlimeKingAttack : E_EnemyAttack
 
             gameObject.GetComponent<NavMeshAgent>().enabled = false;
 
+            attackRate = 10.0f;
 
-            slimeKingRb.AddForce(Vector3.up * 20.0f, ForceMode.Impulse);
+            slimeKingRb.AddForce(Vector3.up * 2000.0f, ForceMode.Impulse);
 
             StartCoroutine(GroundCheckEnableDelay());
 
@@ -116,7 +117,7 @@ public class E_SlimeKingAttack : E_EnemyAttack
         {
             readToSummon = false;
 
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 3; i++)
             {
                 Instantiate(minions, RandomPos(), minions.transform.rotation);
             }
@@ -129,7 +130,7 @@ public class E_SlimeKingAttack : E_EnemyAttack
 
     IEnumerator CoolDown()
     {
-        yield return new WaitForSeconds(10.0f);
+        yield return new WaitForSeconds(30.0f);
         readToSummon = true;
     }
 

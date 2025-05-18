@@ -93,7 +93,7 @@ public class WindWaveEffect : MonoBehaviour
 
                 Debug.Log("Player has been shooked");
 
-                target.gameObject.GetComponent<P_HealthController>().TakeDamage(20);
+                target.gameObject.GetComponent<P_HealthController>().TakeDamage(10);
 
             }
         }
