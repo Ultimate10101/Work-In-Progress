@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 2259399497058577664}
   - component: {fileID: 7918321320946400766}
   - component: {fileID: 1767034118998199638}
-  - component: {fileID: -8598788483376068151}
   - component: {fileID: 9151208781311223856}
   m_Layer: 0
   m_Name: ExplosionEffect
@@ -4904,18 +4903,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   killEffectTime: 1
---- !u!114 &-8598788483376068151
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1632295715599650948}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1be3526b09b2f3c4da3584357e32b82f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!82 &9151208781311223856
 AudioSource:
   m_ObjectHideFlags: 0

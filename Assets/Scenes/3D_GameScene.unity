@@ -1820,7 +1820,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -5, y: -10.134}
+  m_AnchoredPosition: {x: -5, y: -10.133972}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &71653925
@@ -54240,7 +54240,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: A critical error has occured
+  m_text: A critical error has occurred
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 81ea03e49d43d1e46bdeeb936919d11b, type: 2}
   m_sharedMaterial: {fileID: -6349337266256532784, guid: 81ea03e49d43d1e46bdeeb936919d11b, type: 2}
@@ -59604,7 +59604,7 @@ MonoBehaviour:
   health: 1000
   healthBar: {fileID: 1484699758}
   healthText: {fileID: 753547131}
-  DeathSomke: {fileID: 0}
+  DeathSomke: {fileID: 4331989119735015919, guid: d828583de5bfba7498e4ccddf5fd9544, type: 3}
 --- !u!114 &919132148140881627
 MonoBehaviour:
   m_ObjectHideFlags: 0

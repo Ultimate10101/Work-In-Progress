@@ -235,7 +235,7 @@ GameObject:
   - component: {fileID: 8000977032186964954}
   - component: {fileID: 7487426576990482349}
   - component: {fileID: 2128159805758806145}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: ForestCreature_BossFight
   m_TagString: Enemy
   m_Icon: {fileID: 0}

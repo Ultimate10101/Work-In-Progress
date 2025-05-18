@@ -69,7 +69,7 @@ public class P_FireboltLogic : MonoBehaviour
 
         }
 
-        if (!P_DTLMenu.DTLMenuRef.Inverse)
+        if (!P_DTLMenu.DTLMenuRef.Inverse && explosion != null)
         {
             Instantiate(explosion, transform.position, Quaternion.identity);
         }
