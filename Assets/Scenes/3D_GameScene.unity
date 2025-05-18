@@ -1564,7 +1564,7 @@ RectTransform:
   m_GameObject: {fileID: 71653923}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 0.70951, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 461216587}
@@ -1575,7 +1575,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -5, y: -2}
+  m_AnchoredPosition: {x: -5, y: -10.134}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &71653925
@@ -24685,10 +24685,6 @@ MonoBehaviour:
   musicSource: {fileID: 933587847}
   SFXSource: {fileID: 1107494398}
   backgroundMusic: {fileID: 8300000, guid: 7d1e8bf7350ed274285db8426bb0639a, type: 3}
-  assessSFX: {fileID: 8300000, guid: a94d168435a79974aa00d3547087aebc, type: 3}
-  cureSFX: {fileID: 8300000, guid: 0464da0fe3544934dbc9d204599ea0c8, type: 3}
-  fireboltSFX: {fileID: 8300000, guid: 001602ad44edf1a49bff42ec0d3661bf, type: 3}
-  thickSkinnedSFX: {fileID: 8300000, guid: ef36ad1d1ea20fb4eb52dd7d64f0ca19, type: 3}
 --- !u!4 &1024572037
 Transform:
   m_ObjectHideFlags: 0
@@ -28214,7 +28210,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerAnim: {fileID: 9188156782952271869}
   magicSFX: {fileID: 8300000, guid: 0464da0fe3544934dbc9d204599ea0c8, type: 3}
-  inverseMagicSFX: {fileID: 0}
+  inverseMagicSFX: {fileID: 8300000, guid: acbcb75601b0082458fda8807f67c813, type: 3}
   gameCam: {fileID: 963194227}
   healPercent: 25
   healingEffect: {fileID: 1399182140}
@@ -28235,7 +28231,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerAnim: {fileID: 9188156782952271869}
   magicSFX: {fileID: 8300000, guid: 2b3cdc6bf368b4e4aaecca95b8ae6d4d, type: 3}
-  inverseMagicSFX: {fileID: 0}
+  inverseMagicSFX: {fileID: 8300000, guid: 945068035d6f84ee2bd2da8e08e7b375, type: 3}
   gameCam: {fileID: 963194227}
   barrierBG: {fileID: 1897270029}
   barrierBar: {fileID: 112417062}
@@ -28261,7 +28257,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerAnim: {fileID: 9188156782952271869}
   magicSFX: {fileID: 8300000, guid: d0a4f0e728456654fb849917c395d2b9, type: 3}
-  inverseMagicSFX: {fileID: 0}
+  inverseMagicSFX: {fileID: 8300000, guid: 1d74880bed4586644a16a79a2d9dc8af, type: 3}
   gameCam: {fileID: 963194227}
   attackPoint: {fileID: 223555066}
   fireboltPrefab: {fileID: 1129942942469036287, guid: d66bdb6d3f782664088dc3271a8ba85b, type: 3}
@@ -28303,6 +28299,9 @@ MonoBehaviour:
   fireboltLogic: {fileID: 2370882063770122857, guid: d66bdb6d3f782664088dc3271a8ba85b, type: 3}
   thickSkinnedAbility: {fileID: 1224789327}
   Inverse: 0
+  manaReduxSFX: {fileID: 8300000, guid: 87a2e502ddd174591af0e35f76e448a2, type: 3}
+  increasePotencySFX: {fileID: 8300000, guid: a27ae245f760b4bf191c0234d3b43918, type: 3}
+  inverseSFX: {fileID: 8300000, guid: 113a0f1929ad74dcba20169a2eaa5e57, type: 3}
 --- !u!114 &1224789331
 MonoBehaviour:
   m_ObjectHideFlags: 0

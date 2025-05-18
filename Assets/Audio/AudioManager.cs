@@ -8,10 +8,6 @@ public class AudioManager : MonoBehaviour
     [SerializeField] AudioSource SFXSource;
 
     public AudioClip backgroundMusic;
-    public AudioClip assessSFX;
-    public AudioClip cureSFX;
-    public AudioClip fireboltSFX;
-    public AudioClip thickSkinnedSFX;
 
 
 

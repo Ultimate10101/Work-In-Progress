@@ -54,6 +54,9 @@ public class P_DTLMenu : MonoBehaviour
     private int firebolt_StartingDamage;
     private int firebolInverse_StartingDamage;
     private float dot_StartingDamage;
+    [SerializeField] private AudioClip manaReduxSFX;
+    [SerializeField] private AudioClip increasePotencySFX;
+    [SerializeField] private AudioClip inverseSFX;
 
     public static P_DTLMenu DTLMenuRef;
 
@@ -143,6 +146,8 @@ public class P_DTLMenu : MonoBehaviour
             // Reduce Player's Magic Spells Mana Cost by half
             if (manaReduxKey && !isReduceManaCostActive)
             {
+                AudioManager.audioManagerRef.PlaySFX(manaReduxSFX);
+
                 playerAnim.SetTrigger("IsUsingOtherDTLOptions");
 
                 isReduceManaCostActive = true;
@@ -153,6 +158,8 @@ public class P_DTLMenu : MonoBehaviour
             // Increase Effectiveness of Player's Magic Spells
             if (increasePotencyKey && !isIncreasePotencyAcitve)
             {
+                AudioManager.audioManagerRef.PlaySFX(increasePotencySFX);
+
                 playerAnim.SetTrigger("IsUsingOtherDTLOptions");
 
                 isIncreasePotencyAcitve = true;
@@ -163,6 +170,8 @@ public class P_DTLMenu : MonoBehaviour
             // Inverse Player's Magic Abilites
             if (inverseKey)
             {
+                AudioManager.audioManagerRef.PlaySFX(inverseSFX);
+                
                 playerAnim.SetTrigger("IsUsingOtherDTLOptions");
 
                 Inverse = !Inverse;

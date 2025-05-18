@@ -57,8 +57,8 @@ public abstract class Def_Ability : MonoBehaviour
 
 
     [SerializeField] protected AudioClip magicSFX;
-    [SerializeField] protected AudioClip inverseMagicSFX;
 
+    [SerializeField] protected AudioClip inverseMagicSFX;
 
     protected abstract void Cast();
     protected abstract void InverseCast();
