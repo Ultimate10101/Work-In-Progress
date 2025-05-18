@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class DeathScreenManager : MonoBehaviour
 {
-    private Vector3 respawnPosition;
 
     public void BackToMainMenu()
     {
@@ -15,8 +14,6 @@ public class DeathScreenManager : MonoBehaviour
 
     public void Respawn()
     {
-        // Set Player Back to the beginning and refresh enemies on map, but not puzzels
-        //P_PlayerController.playerControllerRef.transform.position = respawnPosition;
         SceneManager.LoadScene("3D_GameScene", LoadSceneMode.Single);
 
     }
