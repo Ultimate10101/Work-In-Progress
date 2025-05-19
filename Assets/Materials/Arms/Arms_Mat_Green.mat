@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Arms_Mat
+  m_Name: Arms_Mat_Green
   m_Shader: {fileID: -6465566751694194690, guid: e902c77a27bf1654ebc0d695b4ff47bc, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -23,22 +23,22 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _SampleTexture2D_1eb96235d0de47bcb8e6afca58a82dca_Texture_1_Texture2D:
-        m_Texture: {fileID: 2800000, guid: fbe262d0b1508a94ea7fef00bea8caba, type: 3}
+    - _Alpha:
+        m_Texture: {fileID: 2800000, guid: d35ed4899c6f5df4a856069dbdf2173e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_f272ee12c4b7488d925e6a1bc5c4848c_Texture_1_Texture2D:
-        m_Texture: {fileID: 2800000, guid: e60898ee248e3d644a30c043218f925d, type: 3}
+    - _BaseColor:
+        m_Texture: {fileID: 2800000, guid: 953b070506b0c6d40b1bc779400119aa, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AlphaBoost: 6
+    - _AlphaBoost: 1.5
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
     m_Colors: []
   m_BuildTextureStacks: []
---- !u!114 &4990407010166848227
+--- !u!114 &8965432431367025181
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

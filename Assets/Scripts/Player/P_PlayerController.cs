@@ -65,7 +65,7 @@ public class P_PlayerController : MonoBehaviour
     void Update()
     {
 
-        if (!playerStatus.GetState("STUNNED") && !GameManager.gameManagerRef.GameOver)
+        if (!playerStatus.GetState("STUNNED") && !GameManager.gameManagerRef.GameOver && !GameManager.gameManagerRef.IsStoryPanelRunning && !GameManager.gameManagerRef.GameWin)
         {
             PlayerInput();
         }

@@ -23,10 +23,8 @@ public class PauseMenuManager : MonoBehaviour
     {
         Debug.Log("I'm running");
 
-        if (Input.GetKeyDown(KeyCode.Escape) && !pauseMenu.activeSelf && !settingsMenu.activeSelf && !GameManager.gameManagerRef.IsStoryPanelRunning)
+        if (Input.GetKeyDown(KeyCode.Escape) && !pauseMenu.activeSelf && !settingsMenu.activeSelf && !GameManager.gameManagerRef.IsStoryPanelRunning && !GameManager.gameManagerRef.GameWin)
         {
-
-
             AudioManager.audioManagerRef.PlaySFX(pauseSound);
 
             pauseMenu.SetActive(true);

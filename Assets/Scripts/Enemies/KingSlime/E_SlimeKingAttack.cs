@@ -56,38 +56,17 @@ public class E_SlimeKingAttack : E_EnemyAttack
         }
     }
 
-
-    protected override void SpecialAttack()
-    {
-        if ((gameObject.GetComponent<E_HealthController>().Health <= 40.0f) && specialReady)
-        {
-            CancelInvoke("UntilCanAct");
-
-            canAct = false;
-            specialReady = false;
-
-            attackRate = 5.0f;
-
-
-            Invoke("UntilCanAct", attackRate);
-
-        }
-    }
-
-
     protected override void BasicAttack()
     {
         if (canAct)
         {
-            attackRate = 1.0f;
-
             canAct = false;
 
             slimeKingRb.isKinematic = false;
 
             gameObject.GetComponent<NavMeshAgent>().enabled = false;
 
-            attackRate = 10.0f;
+            attackRate = 9.0f;
 
             slimeKingRb.AddForce(Vector3.up * 2000.0f, ForceMode.Impulse);
 
@@ -117,7 +96,7 @@ public class E_SlimeKingAttack : E_EnemyAttack
         {
             readToSummon = false;
 
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < 4; i++)
             {
                 Instantiate(minions, RandomPos(), minions.transform.rotation);
             }

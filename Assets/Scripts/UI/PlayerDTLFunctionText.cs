@@ -19,7 +19,7 @@ public class PlayerDTLFunctionText : MonoBehaviour
     {
         assessInfo = P_PlayerController.playerControllerRef.GetComponent<P_AssessFunction>();
 
-        functionInfo = P_PlayerController.playerControllerRef.GetComponent<P_DTLMenu>();
+        functionInfo = P_DTLMenu.DTLMenuRef;
     }
 
     // Update is called once per frame
@@ -31,8 +31,8 @@ public class PlayerDTLFunctionText : MonoBehaviour
     private void UpdateText()
     {
         dtlFunctionPrompt1.text = "T - Assess Enemies\r\nReady To Use: " + assessInfo.ReadyToActivate;
-        dtlFunctionPrompt3.text = "X - Increase Potency\r\nReady To Use: " + functionInfo.IncreasePotencyAcitve;
-        dtlFunctionPrompt4.text = "C - Reduce Mana Cost\r\nReady To Use: " + functionInfo.ReduceManaCostActive;
+        dtlFunctionPrompt3.text = "X - Increase Potency\r\nReady To Use: " + !functionInfo.IncreasePotencyAcitve;
+        dtlFunctionPrompt4.text = "C - Reduce Mana Cost\r\nReady To Use: " + !functionInfo.ReduceManaCostActive;
 
     }
 }

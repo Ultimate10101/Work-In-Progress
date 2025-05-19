@@ -10,10 +10,13 @@ public class E_HybridAttack : E_EnemyAttack
     
     private Rigidbody HybridRb;
 
+    private float rageActionDelay;
+
     // Start is called before the first frame update
     protected override void Start()
     {
-        
+        rageActionDelay = 3.0f;
+
         base.Start();
 
         HybridRb = GetComponent<Rigidbody>();
@@ -33,12 +36,10 @@ public class E_HybridAttack : E_EnemyAttack
             canAct = false;
             specialReady = false;
 
-            attackRate = 4.0f;
-
             //anim.SetTrigger("Berserk"); ---> To do once animations are set
             RageActivate();
 
-            Invoke("UntilCanAct", attackRate);
+            Invoke("UntilCanAct", rageActionDelay);
 
         }
     }
@@ -48,7 +49,7 @@ public class E_HybridAttack : E_EnemyAttack
     {
         if (canAct)
         {
-            attackRate = 1.0f;
+            attackRate = 2.0f;
 
             canAct = false;
 

@@ -77,7 +77,7 @@ public abstract class Def_Ability : MonoBehaviour
 
     protected virtual void Update()
     {
-        if (!GameManager.gameManagerRef.GameOver && !GameManager.gameManagerRef.GamePaused)
+        if (!GameManager.gameManagerRef.GameOver && !GameManager.gameManagerRef.GamePaused && !GameManager.gameManagerRef.IsStoryPanelRunning && !GameManager.gameManagerRef.GameWin)
         {
             CastInput();
         }

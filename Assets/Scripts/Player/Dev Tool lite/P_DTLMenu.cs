@@ -42,13 +42,13 @@ public class P_DTLMenu : MonoBehaviour
     private bool isIncreasePotencyAcitve;
     public bool IncreasePotencyAcitve
     {
-        get { return !isIncreasePotencyAcitve; }
+        get { return isIncreasePotencyAcitve; }
     }
 
     private bool isReduceManaCostActive;
     public bool ReduceManaCostActive
     {
-        get { return !isReduceManaCostActive; }
+        get { return isReduceManaCostActive; }
     }
 
     private int firebolt_StartingDamage;
@@ -86,7 +86,7 @@ public class P_DTLMenu : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.CapsLock))
+        if (Input.GetKeyDown(KeyCode.CapsLock) && !GameManager.gameManagerRef.IsStoryPanelRunning && !GameManager.gameManagerRef.GamePaused && !GameManager.gameManagerRef.GameWin)
         {
             DTL_Menu.SetActive(!DTL_Menu.activeSelf);
             DTL_MenuActive = DTL_Menu.activeSelf;
@@ -101,7 +101,6 @@ public class P_DTLMenu : MonoBehaviour
         }
 
 
-
         if (Inverse)
         {
             normalMenu.SetActive(false);
@@ -112,7 +111,6 @@ public class P_DTLMenu : MonoBehaviour
             normalMenu.SetActive(true);
             inverseMenu.SetActive(false);
         }
-
 
 
         if (DTL_MenuActive)
@@ -126,7 +124,6 @@ public class P_DTLMenu : MonoBehaviour
             playerAnim.SetBool("DTL_Active", false);
         }
 
-       
     }
 
 

@@ -5,11 +5,16 @@ using UnityEngine;
 public class RUSH_DAMAGE : MonoBehaviour
 {
 
+    private int damage;
+    private int SpecialDamage;
+
     public bool specialActivated;
 
 
     private void Start()
     {
+        damage = 20;
+        SpecialDamage = 40;
         specialActivated = false;
     }
 
@@ -24,25 +29,25 @@ public class RUSH_DAMAGE : MonoBehaviour
 
                 if (specialActivated)
                 {
-                    other.gameObject.GetComponent<P_ThickSkinnedAbility>().TakeDamage(40);
+                    other.gameObject.GetComponent<P_ThickSkinnedAbility>().TakeDamage(SpecialDamage);
                 }
 
-                other.gameObject.GetComponent<P_ThickSkinnedAbility>().TakeDamage(20);
+                other.gameObject.GetComponent<P_ThickSkinnedAbility>().TakeDamage(damage);
             }
             else
             {
                 if (specialActivated)
                 {
-                    other.gameObject.GetComponent<P_HealthController>().TakeDamage(40);
+                    other.gameObject.GetComponent<P_HealthController>().TakeDamage(SpecialDamage);
                 }
 
-                other.gameObject.GetComponent<P_HealthController>().TakeDamage(20);
+                other.gameObject.GetComponent<P_HealthController>().TakeDamage(damage);
             }
 
 
             if (specialActivated)
             {
-                other.gameObject.GetComponent<P_ManaController>().Mana -= 5;
+                other.gameObject.GetComponent<P_ManaController>().Mana -= 10;
             }
         }
     }

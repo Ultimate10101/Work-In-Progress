@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
 
     public bool GameWin
     {
-        get { return GameWin; }
+        get { return gameWin; }
         set { gameWin = value; }
 
     }
@@ -43,11 +43,11 @@ public class GameManager : MonoBehaviour
     public bool IsStoryPanelRunning
     {
         get { return isStoryPanelRunning; }
+        set { isStoryPanelRunning = value; }
 
     }
 
     [SerializeField] private GameObject deathScreen;
-    [SerializeField] private GameObject storyPanel;
     [SerializeField] private GameObject winScreen;
 
     private void Awake()
@@ -63,16 +63,6 @@ public class GameManager : MonoBehaviour
     }
 
 
-
-    public enum PlayerInSection
-    {
-        PLAYER_IN_COMBAT,
-        PLAYER_EXPLORING,
-
-    }
-
-    private PlayerInSection playerInSection;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -81,8 +71,6 @@ public class GameManager : MonoBehaviour
         gamePaused = false;
 
         deathScreen.SetActive(false);
-
-        playerInSection = PlayerInSection.PLAYER_EXPLORING;
     }
 
     // Update is called once per frame
@@ -101,21 +89,6 @@ public class GameManager : MonoBehaviour
 
             StartCoroutine(Delay());
         }
-    }
-
-
-    void PlayerInSectionTransition()
-    {
-        switch (playerInSection)
-        {
-            case PlayerInSection.PLAYER_IN_COMBAT:
-                break;
-            case PlayerInSection.PLAYER_EXPLORING:
-                break;
-        }
-
-
-        // Changes Player States and Set variables
     }
 
     IEnumerator Delay()

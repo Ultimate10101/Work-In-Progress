@@ -22,6 +22,8 @@ public class WindWaveEffect : MonoBehaviour
 
     private bool playerFound;
 
+    private int damage;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +33,8 @@ public class WindWaveEffect : MonoBehaviour
         lineRenderer.positionCount = pointCount;
 
         playerFound = false;
+
+        damage = 10;
 
         FindPoints();
 
@@ -93,7 +97,7 @@ public class WindWaveEffect : MonoBehaviour
 
                 Debug.Log("Player has been shooked");
 
-                target.gameObject.GetComponent<P_HealthController>().TakeDamage(10);
+                target.gameObject.GetComponent<P_HealthController>().TakeDamage(damage);
 
             }
         }

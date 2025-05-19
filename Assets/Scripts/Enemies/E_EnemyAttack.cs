@@ -29,7 +29,7 @@ public class E_EnemyAttack : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
-        if (!GameManager.gameManagerRef.GameOver && enemyMoveState.currentState == EnemyState.ATTACKING)
+        if (!GameManager.gameManagerRef.GameOver && !GameManager.gameManagerRef.GameWin && enemyMoveState.currentState == EnemyState.ATTACKING)
         {
             SpecialAttack();
             BasicAttack();

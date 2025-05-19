@@ -5,10 +5,11 @@ using UnityEngine;
 public class E_PatrollerProjectileLogic : MonoBehaviour
 {
 
-    private int DAMAGE = 5;
+    private int damage;
 
     void Start()
     {
+        damage = 10;
         Destroy(gameObject,1f);
     }
 
@@ -19,11 +20,11 @@ public class E_PatrollerProjectileLogic : MonoBehaviour
         {
             if(collision.gameObject.GetComponent<P_ThickSkinnedAbility>().isActive)
             {
-                collision.gameObject.GetComponent<P_ThickSkinnedAbility>().TakeDamage(DAMAGE);
+                collision.gameObject.GetComponent<P_ThickSkinnedAbility>().TakeDamage(damage);
             }
             else
             {
-                collision.gameObject.GetComponent<P_HealthController>().TakeDamage(DAMAGE);
+                collision.gameObject.GetComponent<P_HealthController>().TakeDamage(damage);
             }
         }
         Destroy(gameObject);

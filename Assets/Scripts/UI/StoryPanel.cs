@@ -23,7 +23,12 @@ public class StoryPanel : MonoBehaviour
 
         isActive = true;
 
-        if(gameObject.activeSelf)
+        if (GameManager.gameManagerRef != null)
+        {
+            GameManager.gameManagerRef.IsStoryPanelRunning = true;
+        }
+
+        if (gameObject.activeSelf)
         {
             StartCoroutine(ActivateTextEffect());
         }     
@@ -41,6 +46,10 @@ public class StoryPanel : MonoBehaviour
 
             isActive = false;
 
+            if (GameManager.gameManagerRef != null)
+            {
+                GameManager.gameManagerRef.IsStoryPanelRunning = false;
+            }
         }
     }
 

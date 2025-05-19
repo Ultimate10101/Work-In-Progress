@@ -52,7 +52,7 @@ public class PlayerMagicAbilityText : MonoBehaviour
         }
         else
         {
-            fireboltMaigcPrompt.text = "Left click  - Restore Mana\r\nMana Cost: " + arcaneShotInfo.InverseManaCost + "\r\nReady To Use: " + arcaneShotInfo.InverseReadyToCast;
+            fireboltMaigcPrompt.text = "Hold Left click  - Restore Mana\r\nMana Cost: " + arcaneShotInfo.InverseManaCost + "\r\nReady To Use: " + arcaneShotInfo.InverseReadyToCast;
             restorationMaigcPrompt.text = "F - Inflict Damage Over Time\r\nMana Cost: " + inverseRestorationInfo.InverseManaCost + "\r\nReady To Use: " + inverseRestorationInfo.InverseReadyToCast;
             thickSkinnedMagicPrompt.text = "Q - Inflict Increse Damage Taken\r\nMana Cost: " + inverseThickSkinnedInfo.InverseManaCost + "\r\nReady To Use: " + inverseThickSkinnedInfo.InverseReadyToCast;
         }
