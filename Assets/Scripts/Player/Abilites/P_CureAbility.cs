@@ -16,6 +16,12 @@ public class P_CureAbility : Def_Ability
     private float healDelay;
     private int  healAmount;
 
+    public int HealAmount
+    {
+        get { return healAmount; }
+        set { healAmount = value; }
+    }
+
     private bool cureKey;
 
     [SerializeField] private ParticleSystem healingEffect;
@@ -35,8 +41,10 @@ public class P_CureAbility : Def_Ability
 
     private P_HealthController playerHealth;
 
-    void Start()
+    protected override void Start()
     {
+        base.Start();
+
         // Regular Magic variables
 
         coolDown = 20.0f;
@@ -112,7 +120,7 @@ public class P_CureAbility : Def_Ability
 
     private IEnumerator HealOverTime()
     {
-        for (int i = 0; i < heal; i += healAmount)
+        for (int i = 0; i < heal; i += 5)
         {
             yield return new WaitForSeconds(healDelay);
 

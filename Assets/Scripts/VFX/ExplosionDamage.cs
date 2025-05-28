@@ -19,8 +19,19 @@ public class ExplosionDamage : MonoBehaviour
                 {
                     c.gameObject.GetComponent<E_AIMovement>().wasHit = true;
                 }
-                c.gameObject.GetComponent<E_HealthController>().TakeDamage(20.0f);
+                if (P_DTLMenu.DTLMenuRef.IncreasePotencyAcitve)
+                {
+                    c.gameObject.GetComponent<E_HealthController>().TakeDamage(40.0f);
+                }
+                else
+                {
+                    c.gameObject.GetComponent<E_HealthController>().TakeDamage(20.0f);
+                }
+                
             }
         }
     }
+
+
+
 }

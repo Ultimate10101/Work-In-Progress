@@ -6,6 +6,8 @@ public class P_DTLMenu : MonoBehaviour
 {
     [SerializeField] private Animator playerAnim;
 
+    private StatusEffectHandler playerStatus;
+
     [SerializeField] private GameObject DTL_Menu;
 
     [SerializeField] private GameObject normalMenu;
@@ -30,6 +32,15 @@ public class P_DTLMenu : MonoBehaviour
     private float inverRestoration_StartingManaCost;
     private float inverThickskinned_StartingManaCost;
 
+    private int firebolt_StartingDamage;
+    private int firebolInverse_StartingDamage;
+    private float dot_StartingDamage;
+
+    private float firebolt_StartingDamageToSelf;
+
+    private int restoration_StartingHealAmount;
+
+
     private bool manaReduxKey;
 
     private bool inverseKey;
@@ -51,9 +62,7 @@ public class P_DTLMenu : MonoBehaviour
         get { return isReduceManaCostActive; }
     }
 
-    private int firebolt_StartingDamage;
-    private int firebolInverse_StartingDamage;
-    private float dot_StartingDamage;
+
     [SerializeField] private AudioClip manaReduxSFX;
     [SerializeField] private AudioClip increasePotencySFX;
     [SerializeField] private AudioClip inverseSFX;
@@ -75,7 +84,10 @@ public class P_DTLMenu : MonoBehaviour
 
     void Start()
     {
+        playerStatus = gameObject.GetComponent<StatusEffectHandler>();
+
         DTL_Menu.SetActive(false);
+
 
         Inverse = false;
 
@@ -86,7 +98,7 @@ public class P_DTLMenu : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.CapsLock) && !GameManager.gameManagerRef.IsStoryPanelRunning && !GameManager.gameManagerRef.GamePaused && !GameManager.gameManagerRef.GameWin)
+        if (Input.GetKeyDown(KeyCode.CapsLock) && GameManager.gameManagerRef.GameMangerConditions() && !playerStatus.GetState("STUNNED"))
         {
             DTL_Menu.SetActive(!DTL_Menu.activeSelf);
             DTL_MenuActive = DTL_Menu.activeSelf;
@@ -113,13 +125,15 @@ public class P_DTLMenu : MonoBehaviour
         }
 
 
-        if (DTL_MenuActive)
+        if (DTL_MenuActive && GameManager.gameManagerRef.GameMangerConditions() && !playerStatus.GetState("STUNNED"))
         {
             MenuInputs();
 
             DTLMenuOptions();
         }
-        else
+
+
+        if (!DTL_MenuActive) 
         {
             playerAnim.SetBool("DTL_Active", false);
         }
@@ -188,7 +202,11 @@ public class P_DTLMenu : MonoBehaviour
         fireboltLogic.DAMAGE *= 2;
         fireboltLogic.INVERSE_DAMAGE *= 2;
 
+        fireboltAbility.DamageToSelf *= 2;
+
         cureAbility.InverseDamage *= 2;
+
+        cureAbility.HealAmount *= 2;
 
         yield return new WaitForSeconds(15);
 
@@ -197,7 +215,11 @@ public class P_DTLMenu : MonoBehaviour
         fireboltLogic.DAMAGE = firebolt_StartingDamage;
         fireboltLogic.INVERSE_DAMAGE = firebolInverse_StartingDamage;
 
+        fireboltAbility.DamageToSelf = firebolt_StartingDamageToSelf;
+
         cureAbility.InverseDamage = dot_StartingDamage;
+
+        cureAbility.HealAmount = restoration_StartingHealAmount;
 
     }
 
@@ -231,6 +253,8 @@ public class P_DTLMenu : MonoBehaviour
         firebolt_StartingDamage = fireboltLogic.DAMAGE;
         firebolInverse_StartingDamage = fireboltLogic.INVERSE_DAMAGE;
 
+        firebolt_StartingDamageToSelf = fireboltAbility.DamageToSelf;
+
         dot_StartingDamage = cureAbility.InverseDamage;
 
         restoration_StartingManaCost = cureAbility.ManaCost;
@@ -239,6 +263,9 @@ public class P_DTLMenu : MonoBehaviour
 
         inverRestoration_StartingManaCost = cureAbility.InverseManaCost;
         inverThickskinned_StartingManaCost = thickSkinnedAbility.InverseManaCost;
+
+
+        restoration_StartingHealAmount = cureAbility.HealAmount;
     }
 
 }

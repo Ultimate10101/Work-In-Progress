@@ -19,18 +19,28 @@ public class P_FireboltAbility : Def_Ability
     private bool fireboltKey;
     private bool arcaneShotKey;
 
-    private float damageToSelf = 15.0f;
+    private float damageToSelf;
+
+    public float DamageToSelf
+    {
+        get { return damageToSelf; }
+        set { damageToSelf = value; }
+    }
 
     P_HealthController playerHealth;
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
+        base.Start();
+
         // Regular Magic variables
 
         coolDown = 5.0f;
 
         manaCost = 20.0f;
+
+        damageToSelf = 15.0f;
 
 
         // Inverse Magic variables
@@ -82,16 +92,16 @@ public class P_FireboltAbility : Def_Ability
 
         abilityCurrentlyCasting = false;
 
-        if(gameObject.GetComponent<P_ThickSkinnedAbility>().isActive)
+        Fire();
+
+        if (gameObject.GetComponent<P_ThickSkinnedAbility>().isActive)
         {
-            gameObject.GetComponent<P_ThickSkinnedAbility>().TakeDamage(10);
+            gameObject.GetComponent<P_ThickSkinnedAbility>().TakeDamage(damageToSelf);
         }
         else
         {
             playerHealth.TakeDamage(damageToSelf);
         }       
-
-        Fire();
 
         StartCoroutine(CoolDownHandler());
     }

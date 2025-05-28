@@ -31,8 +31,10 @@ public class P_ThickSkinnedAbility : Def_Ability
     [SerializeField] private AnimationClip thickSkinned;
     [SerializeField] private AnimationClip inverseThickSkinned;
 
-    void Start()
+    protected override void Start()
     {
+        base.Start();
+
         // Regular Magic variables
 
         coolDown = 8.0f;
@@ -142,7 +144,16 @@ public class P_ThickSkinnedAbility : Def_Ability
 
     public void TakeDamage(float damage)
     {
-        barrier -= damage;
+        if (P_DTLMenu.DTLMenuRef.IncreasePotencyAcitve)
+        {
+            barrier -= (damage/2);
+        }
+        else
+        {
+            barrier -= damage;
+
+        }
+        
     }
 
     private void SetBarrier()

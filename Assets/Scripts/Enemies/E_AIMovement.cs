@@ -60,7 +60,7 @@ public class E_AIMovement : MonoBehaviour
     // Update is called once per framez
     void Update()
     {
-        if (!enemyStatus.GetState("STUNNED") && !GameManager.gameManagerRef.GameOver && navMeshAgent.enabled && !GameManager.gameManagerRef.GameWin)
+        if (!enemyStatus.GetState("STUNNED") && !GameManager.gameManagerRef.GameOver && navMeshAgent.enabled && !GameManager.gameManagerRef.GameWin && !GameManager.gameManagerRef.GamePaused)
         {
             MoveState();
         }

@@ -42,11 +42,11 @@ public class P_ArmsColorDTL : MonoBehaviour
         {
             if (P_DTLMenu.DTLMenuRef.ReduceManaCostActive && P_DTLMenu.DTLMenuRef.IncreasePotencyAcitve)
             {
-                meshArms.GetComponent<Renderer>().material = purpleArmsMat;
+                meshArms.GetComponent<Renderer>().material = yellowArmsMat;
             }
             else if (P_DTLMenu.DTLMenuRef.ReduceManaCostActive)
             {
-                meshArms.GetComponent<Renderer>().material = yellowArmsMat;
+                meshArms.GetComponent<Renderer>().material = purpleArmsMat;
             }
             else if (P_DTLMenu.DTLMenuRef.IncreasePotencyAcitve)
             {

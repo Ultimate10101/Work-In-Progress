@@ -5,6 +5,7 @@ using UnityEditor;
 #endif
 
 using UnityEngine;
+using UnityEngine.Diagnostics;
 
 
 
@@ -98,8 +99,15 @@ public class GameManager : MonoBehaviour
 #if UNITY_EDITOR
         EditorApplication.ExitPlaymode();
 #else
-            Application.Quit();
+            //Application.Quit();
+            Utils.ForceCrash(ForcedCrashCategory.FatalError);
 #endif
+    }
+
+
+    public bool GameMangerConditions()
+    {
+        return (!GameManager.gameManagerRef.GameOver && !GameManager.gameManagerRef.GamePaused && !GameManager.gameManagerRef.IsStoryPanelRunning && !GameManager.gameManagerRef.GameWin);
     }
 
 

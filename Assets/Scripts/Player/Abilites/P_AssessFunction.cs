@@ -10,6 +10,8 @@ public class P_AssessFunction : MonoBehaviour
 
     private E_CanvasController enemyCanvas;
 
+    private BridgeSection_CanvasController bridgeCanvas;
+
     private float launchTimeOffset;
 
     private float coolDown;
@@ -65,9 +67,13 @@ public class P_AssessFunction : MonoBehaviour
 
         AudioManager.audioManagerRef.PlaySFX(assessAudioClip);
 
-        if (IsValidTarget())
+        if (IsValidTarget().Equals("EnemyHit"))
         {
             enemyCanvas.InformationPanelActivate(true, duration);
+        }
+        else if (IsValidTarget().Equals("BridgeHit"))
+        {
+            bridgeCanvas.BridgePanelActivate(true, duration);
         }
         else
         {
@@ -88,7 +94,7 @@ public class P_AssessFunction : MonoBehaviour
     }
 
     // Return true if Player is looking at Target the Spell is usuable on 
-    bool IsValidTarget()
+    string IsValidTarget()
     {
         Ray ray = gameCam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
 
@@ -102,16 +108,30 @@ public class P_AssessFunction : MonoBehaviour
             if (!enemyCanvas.isActive)
             {
                 Debug.Log("Enemy Targeted with Assess");
-                return true;
+                return "EnemyHit";
             }
 
             Debug.Log("Assess already active on this target");
 
-            return false;
+            return "";
+        }
+        else if(hit.collider != null && hit.collider.gameObject.CompareTag("Bridge"))
+        {
+            bridgeCanvas = hit.collider.gameObject.GetComponent<BridgeSection_CanvasController>();
+
+            if (!bridgeCanvas.isActive)
+            {
+                Debug.Log("Bridge Targeted with Assess");
+                return "BridgeHit";
+            }
+
+            Debug.Log("Assess already active on this target");
+
+            return "";
         }
 
         Debug.Log("Nothing was hit with Assess");
-        return false;
+        return "";
 
     }
 

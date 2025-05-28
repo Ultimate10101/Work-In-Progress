@@ -7,7 +7,9 @@ using UnityEngine;
 public abstract class Def_Ability : MonoBehaviour
 {
 
-    [SerializeField] protected Animator playerAnim; 
+    [SerializeField] protected Animator playerAnim;
+
+    private StatusEffectHandler playerStatus;
 
     protected float castTimeLengthOffset;
 
@@ -70,14 +72,18 @@ public abstract class Def_Ability : MonoBehaviour
 
 
 
-    private void Start()
+    protected virtual void Start()
     {
+        playerStatus = gameObject.GetComponent<StatusEffectHandler>();
+
+        Debug.Log("I am running notice me please");
+
         abilityCurrentlyCasting = false;
     }
 
     protected virtual void Update()
     {
-        if (!GameManager.gameManagerRef.GameOver && !GameManager.gameManagerRef.GamePaused && !GameManager.gameManagerRef.IsStoryPanelRunning && !GameManager.gameManagerRef.GameWin)
+        if (GameManager.gameManagerRef.GameMangerConditions() && !playerStatus.GetState("STUNNED"))
         {
             CastInput();
         }

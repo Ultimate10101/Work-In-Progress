@@ -38,6 +38,11 @@ public class E_HealthController : HealthController
         if (isDoubleDamageActive)
         {
             health -= (damage * 2);
+
+            if (P_DTLMenu.DTLMenuRef.IncreasePotencyAcitve)
+            {
+                health -= (damage * 4);
+            }
         }
         else
         {

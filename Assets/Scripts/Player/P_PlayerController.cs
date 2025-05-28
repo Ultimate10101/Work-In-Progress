@@ -65,7 +65,7 @@ public class P_PlayerController : MonoBehaviour
     void Update()
     {
 
-        if (!playerStatus.GetState("STUNNED") && !GameManager.gameManagerRef.GameOver && !GameManager.gameManagerRef.IsStoryPanelRunning && !GameManager.gameManagerRef.GameWin)
+        if (!playerStatus.GetState("STUNNED") && GameManager.gameManagerRef.GameMangerConditions())
         {
             PlayerInput();
         }
@@ -150,7 +150,7 @@ public class P_PlayerController : MonoBehaviour
 
     void DragCheck()
     {
-        if (playerStatus.GetState("STUNNED"))
+        if (playerStatus.GetState("STUNNED") || GameManager.gameManagerRef.GameOver)
         {
             playerRb.drag = 99;
         }
